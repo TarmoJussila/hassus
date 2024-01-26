@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,7 +8,8 @@ public class WeaponSpawner : MonoBehaviour
     [SerializeField] private float spawnDelaySeconds = 1;
     [SerializeField] private SpriteRenderer weaponSprite;
 
-    BoxCollider2D boxCollider;
+    private BoxCollider2D boxCollider;
+    private WeaponSO currentWeaponSO;
 
     void Start()
     {
@@ -28,11 +28,10 @@ public class WeaponSpawner : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            // TODO: Check if collided with player
-            if (false)
+            if (collider.TryGetComponent(out PlayerWeapon playerWeapon))
             {
                 weaponSprite.enabled = false;
-                // call player's PickWeapon() or something
+                playerWeapon.PickUpWeapon(currentWeaponSO);
                 StartCoroutine(DelayedWeaponSpawn());
             }
         }
@@ -46,7 +45,7 @@ public class WeaponSpawner : MonoBehaviour
 
     private void SpawnRandomWeapon()
     {
-        WeaponSO randomWeaponSO = weaponSOs[UnityEngine.Random.Range(0, weaponSOs.Length)];
+        WeaponSO randomWeaponSO = weaponSOs[Random.Range(0, weaponSOs.Length)];
         weaponSprite.sprite = randomWeaponSO.sprite;
         weaponSprite.enabled = true;
     }
