@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum GameState
 {
@@ -133,5 +134,15 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
         {
             ChangeGameState(GameState.GAME_OVER);
         }
+    }
+
+    public void OnPlayerJoined(PlayerInput playerInput)
+    {
+        Debug.Log($"Player joined: {playerInput.playerIndex}");
+    }
+    
+    public void OnPlayerLeft(PlayerInput playerInput)
+    {
+        Debug.Log($"Player left: {playerInput.playerIndex}");
     }
 }
