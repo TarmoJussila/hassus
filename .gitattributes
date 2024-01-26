@@ -1,0 +1,6 @@
+### Line Endings
+# Windows (CRLF) Line Endings
+*.sln text eol=crlf
+*.cs text eol=crlf
+*.xml text eol=crlf
+*.json text eol=crlf
