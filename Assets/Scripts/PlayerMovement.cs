@@ -5,12 +5,11 @@ public class PlayerMovement : MonoBehaviour
 {
     private const float Speed = 10;
 
-    private bool _moving;
     private Vector2 _input;
 
     private void Update()
     {
-        if (!_moving)
+        if (_input == Vector2.zero)
         {
             return;
         }
@@ -20,8 +19,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        _moving = context.control.IsPressed();
-        _input = context.ReadValue<Vector2>();
+        Debug.Log($"pressed={context.control.IsPressed()} | {context.ReadValue<Vector2>()}");
+        Vector2 temp = context.ReadValue<Vector2>();
+        _input = temp;
+        _input.y = 0;
+        _input.Normalize();
     }
 
     public void Join(InputAction.CallbackContext context)
