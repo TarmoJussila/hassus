@@ -1,5 +1,5 @@
 
-# INSERT NAME
+# HASSUS
 
 Insert description here.
 
@@ -27,6 +27,6 @@ The game was created with **Unity 2022.3.18f1**.
 | ------------- |:-------------:|
 | Insert text | Insert text |
 
-# Credits - Team INSERT NAME
+# Credits - Team Hassus
 
 Insert credits here
