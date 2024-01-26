@@ -5,7 +5,12 @@ public class MapLoader : MonoBehaviour
 {
     [Header("Map References")]
     [SerializeField] private TextAsset mapTextAsset;
+    [SerializeField] private MapBlock mapBlockPrefab;
+
+    [Header("Map Settings")]
+    [SerializeField] [Range(0, 1.0f)] private float foliageChance = 0.5f;
     
+    private Dictionary<Vector2Int, MapBlock> mapBlocks = new();
     private Dictionary<Vector2Int, BoxCollider2D> mapColliders = new();
     
     private readonly int mapWidth = 32;
@@ -15,10 +20,10 @@ public class MapLoader : MonoBehaviour
     
     private void Start()
     {
-        GenerateMapColliders();
+        GenerateMap();
     }
     
-    private void GenerateMapColliders()
+    private void GenerateMap()
     {
         var map = MapTextAssetToList(mapTextAsset);
 
@@ -34,12 +39,35 @@ public class MapLoader : MonoBehaviour
                 }
                 else if (symbol == mapBlockSymbol)
                 {
-                    var boxCollider = Instantiate(new GameObject(), new Vector2(i, j), Quaternion.identity, transform).AddComponent<BoxCollider2D>();
-
+                    var mapBlock = Instantiate(mapBlockPrefab, new Vector2(i, j), Quaternion.Euler(0, -90f, 0), transform);
+                    
+                    var boxCollider = new GameObject().AddComponent<BoxCollider2D>();
+                    boxCollider.transform.position = new Vector2(i, j);
+                    boxCollider.transform.parent = transform;
+                    
+                    mapBlocks.Add(new Vector2Int(i, j), mapBlock);
                     mapColliders.Add(new Vector2Int(i, j), boxCollider);
                 }
             }
         }
+        
+        for (int i = 0; i < mapWidth; i++)
+        {
+            for (int j = 0; j < mapHeight; j++)
+            {
+                mapBlocks.TryGetValue(new Vector2Int(i, j), out var mapBlock);
+                if (mapBlock != null)
+                {
+                    InitializeMapBlock(mapBlock);
+                }
+            }
+        }
+    }
+
+    private void InitializeMapBlock(MapBlock mapBlock)
+    {
+        mapBlock.ToggleGrass(false);
+        mapBlock.ToggleFoliage(foliageChance);
     }
     
     private List<string> MapTextAssetToList(TextAsset mapTextAsset)
