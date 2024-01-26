@@ -44,7 +44,6 @@ Shader "Custom/TriPlanarGround"
 
         #include <AutoLight.cginc>
         #include <Lighting.cginc>
-        #include "HassusLighting.hlsl"
 
         half4 LightingHassus(SurfaceOutput s, half3 lightDir, half atten)
         {
