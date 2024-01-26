@@ -249,6 +249,7 @@ MonoBehaviour:
   mapTextAsset: {fileID: 4900000, guid: 058d453892e06479d9fd6197b6e5d0df, type: 3}
   mapBlockPrefab: {fileID: 5279498002537231270, guid: 37488e5952be44da1ae2ce4d4966a1da, type: 3}
   foliageChance: 0.25
+  foliageHeightSpace: 3
 --- !u!4 &1540308514
 Transform:
   m_ObjectHideFlags: 0
@@ -350,7 +351,7 @@ Transform:
   m_GameObject: {fileID: 1665722229}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 16, y: 16, z: -36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

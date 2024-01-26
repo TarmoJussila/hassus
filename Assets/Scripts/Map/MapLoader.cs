@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MapLoader : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class MapLoader : MonoBehaviour
 
     [Header("Map Settings")]
     [SerializeField] [Range(0, 1.0f)] private float foliageChance = 0.5f;
+    [SerializeField] [Range(1, 9)] private int foliageHeightSpace = 2; 
     
     private Dictionary<Vector2Int, MapBlock> mapBlocks = new();
     private Dictionary<Vector2Int, BoxCollider2D> mapColliders = new();
@@ -22,7 +25,40 @@ public class MapLoader : MonoBehaviour
     {
         GenerateMap();
     }
-    
+
+    private void Update()
+    {
+        #if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            DestroyMap();
+            GenerateMap();
+        }
+        #endif
+    }
+
+    private void DestroyMap()
+    {
+        for (int i = 0; i < mapWidth; i++)
+        {
+            for (int j = 0; j < mapHeight; j++)
+            {
+                mapBlocks.TryGetValue(new Vector2Int(i, j), out var mapBlock);
+                if (mapBlock != null)
+                {
+                    Destroy(mapBlock.gameObject);
+                }
+                mapColliders.TryGetValue(new Vector2Int(i, j), out var mapCollider);
+                if (mapCollider != null)
+                {
+                    Destroy(mapCollider.gameObject);
+                }
+            }
+        }
+        mapBlocks.Clear();
+        mapColliders.Clear();
+    }
+
     private void GenerateMap()
     {
         var map = MapTextAssetToList(mapTextAsset);
@@ -55,19 +91,33 @@ public class MapLoader : MonoBehaviour
         {
             for (int j = 0; j < mapHeight; j++)
             {
+                int topEmptySpace = 0;
+                for (int k = 1; k <= foliageHeightSpace; k++)
+                {
+                    mapBlocks.TryGetValue(new Vector2Int(i, j + k), out var upperMapBlock);
+                    if (upperMapBlock == null)
+                    {
+                        topEmptySpace++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                
                 mapBlocks.TryGetValue(new Vector2Int(i, j), out var mapBlock);
                 if (mapBlock != null)
                 {
-                    InitializeMapBlock(mapBlock);
+                    InitializeMapBlock(mapBlock, topEmptySpace);
                 }
             }
         }
     }
 
-    private void InitializeMapBlock(MapBlock mapBlock)
+    private void InitializeMapBlock(MapBlock mapBlock, int topEmptySpace)
     {
-        mapBlock.ToggleGrass(false);
-        mapBlock.ToggleFoliage(foliageChance);
+        mapBlock.ToggleGrass(topEmptySpace >= 1);
+        mapBlock.ToggleFoliage(topEmptySpace >= foliageHeightSpace ? foliageChance : 0);
     }
     
     private List<string> MapTextAssetToList(TextAsset mapTextAsset)
