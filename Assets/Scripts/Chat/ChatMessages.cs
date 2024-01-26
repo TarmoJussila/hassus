@@ -1,0 +1,36 @@
+public static class ChatMessages
+{
+    public static readonly string[] Messages = {
+        "That play was incredible!",
+        "F in the chat for [character/player]!",
+        "What a fail!",
+        "GG! Well played!",
+        "Is this real life?",
+        "Let's get some hype in the chat!",
+        "I can't stop laughing!",
+        "Good luck to [team/player]!",
+        "This stream is a bit slow today.",
+        "That moment was pure gold!",
+        "What just happened?",
+        "The chat is so lively tonight!",
+        "RAGE MODE ACTIVATED!",
+        "The streamer is doing great!",
+        "That was unexpected!",
+        "Go [team/player]!",
+        "That was a disaster.",
+        "Something's about to happen!",
+        "This moment is so emotional.",
+        "Can we get some positivity in the chat?",
+        "What a wild stream!",
+        "Unlucky moment there.",
+        "EZ win, no competition!",
+        "LOL, this stream is hilarious!",
+        "That's a spicy moment!",
+        "Wow, the chat is on fire!",
+        "Spread love and positivity!",
+        "That play showed real skill!",
+        "I'm dying of laughter!",
+        "Well done, clap clap clap!",
+        "That was a trolling moment!"
+    };
+}
