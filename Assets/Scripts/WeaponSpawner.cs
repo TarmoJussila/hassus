@@ -3,17 +3,16 @@ using UnityEngine;
 
 public class WeaponSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject entityToSpawn;
     [SerializeField] private WeaponSO[] weaponSOs;
     [SerializeField] private float spawnDelaySeconds = 1;
     [SerializeField] private SpriteRenderer weaponSprite;
-
-    private BoxCollider2D boxCollider;
+    [SerializeField] private BoxCollider2D pickupCollider;
+    
     private WeaponSO currentWeaponSO;
+    private Coroutine delayedWeaponSpawn;
 
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
         SpawnRandomWeapon();
     }
 
@@ -24,7 +23,7 @@ public class WeaponSpawner : MonoBehaviour
 
     void CheckCollisions()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxCollider.bounds.center, boxCollider.bounds.size, 0f);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(pickupCollider.bounds.center, pickupCollider.bounds.size, 0f);
 
         foreach (Collider2D collider in colliders)
         {
@@ -32,21 +31,26 @@ public class WeaponSpawner : MonoBehaviour
             {
                 weaponSprite.enabled = false;
                 playerWeapon.PickUpWeapon(currentWeaponSO);
-                StartCoroutine(DelayedWeaponSpawn());
+
+                if (delayedWeaponSpawn == null)
+                {
+                    delayedWeaponSpawn = StartCoroutine(SpawnWeaponAfterSeconds(spawnDelaySeconds));
+                }
             }
         }
     }
 
-    private IEnumerator DelayedWeaponSpawn()
+    private IEnumerator SpawnWeaponAfterSeconds(float seconds)
     {
-        yield return new WaitForSeconds(spawnDelaySeconds);
+        yield return new WaitForSeconds(seconds);
         SpawnRandomWeapon();
+        delayedWeaponSpawn = null;
     }
 
     private void SpawnRandomWeapon()
     {
-        WeaponSO randomWeaponSO = weaponSOs[Random.Range(0, weaponSOs.Length)];
-        weaponSprite.sprite = randomWeaponSO.sprite;
+        currentWeaponSO = weaponSOs[Random.Range(0, weaponSOs.Length)];
+        weaponSprite.sprite = currentWeaponSO.sprite;
         weaponSprite.enabled = true;
     }
 }
