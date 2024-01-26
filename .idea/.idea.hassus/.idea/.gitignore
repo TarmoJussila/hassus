@@ -2,9 +2,9 @@
 /shelf/
 /workspace.xml
 # Rider ignored files
+/.idea.hassus.iml
 /contentModel.xml
 /projectSettingsUpdater.xml
-/.idea.hassus.iml
 /modules.xml
 # Editor-based HTTP Client requests
 /httpRequests/
