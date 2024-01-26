@@ -13,8 +13,17 @@ public enum GameState
     OUTRO
 }
 
+[System.Serializable]
+public class StateObjectPair
+{
+    public GameState State;
+    public GameObject StateObject;
+}
+
 public class GameStateSystem : MonoSingleton<GameStateSystem>
 {
+    [SerializeField] private List<StateObjectPair> _stateObjects = new List<StateObjectPair>();
+
     public GameState CurrentState { get; private set; }
 
     public static event Action<GameState> OnGameStateChanged;
@@ -25,6 +34,12 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
     {
         StateTime = 0f;
         CurrentState = state;
+
+        foreach (StateObjectPair pair in _stateObjects)
+        {
+            pair.StateObject.SetActive(pair.State == state);
+        }
+
         OnGameStateChanged?.Invoke(state);
     }
 
