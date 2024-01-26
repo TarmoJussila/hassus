@@ -30,6 +30,11 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     public float StateTime { get; private set; }
 
+    protected override void OnAwake()
+    {
+        ChangeGameState(GameState.INTRO);
+    }
+
     public void ChangeGameState(GameState state)
     {
         StateTime = 0f;
@@ -102,7 +107,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
     {
         if (StateTime > 2f && Input.GetKeyDown(KeyCode.Return))
         {
-            ChangeGameState(GameState.INTRO);
+            ChangeGameState(GameState.OUTRO);
         }
     }
 
@@ -124,7 +129,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Update_Fight()
     {
-        if (StateTime > GameSettings.Instance.GameTime)
+        if (StateTime > GameSettings.Instance.RoundTime)
         {
             ChangeGameState(GameState.GAME_OVER);
         }

@@ -14,6 +14,9 @@ public class MonoSingleton<T> : MonoBehaviour
         else
         {
             Instance = (T)this;
+            OnAwake();
         }
     }
+
+    protected virtual void OnAwake() {}
 }
