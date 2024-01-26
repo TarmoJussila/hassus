@@ -31,6 +31,7 @@ public static class ChatMessages
         "That play showed real skill!",
         "I'm dying of laughter! \ud83d\ude06",
         "Well done, clap clap clap!",
-        "That was a trolling moment! \ud83d\ude06"
+        "That was a trolling moment! \ud83d\ude06",
+        "pog pog pog pog pog pog pog"
     };
 }
