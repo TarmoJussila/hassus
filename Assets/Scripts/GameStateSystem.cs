@@ -135,4 +135,22 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
             ChangeGameState(GameState.GAME_OVER);
         }
     }
+
+    public void OnPlayerJoined(PlayerInput playerInput)
+    {
+        Debug.Log($"Player joined: {playerInput.playerIndex}");
+        // TODO: move player to spawn point
+        //playerInput.transform.position = ???
+    }
+
+    public void OnPlayerLeft(PlayerInput playerInput)
+    {
+        Debug.Log($"Player left: {playerInput.playerIndex}");
+        // TODO: delete player
+    }
+
+    public void StartGame(InputAction.CallbackContext context)
+    {
+        Debug.Log("Start Game!");
+    }
 }
