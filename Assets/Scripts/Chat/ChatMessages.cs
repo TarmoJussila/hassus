@@ -11,7 +11,7 @@ public static class ChatMessages
         "Good luck to [team/player]!",
         "This stream is a bit slow today.",
         "That moment was pure gold!",
-        "What just happened?",
+        "What just happened \ud83e\udd23 \ud83e\udd23",
         "The chat is so lively tonight!",
         "RAGE MODE ACTIVATED!",
         "The streamer is doing great!",
@@ -19,18 +19,18 @@ public static class ChatMessages
         "Go [team/player]!",
         "That was a disaster.",
         "Something's about to happen!",
-        "This moment is so emotional.",
-        "Can we get some positivity in the chat?",
+        "This moment is so emotional \ud83d\ude0d \ud83d\ude0d",
+        "Can we get some positivity in the chat? \ud83d\ude0d",
         "What a wild stream!",
         "Unlucky moment there.",
-        "EZ win, no competition!",
+        "EZ win \ud83e\udd23, no competition!",
         "LOL, this stream is hilarious!",
         "That's a spicy moment!",
         "Wow, the chat is on fire!",
-        "Spread love and positivity!",
+        "Spread love and positivity \ud83d\ude0d \ud83d\ude0d",
         "That play showed real skill!",
-        "I'm dying of laughter!",
+        "I'm dying of laughter! \ud83d\ude06",
         "Well done, clap clap clap!",
-        "That was a trolling moment!"
+        "That was a trolling moment! \ud83d\ude06"
     };
 }
