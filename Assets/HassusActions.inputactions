@@ -1,5 +1,5 @@
 {
-    "name": "Hassut",
+    "name": "HassusActions",
     "maps": [
         {
             "name": "Player",
@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Join",
+                    "type": "Button",
+                    "id": "170f5d50-3465-49bb-9d24-7f9d4cf33701",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -145,6 +154,17 @@
                     "processors": "",
                     "groups": "Joystick",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88200bae-b892-4990-8a80-2a9757289a41",
+                    "path": "<Keyboard>/#(Q)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Join",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
