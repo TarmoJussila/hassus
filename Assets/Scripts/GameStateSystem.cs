@@ -24,6 +24,8 @@ public class StateObjectPair
 
 public class GameStateSystem : MonoSingleton<GameStateSystem>
 {
+    private const float SecondsToHoldExitKey = 3f;
+
     [FormerlySerializedAs("_stateObjects")] [SerializeField]
     private List<StateObjectPair> _states = new List<StateObjectPair>();
 
@@ -33,8 +35,12 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     public float StateTime { get; private set; }
 
-    private bool EnterPressed => Input.GetKeyDown(KeyCode.Return) ||
-                               Gamepad.all.Any(gamepad => gamepad.startButton.wasPressedThisFrame);
+    private static bool EnterKeyPressed => Input.GetKeyDown(KeyCode.Return) ||
+                                        Gamepad.all.Any(gamepad => gamepad.startButton.wasPressedThisFrame);
+    private static bool ExitKeyHeldDown =>  Input.GetKey(KeyCode.Escape) ||
+                                        Gamepad.all.Any(gamepad => gamepad.selectButton.isPressed);
+
+    private float _exitKeyHoldTimer;
 
     protected override void OnAwake()
     {
@@ -110,11 +116,27 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
                 break;
             }
         }
+
+        if (ExitKeyHeldDown)
+        {
+            _exitKeyHoldTimer += Time.deltaTime;
+            Debug.Log($"Exit hold = {_exitKeyHoldTimer}");
+        }
+        else if (_exitKeyHoldTimer > 0)
+        {
+            _exitKeyHoldTimer = 0;
+        }
+
+        if (_exitKeyHoldTimer >= SecondsToHoldExitKey)
+        {
+            Debug.LogError("Exit");
+            Application.Quit();
+        }
     }
 
     private void Update_Outro()
     {
-        if (StateTime > 1f && EnterPressed)
+        if (StateTime > 1f && EnterKeyPressed)
         {
             ChangeGameState(GameState.INTRO);
         }
@@ -122,7 +144,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Update_Intro()
     {
-        if (StateTime > 1f && EnterPressed)
+        if (StateTime > 1f && EnterKeyPressed)
         {
             ChangeGameState(GameState.WAITING_FOR_PLAYERS);
         }
@@ -130,7 +152,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Update_GameOver()
     {
-        if (StateTime > 1f && EnterPressed)
+        if (StateTime > 1f && EnterKeyPressed)
         {
             ChangeGameState(GameState.OUTRO);
         }
