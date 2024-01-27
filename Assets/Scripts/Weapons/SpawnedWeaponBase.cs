@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 public class SpawnedWeaponBase : MonoBehaviour
 {
-    public PlayerInput OwnerPlayer;
+    [HideInInspector] public PlayerInput OwnerPlayer;
 
     // Use this for one frame only checks
     [SerializeField] private float _overlapQueryRadius = 0f;
@@ -104,6 +104,24 @@ public class SpawnedWeaponBase : MonoBehaviour
             OnExitEnemy(other);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (!coll.collider.CompareTag("Player")) { return; }
+
+        if (coll.gameObject == OwnerPlayer.gameObject)
+        {
+            OnCollideSelf();
+        }
+        else
+        {
+            OnCollideEnemy(coll);
+        }
+    }
+    
+    protected virtual void OnCollideSelf() {}
+    
+    protected virtual void OnCollideEnemy(Collision2D coll) {}
 
     protected virtual void OnHitSelf() { }
 

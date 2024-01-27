@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 331a9f704098ce444bfe1e253742dc9e, type: 3}
-  m_Name: ExampleBananaGun
+  m_Name: HonkChicken
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 853a096ef18aa564b90a76bde12f97c3, type: 3}
-  MaxUses: 3
-  CharacterAnimation: 
-  WeaponAnimation: 
-  Prefab: {fileID: 0}
+  Sprite: {fileID: 1154690066, guid: 2e239b6792bd1b746914574a6d9798dc, type: 3}
+  MaxUses: 5
+  WeaponAnimationTrigger: melee
+  Prefab: {fileID: 4206063997405541529, guid: ce8eeb682c456a841b1589b7917cde7a, type: 3}
+  SpawnOffset: {x: 0, y: 0}
+  SpawnForce: {x: 0, y: 0}

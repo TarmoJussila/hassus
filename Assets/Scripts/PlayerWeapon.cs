@@ -35,7 +35,7 @@ public class PlayerWeapon : MonoBehaviour
 
     public void UseWeapon(InputAction.CallbackContext context)
     {
-        if (context.performed) { return; }
+        if (context.performed || currentWeapon == null) { return; }
 
         if (usesLeft <= 0)
         {
@@ -44,14 +44,9 @@ public class PlayerWeapon : MonoBehaviour
 
         usesLeft--;
 
-        if (string.IsNullOrEmpty(currentWeapon.CharacterAnimation))
+        if (!string.IsNullOrEmpty(currentWeapon.WeaponAnimationTrigger))
         {
-            _animator.CharacterAnimation(currentWeapon.CharacterAnimation);
-        }
-
-        if (string.IsNullOrEmpty(currentWeapon.WeaponAnimation))
-        {
-            _animator.WeaponAnimation(currentWeapon.WeaponAnimation);
+            _animator.WeaponAnimation(currentWeapon.WeaponAnimationTrigger);
         }
 
         SpawnedWeaponBase weapon = Instantiate(currentWeapon.Prefab);
@@ -78,6 +73,12 @@ public class PlayerWeapon : MonoBehaviour
     public void Disarm()
     {
         currentWeapon = null;
+        StartCoroutine(DelaySpriteHide());
+    }
+
+    private IEnumerator DelaySpriteHide()
+    {
+        yield return new WaitForSeconds(0.3f);
         spriteRenderer.enabled = false;
     }
 
