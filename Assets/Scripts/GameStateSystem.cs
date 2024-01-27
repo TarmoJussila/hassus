@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -31,6 +32,9 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
     public static event Action<GameState> OnGameStateChanged;
 
     public float StateTime { get; private set; }
+
+    private bool EnterPressed => Input.GetKeyDown(KeyCode.Return) ||
+                               Gamepad.all.Any(gamepad => gamepad.startButton.wasPressedThisFrame);
 
     protected override void OnAwake()
     {
@@ -110,7 +114,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Update_Outro()
     {
-        if (StateTime > 1f && Input.GetKeyDown(KeyCode.Return))
+        if (StateTime > 1f && EnterPressed)
         {
             ChangeGameState(GameState.INTRO);
         }
@@ -118,7 +122,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Update_Intro()
     {
-        if (StateTime > 1f && Input.GetKeyDown(KeyCode.Return))
+        if (StateTime > 1f && EnterPressed)
         {
             ChangeGameState(GameState.WAITING_FOR_PLAYERS);
         }
@@ -126,7 +130,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Update_GameOver()
     {
-        if (StateTime > 1f && Input.GetKeyDown(KeyCode.Return))
+        if (StateTime > 1f && EnterPressed)
         {
             ChangeGameState(GameState.OUTRO);
         }
@@ -143,10 +147,11 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
     private void Update_WaitingPlayers()
     {
         // TODO: link to input schemes
-        var joinKeys = new List<List<KeyCode>> {
+        var joinKeys = new List<List<KeyCode>>
+        {
             new() { KeyCode.Q },
             new() { KeyCode.RightControl, KeyCode.RightAlt, KeyCode.Minus },
-            new(){ KeyCode.R },
+            new() { KeyCode.R },
             new() { KeyCode.U }
         };
 
@@ -161,7 +166,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
                 }
             }
         }
-        
+
         foreach (var gamepad in Gamepad.all)
         {
             // TODO: replace hard coded join button with on from schemes
