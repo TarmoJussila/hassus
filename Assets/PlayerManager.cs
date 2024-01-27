@@ -11,8 +11,8 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     /// </summary>
     public static event Action<int, int, int> OnPlayerScoreChanged;
 
-    public static event Action<int> OnPlayerJoin;
-    public static event Action<int> OnPlayerLeave;
+    public static event Action<PlayerInput> OnPlayerJoin;
+    public static event Action<PlayerInput> OnPlayerLeave;
 
     public class PlayerData
     {
@@ -108,13 +108,13 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         // TODO: move player to spawn point
         //playerInput.transform.position = ???
 
-        OnPlayerJoin?.Invoke(playerInput.playerIndex);
+        OnPlayerJoin?.Invoke(playerInput);
     }
 
     public void OnPlayerLeft(PlayerInput playerInput)
     {
         Debug.Log($"Player left: {playerInput.playerIndex}");
         
-        OnPlayerLeave?.Invoke(playerInput.playerIndex);
+        OnPlayerLeave?.Invoke(playerInput);
     }
 }
