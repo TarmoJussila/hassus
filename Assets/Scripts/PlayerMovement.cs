@@ -33,4 +33,14 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("Join!");
     }
+
+    public void PlayerDead()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void PlayerRespawn()
+    {
+        throw new System.NotImplementedException();
+    }
 }

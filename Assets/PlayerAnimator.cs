@@ -14,4 +14,14 @@ public class PlayerAnimator : MonoBehaviour
     {
         // TODO animator state
     }
+
+    public void PlayerDead()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void PlayerRespawn()
+    {
+        throw new System.NotImplementedException();
+    }
 }
