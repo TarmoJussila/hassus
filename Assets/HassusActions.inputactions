@@ -9,7 +9,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "307985ff-d162-4c9f-ade5-34a1c290e274",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Stick",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -210,11 +210,33 @@
                 },
                 {
                     "name": "",
+                    "id": "4188759d-9883-4074-ad18-bf920a5dbc9d",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "917a4a48-6464-4083-ab5a-fd30ed483b06",
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;Keyboard IJKL;Keyboard TFGH;Keyboard arrows",
+                    "action": "Start game",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c97e037c-cbfe-4021-9921-fdeb5430b152",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Start game",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -424,6 +446,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard arrows",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c82ecc68-fc97-4071-b8dc-e07a587ac615",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false

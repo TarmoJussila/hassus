@@ -325,7 +325,7 @@ MonoBehaviour:
     m_ActionId: 3aeef96d-8a71-49bc-b14f-0c1f3ec1d175
     m_ActionName: Player/Fire[/Keyboard/e,/Keyboard/y,/Keyboard/o,/Keyboard/rightShift]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Xbox Controller
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
