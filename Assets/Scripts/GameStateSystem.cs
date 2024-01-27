@@ -120,7 +120,6 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
         if (ExitKeyHeldDown)
         {
             _exitKeyHoldTimer += Time.deltaTime;
-            Debug.Log($"Exit hold = {_exitKeyHoldTimer}");
         }
         else if (_exitKeyHoldTimer > 0)
         {
@@ -129,7 +128,6 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
         if (_exitKeyHoldTimer >= SecondsToHoldExitKey)
         {
-            Debug.LogError("Exit");
             Application.Quit();
         }
     }
