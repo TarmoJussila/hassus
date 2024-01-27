@@ -107,9 +107,11 @@ public class SpawnedWeaponBase : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        if (!coll.collider.CompareTag("Player")) { return; }
-
-        if (coll.gameObject == OwnerPlayer.gameObject)
+        if (!coll.collider.CompareTag("Player"))
+        {
+            OnHitOther();
+        }
+        else if (coll.gameObject == OwnerPlayer.gameObject)
         {
             OnCollideSelf();
         }
@@ -118,10 +120,12 @@ public class SpawnedWeaponBase : MonoBehaviour
             OnCollideEnemy(coll);
         }
     }
-    
-    protected virtual void OnCollideSelf() {}
-    
-    protected virtual void OnCollideEnemy(Collision2D coll) {}
+
+    protected virtual void OnHitOther() { }
+
+    protected virtual void OnCollideSelf() { }
+
+    protected virtual void OnCollideEnemy(Collision2D coll) { }
 
     protected virtual void OnHitSelf() { }
 
