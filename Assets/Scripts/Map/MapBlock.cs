@@ -24,13 +24,18 @@ namespace Hassus.Map
             grassObject.SetActive(toggle);
         }
 
-        public void ToggleFoliage(float foliageChance, int index = -1)
+        public void ToggleFoliage(Texture2D texture, float foliageChance, int index = -1)
         {
             bool enableFoliage = foliageChance > Random.Range(0.0f, 1.0f);
             int randomIndex = index == -1 ? Random.Range(0, foliageObjects.Length) : index;
             for (int i = 0; i < foliageObjects.Length; i++)
             {
-                foliageObjects[i].SetActive(i == randomIndex && enableFoliage);
+                bool toggle = i == randomIndex && enableFoliage;
+                foliageObjects[i].SetActive(toggle);
+                if (toggle)
+                {
+                    foliageObjects[i].GetComponent<MeshRenderer>().material.mainTexture = texture;
+                }
             }
         }
 
