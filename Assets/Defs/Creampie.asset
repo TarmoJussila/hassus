@@ -17,4 +17,4 @@ MonoBehaviour:
   WeaponAnimationTrigger: throw
   Prefab: {fileID: 5290096743210598612, guid: 9330fb43c4a99e84ab5e29ed364a75ac, type: 3}
   SpawnOffset: {x: 1.2, y: 0.5}
-  SpawnForce: {x: 50, y: 15}
+  SpawnForce: {x: 50, y: 10}
