@@ -156,9 +156,18 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
             {
                 if (Input.GetKeyDown(joinKeys[i][j]))
                 {
-                    PlayerManager.Instance.OnJoinInput(i);
+                    PlayerManager.Instance.JoinKeyboard(i);
                     break;
                 }
+            }
+        }
+        
+        foreach (var gamepad in Gamepad.all)
+        {
+            // TODO: replace hard coded join button with on from schemes
+            if (gamepad.aButton.wasPressedThisFrame)
+            {
+                PlayerManager.Instance.JoinGamePad(gamepad);
             }
         }
     }

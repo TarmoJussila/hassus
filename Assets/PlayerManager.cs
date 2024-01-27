@@ -72,7 +72,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         OnPlayerScoreChanged?.Invoke(index, score, PlayerDatas[index].Score);
     }
 
-    public void OnJoinInput(int keyboardSchemeIndex)
+    public void JoinKeyboard(int keyboardSchemeIndex)
     {
         // TODO: link to schemes
         List<string> schemeNames = new List<string>()
@@ -92,6 +92,12 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         string scheme = schemeNames[keyboardSchemeIndex];
         Debug.Log($"Join input from keyboard scheme ID {keyboardSchemeIndex} = {scheme}");
         PlayerInput.Instantiate(playerPrefab, controlScheme: scheme, pairWithDevice: Keyboard.current);
+    }
+
+    public void JoinGamePad(Gamepad gamepad)
+    {
+        Debug.Log($"Join input from gamepad ID {gamepad.deviceId} = {gamepad.name}");
+        PlayerInput.Instantiate(playerPrefab, controlScheme: "Gamepad", pairWithDevice: gamepad);
     }
 
     public void OnPlayerJoined(PlayerInput playerInput)
