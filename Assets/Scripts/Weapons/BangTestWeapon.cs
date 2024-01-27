@@ -6,9 +6,9 @@ public class BangTestWeapon : SpawnedWeaponBase
 {
     public int Damage;
 
-    private void Awake()
+    private void Start()
     {
-        //transform.position = OwnerPlayer.transform.position;
+        transform.position = OwnerPlayer.transform.position;
     }
 
     protected override void OnStayEnemy(Collider2D other)

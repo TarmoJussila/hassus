@@ -15,7 +15,7 @@ public class SpawnedWeaponBase : MonoBehaviour
 
     private List<Collider2D> contacts = new List<Collider2D>();
 
-    private void Awake()
+    private void Start()
     {
         if (_overlapQueryRadius > float.Epsilon
             && Physics2D.OverlapCircle(transform.position, _overlapQueryRadius, new ContactFilter2D(), contacts) > 0) { }

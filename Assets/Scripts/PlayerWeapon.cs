@@ -37,28 +37,34 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (context.performed)
         {
-            usesLeft--;
-
-            if (string.IsNullOrEmpty(currentWeapon.CharacterAnimation))
+            if (usesLeft > 0)
             {
-                _animator.CharacterAnimation(currentWeapon.CharacterAnimation);
-            }
+                usesLeft--;
 
-            if (string.IsNullOrEmpty(currentWeapon.WeaponAnimation))
+                if (string.IsNullOrEmpty(currentWeapon.CharacterAnimation))
+                {
+                    _animator.CharacterAnimation(currentWeapon.CharacterAnimation);
+                }
+
+                if (string.IsNullOrEmpty(currentWeapon.WeaponAnimation))
+                {
+                    _animator.WeaponAnimation(currentWeapon.WeaponAnimation);
+                }
+
+                SpawnedWeaponBase weapon = Instantiate(currentWeapon.Prefab);
+                weapon.OwnerPlayer = _input;
+
+                Debug.Log("Player: " + weapon.OwnerPlayer.playerIndex + " used " + currentWeapon.name);
+
+                if (usesLeft <= 0)
+                {
+                    Disarm();
+                }
+            }
+            else
             {
-                _animator.WeaponAnimation(currentWeapon.WeaponAnimation);
+                // TODO: Taunt?
             }
-
-            SpawnedWeaponBase weapon = Instantiate(currentWeapon.Prefab);
-            weapon.OwnerPlayer = _input;
-
-            Debug.Log("Player: " + weapon.OwnerPlayer.playerIndex + " used " + currentWeapon.name);
-
-            if (usesLeft <= 0)
-            {
-                Disarm();
-            }
-
         }
     }
 
