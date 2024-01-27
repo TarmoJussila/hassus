@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a3e93ca5232964f42bbe87eae4c1d247
+guid: 2d23a2e042aa317439616795bc9f2df8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -149,85 +149,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character_1_Dead
+      name: Sprite_Hand_Gun
       rect:
         serializedVersion: 2
         x: 0
-        y: 512
-        width: 512
-        height: 512
+        y: 254
+        width: 394
+        height: 258
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb479bb9b24263f4398af0bbe6b8e834
-      internalID: 1470563622
+      spriteID: 717d078a1d1908540a4e7a28faa76b65
+      internalID: 999423173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_1_Dying
+      name: Sprite_Hand_Throw_1
       rect:
         serializedVersion: 2
-        x: 512
-        y: 512
-        width: 512
-        height: 512
+        x: 394
+        y: 254
+        width: 392
+        height: 258
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1155a13565596eb4388c763d9ff1e953
-      internalID: 333190117
+      spriteID: 8c08143d73b1da94cbefc676a43f56cc
+      internalID: -626091735
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_1_Jump_1
+      name: Sprite_Hand_Throw_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 512
-        height: 512
+        x: 786
+        y: 254
+        width: 394
+        height: 258
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd65124400f79a54a9c2145d61d6961c
-      internalID: -168190369
+      spriteID: 0067c8b6e1762f044ab65707f03aecd9
+      internalID: 2138296245
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_1_Jump_2
+      name: Sprite_Hand_Throw_3
       rect:
         serializedVersion: 2
-        x: 512
-        y: 0
-        width: 512
-        height: 512
+        x: 1180
+        y: 254
+        width: 395
+        height: 258
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3f7dca404247ef4e8f0128c4e97a0f3
-      internalID: -2130034453
+      spriteID: 7fd79d84e6091174ca93436d6662c020
+      internalID: 1372015439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Hand_Throw_4
+      rect:
+        serializedVersion: 2
+        x: 1575
+        y: 254
+        width: 393
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1a6a19079e67b54196d047a2e1f2c2e
+      internalID: 650108547
       vertices: []
       indices: 
       edges: []
@@ -235,7 +256,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 59f33d87ba38efa43af6cd2dba3a7b50
+    spriteID: 295a7b3198addcb47ad211ef9409a66f
     internalID: 0
     vertices: []
     indices: 
@@ -243,10 +264,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character_1_Dead: 1470563622
-      Character_1_Dying: 333190117
-      Character_1_Jump_1: -168190369
-      Character_1_Jump_2: -2130034453
+      Sprite_Hand_Gun: 999423173
+      Sprite_Hand_Throw_1: -626091735
+      Sprite_Hand_Throw_2: 2138296245
+      Sprite_Hand_Throw_3: 1372015439
+      Sprite_Hand_Throw_4: 650108547
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

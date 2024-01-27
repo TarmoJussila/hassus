@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a3e93ca5232964f42bbe87eae4c1d247
+guid: f398227b91f3b8245960a2875a5e3d1e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,7 +149,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character_1_Dead
+      name: Character_3_Dead
       rect:
         serializedVersion: 2
         x: 0
@@ -163,14 +163,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb479bb9b24263f4398af0bbe6b8e834
-      internalID: 1470563622
+      spriteID: 6807c441fee37c949bfd0f48f651f306
+      internalID: -2084590101
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_1_Dying
+      name: Character_3_Dying
       rect:
         serializedVersion: 2
         x: 512
@@ -184,14 +184,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1155a13565596eb4388c763d9ff1e953
-      internalID: 333190117
+      spriteID: c735e1d2d7e1ca944a7a6089ccd8e15d
+      internalID: 445343945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_1_Jump_1
+      name: Character_3_Jump_1
       rect:
         serializedVersion: 2
         x: 0
@@ -205,14 +205,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd65124400f79a54a9c2145d61d6961c
-      internalID: -168190369
+      spriteID: dab3661b5b281114a98a37480c92d06b
+      internalID: -900885090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_1_Jump_2
+      name: Character_3_Jump_2
       rect:
         serializedVersion: 2
         x: 512
@@ -226,8 +226,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3f7dca404247ef4e8f0128c4e97a0f3
-      internalID: -2130034453
+      spriteID: 10d19a76b3128c845a920da21f6dba9f
+      internalID: -32598354
       vertices: []
       indices: 
       edges: []
@@ -235,7 +235,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 59f33d87ba38efa43af6cd2dba3a7b50
+    spriteID: 0578a85076a668a4291a43ed531a7a37
     internalID: 0
     vertices: []
     indices: 
@@ -243,10 +243,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character_1_Dead: 1470563622
-      Character_1_Dying: 333190117
-      Character_1_Jump_1: -168190369
-      Character_1_Jump_2: -2130034453
+      Character_3_Dead: -2084590101
+      Character_3_Dying: 445343945
+      Character_3_Jump_1: -900885090
+      Character_3_Jump_2: -32598354
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

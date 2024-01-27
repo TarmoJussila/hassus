@@ -514,6 +514,7 @@ MonoBehaviour:
   foliageColorVarianceMax: {r: 1, g: 0.6666667, b: 0, a: 1}
   foliageRotationMax: 5
   foliageSwayMax: 5
+  foliageExplosiveForceMax: 30
   grassScaleMin: 0.7
   grassScaleMax: 1.7
 --- !u!4 &1540308514
