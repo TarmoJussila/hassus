@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +7,46 @@ public class PlayerWeapon : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    public void PickUpWeapon(WeaponSO weaponSO)
+    private WeaponDef currentWeapon;
+    private int usesLeft;
+
+    private PlayerAnimator animator;
+    private PlayerMovement _movement;
+
+    private void Awake()
     {
-        spriteRenderer.sprite =
-            weaponSO.sprite;
+        animator = GetComponent<PlayerAnimator>();
+        _movement = GetComponent<PlayerMovement>();
+    }
+
+    public void PickUpWeapon(WeaponDef weaponDef)
+    {
+        currentWeapon = weaponDef;
+        usesLeft = weaponDef.MaxUses;
+
+        spriteRenderer.sprite = weaponDef.Sprite;
         spriteRenderer.enabled = true;
+    }
+
+    public void UseWeapon()
+    {
+        usesLeft--;
+
+        if (string.IsNullOrEmpty(currentWeapon.CharacterAnimation))
+        {
+            animator.CharacterAnimation(currentWeapon.CharacterAnimation);
+        }
+
+        if (string.IsNullOrEmpty(currentWeapon.WeaponAnimation))
+        {
+            animator.WeaponAnimation(currentWeapon.WeaponAnimation);
+        }
+
+        Instantiate(currentWeapon.Prefab);
     }
 
     private void Update()
     {
-        // TODO: mirror weapon when facing other direction
+        spriteRenderer.flipX = _movement.LastDirection < 0;
     }
 }

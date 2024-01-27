@@ -10,6 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 331a9f704098ce444bfe1e253742dc9e, type: 3}
-  m_Name: ExampleBananaGun
+  m_Name: ExampleBangGun
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: a720872efdbf18d48aa6dca901f1b2f5, type: 3}
+  Sprite: {fileID: 21300000, guid: 146cd35fe238b484fa6bc9fa54a66e0a, type: 3}
+  MaxUses: 3
+  CharacterAnimation: 
+  WeaponAnimation: 
+  Prefab: {fileID: 0}

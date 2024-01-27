@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
     private const float Speed = 10;
 
     private Vector2 _input;
+    
+    public int LastDirection { get; private set; }
 
     private void Update()
     {
@@ -14,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        LastDirection = Mathf.RoundToInt(Mathf.Sign(_input.x));
         transform.position += new Vector3(_input.x, 0, 0) * (Time.deltaTime * Speed);
     }
 

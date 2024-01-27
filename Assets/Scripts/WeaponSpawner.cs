@@ -1,14 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WeaponSpawner : MonoBehaviour
 {
-    [SerializeField] private WeaponSO[] weaponSOs;
+    [SerializeField] private WeaponDef[] weaponDefs;
     [SerializeField] private float spawnDelaySeconds = 1;
     [SerializeField] private SpriteRenderer weaponSprite;
     [SerializeField] private BoxCollider2D pickupCollider;
-    
-    private WeaponSO currentWeaponSO;
+
+    private WeaponDef currentWeaponDef;
     private Coroutine delayedWeaponSpawn;
 
     void Start()
@@ -27,7 +28,7 @@ public class WeaponSpawner : MonoBehaviour
         {
             return;
         }
-        
+
         Collider2D[] colliders = Physics2D.OverlapBoxAll(pickupCollider.bounds.center, pickupCollider.bounds.size, 0f);
 
         foreach (Collider2D collider in colliders)
@@ -35,7 +36,7 @@ public class WeaponSpawner : MonoBehaviour
             if (collider.TryGetComponent(out PlayerWeapon playerWeapon))
             {
                 weaponSprite.enabled = false;
-                playerWeapon.PickUpWeapon(currentWeaponSO);
+                playerWeapon.PickUpWeapon(currentWeaponDef);
 
                 if (delayedWeaponSpawn == null)
                 {
@@ -55,8 +56,8 @@ public class WeaponSpawner : MonoBehaviour
 
     private void SpawnRandomWeapon()
     {
-        currentWeaponSO = weaponSOs[Random.Range(0, weaponSOs.Length)];
-        weaponSprite.sprite = currentWeaponSO.sprite;
+        currentWeaponDef = weaponDefs.Length > 0 ? weaponDefs[Random.Range(0, weaponDefs.Length)] : WeaponManager.Instance.GetRandomWeapon();
+        weaponSprite.sprite = currentWeaponDef.Sprite;
         weaponSprite.enabled = true;
     }
 }
