@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a3e93ca5232964f42bbe87eae4c1d247
+guid: ba38c1609c905e946bbc73b97f615a4b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,7 +149,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character_1_Dead
+      name: Character_4_Dead
       rect:
         serializedVersion: 2
         x: 0
@@ -157,20 +157,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb479bb9b24263f4398af0bbe6b8e834
-      internalID: 1470563622
+      spriteID: c3b5d9336b663cd49a6475b8a5e5361e
+      internalID: -842421819
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_1_Dying
+      name: Character_4_Dying
       rect:
         serializedVersion: 2
         x: 512
@@ -178,20 +178,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1155a13565596eb4388c763d9ff1e953
-      internalID: 333190117
+      spriteID: 4be10c6cb42a68d458b45d1987f997e8
+      internalID: 1558419990
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_1_Jump_1
+      name: Character_4_Jump_1
       rect:
         serializedVersion: 2
         x: 0
@@ -199,20 +199,20 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd65124400f79a54a9c2145d61d6961c
-      internalID: -168190369
+      spriteID: 421ab849f0e9c9549a17072d78cb817e
+      internalID: 882641721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character_1_Jump_2
+      name: Character_4_Jump_2
       rect:
         serializedVersion: 2
         x: 512
@@ -220,14 +220,14 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3f7dca404247ef4e8f0128c4e97a0f3
-      internalID: -2130034453
+      spriteID: c8948ca6140516341a78eeeea52a0a32
+      internalID: -2024232222
       vertices: []
       indices: 
       edges: []
@@ -235,7 +235,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 59f33d87ba38efa43af6cd2dba3a7b50
+    spriteID: cc2acdd9e6bac4b4cae6ac4ae8fca0c7
     internalID: 0
     vertices: []
     indices: 
@@ -243,10 +243,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character_1_Dead: 1470563622
-      Character_1_Dying: 333190117
-      Character_1_Jump_1: -168190369
-      Character_1_Jump_2: -2130034453
+      Character_4_Dead: -842421819
+      Character_4_Dying: 1558419990
+      Character_4_Jump_1: 882641721
+      Character_4_Jump_2: -2024232222
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
