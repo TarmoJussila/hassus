@@ -110,7 +110,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Update_Outro()
     {
-        if (StateTime > 2f && Input.GetKeyDown(KeyCode.Return))
+        if (StateTime > 1f && Input.GetKeyDown(KeyCode.Return))
         {
             ChangeGameState(GameState.INTRO);
         }
@@ -118,7 +118,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Update_Intro()
     {
-        if (StateTime > 2f && Input.GetKeyDown(KeyCode.Return))
+        if (StateTime > 1f && Input.GetKeyDown(KeyCode.Return))
         {
             ChangeGameState(GameState.WAITING_FOR_PLAYERS);
         }
@@ -126,7 +126,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Update_GameOver()
     {
-        if (StateTime > 2f && Input.GetKeyDown(KeyCode.Return))
+        if (StateTime > 1f && Input.GetKeyDown(KeyCode.Return))
         {
             ChangeGameState(GameState.OUTRO);
         }
