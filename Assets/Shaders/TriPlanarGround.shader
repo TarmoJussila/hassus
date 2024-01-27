@@ -31,7 +31,7 @@ Shader "Custom/TriPlanarGround"
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Hassus fullforwardshadows vertex:vert
+        #pragma surface surf Hassus fullforwardshadows vertex:vert addshadow
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
