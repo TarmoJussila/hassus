@@ -78,4 +78,9 @@ public class PlayerWeapon : MonoBehaviour
         currentWeapon = null;
         spriteRenderer.enabled = false;
     }
+
+    private void Update()
+    {
+        spriteRenderer.flipX = _movement.LastDirection < 0;
+    }
 }

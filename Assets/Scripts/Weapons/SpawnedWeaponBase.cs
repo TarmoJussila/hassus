@@ -41,7 +41,7 @@ public class SpawnedWeaponBase : MonoBehaviour
             StartCoroutine(DestroyTimer());
         }
 
-        OnAwake();
+        OnStart();
     }
 
     private IEnumerator DestroyTimer()
@@ -56,6 +56,8 @@ public class SpawnedWeaponBase : MonoBehaviour
     }
 
     protected virtual void OnAwake() { }
+
+    protected virtual void OnStart() { }
 
     protected virtual void OnOverlapSelf() { }
 

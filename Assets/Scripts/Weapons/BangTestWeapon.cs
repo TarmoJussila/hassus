@@ -6,7 +6,7 @@ public class BangTestWeapon : SpawnedWeaponBase
 {
     public int Damage;
 
-    private void Start()
+    protected override void OnStart()
     {
         transform.position = OwnerPlayer.transform.position;
     }
