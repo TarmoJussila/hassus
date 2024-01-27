@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -25,9 +24,13 @@ namespace Hassus.Map
         private float _cornerSizeMax = 1f;
         private float _foliageSway = 1f;
         private float _timer;
-        private float _explosionTimer = 0f;
+        private float _explosionTimer = 1f;
         private float _explosiveForceMax = 1f;
         private float _explosiveForce = 1f;
+        private float _currentExplosiveForce = 1f;
+
+        private readonly float foliageMinRotation = -60f;
+        private readonly float foliageMaxRotation = 60f;
 
         private void Update()
         {
@@ -38,11 +41,11 @@ namespace Hassus.Map
                 if (_explosionTimer < 1f)
                 {
                     _explosionTimer += Time.deltaTime;
-                    _explosiveForce = Mathf.Lerp(_explosiveForce, 1f, _explosionTimer);
+                    _currentExplosiveForce = Mathf.Lerp(_explosiveForce, 1f, _explosionTimer);
                 }
                 
                 var localEulerAngles = _activeFoliageObject.localEulerAngles;
-                _activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Sin(_timer) * _foliageSway * _explosiveForce, localEulerAngles.y, localEulerAngles.z);
+                _activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Clamp(Mathf.Sin(_timer) * _foliageSway * _currentExplosiveForce, foliageMinRotation, foliageMaxRotation), localEulerAngles.y, localEulerAngles.z);
             }
         }
 
@@ -124,6 +127,7 @@ namespace Hassus.Map
 
         public void SetExplosiveForce(float force)
         {
+            _explosionTimer = 0f;
             _explosiveForce = force;
         }
 
@@ -235,23 +239,23 @@ namespace Hassus.Map
 
                 if (_mapBlockGroup.LeftBlock != null && _mapBlockGroup.LeftBlock.isActiveAndEnabled)
                 {
-                    _mapBlockGroup.LeftBlock.SetExplosiveForce(_explosiveForceMax);
+                    _mapBlockGroup.LeftBlock.SetExplosiveForce(-_explosiveForceMax);
 
                     var block = _mapBlockGroup.LeftBlock._mapBlockGroup.LeftBlock;
                     if (block != null && block.isActiveAndEnabled)
                     {
-                        block.SetExplosiveForce(_explosiveForceMax / 2f);
+                        block.SetExplosiveForce(-_explosiveForceMax / 2f);
                     }
                 }
                 
                 if (_mapBlockGroup.RightBlock != null && _mapBlockGroup.RightBlock.isActiveAndEnabled)
                 {
-                    _mapBlockGroup.RightBlock.SetExplosiveForce(-_explosiveForceMax);
+                    _mapBlockGroup.RightBlock.SetExplosiveForce(_explosiveForceMax);
                     
                     var block = _mapBlockGroup.RightBlock._mapBlockGroup.RightBlock;
                     if (block != null && block.isActiveAndEnabled)
                     {
-                        block.SetExplosiveForce(-_explosiveForceMax / 2f);
+                        block.SetExplosiveForce(_explosiveForceMax / 2f);
                     }
                 }
             }
