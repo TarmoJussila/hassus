@@ -143,7 +143,8 @@ namespace Hassus.Map
         {
             mapBlock.ToggleGrass(topEmptySpace >= 1);
             mapBlock.ToggleFoliage(topEmptySpace >= foliageHeightSpace ? foliageChance : 0);
-            mapBlock.ToggleCorners(adjacentMapBlockGroup, pieceChance);
+            mapBlock.ToggleCorners(adjacentMapBlockGroup);
+            mapBlock.TogglePieces(adjacentMapBlockGroup, pieceChance);
         }
         
         private List<string> MapTextAssetToList(TextAsset mapTextAsset)
