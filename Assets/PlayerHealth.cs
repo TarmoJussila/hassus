@@ -10,6 +10,11 @@ public class PlayerHealth : MonoBehaviour
     /// player index, old health, new health, max health
     /// </summary>
     public static event Action<int, int, int, int> OnPlayerHealthChanged;
+    
+    /// <summary>
+    /// player index, source player index, amount, is kill
+    /// </summary>
+    public static event Action<int, int, int, bool> OnDamageDealt;
 
     public static event Action<int, GameObject> OnPlayerDead;
     public static event Action<int, GameObject> OnPlayerRespawn;
@@ -31,9 +36,11 @@ public class PlayerHealth : MonoBehaviour
         _input = GetComponent<PlayerInput>();
         _animator = GetComponent<PlayerAnimator>();
         _movement = GetComponent<PlayerMovement>();
+        
+        OnPlayerHealthChanged?.Invoke(_input.playerIndex, MaxHealth, MaxHealth, MaxHealth);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, int sourcePlayer)
     {
         if (CurrentHealth < 0) { return; }
 
@@ -47,6 +54,8 @@ public class PlayerHealth : MonoBehaviour
             Die();
             OnPlayerDead?.Invoke(_input.playerIndex, gameObject);
         }
+        
+        OnDamageDealt?.Invoke(_input.playerIndex, sourcePlayer, damage, CurrentHealth <= 0);
     }
 
     private void Die()

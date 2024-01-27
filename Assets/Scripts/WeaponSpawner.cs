@@ -33,7 +33,7 @@ public class WeaponSpawner : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.TryGetComponent(out PlayerWeapon playerWeapon))
+            if (collider.TryGetComponent(out PlayerWeapon playerWeapon) && !playerWeapon.HasWeapon)
             {
                 weaponSprite.enabled = false;
                 playerWeapon.PickUpWeapon(currentWeaponDef);

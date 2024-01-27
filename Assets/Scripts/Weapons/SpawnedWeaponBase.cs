@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class SpawnedWeaponBase : MonoBehaviour
 {
-    public GameObject OwnerPlayer;
+    public PlayerInput OwnerPlayer;
 
     // Use this for one frame only checks
     [SerializeField] private float _overlapQueryRadius = 0f;
@@ -24,7 +25,7 @@ public class SpawnedWeaponBase : MonoBehaviour
             {
                 if (coll.CompareTag("Player")) { return; }
 
-                if (coll.gameObject == OwnerPlayer)
+                if (coll.gameObject == OwnerPlayer.gameObject)
                 {
                     OnOverlapSelf();
                 }
@@ -64,7 +65,7 @@ public class SpawnedWeaponBase : MonoBehaviour
     {
         if (other.CompareTag("Player")) { return; }
 
-        if (other.gameObject == OwnerPlayer)
+        if (other.gameObject == OwnerPlayer.gameObject)
         {
             OnHitSelf();
         }
@@ -78,7 +79,7 @@ public class SpawnedWeaponBase : MonoBehaviour
     {
         if (other.CompareTag("Player")) { return; }
 
-        if (other.gameObject == OwnerPlayer)
+        if (other.gameObject == OwnerPlayer.gameObject)
         {
             OnStaySelf();
         }
@@ -92,7 +93,7 @@ public class SpawnedWeaponBase : MonoBehaviour
     {
         if (other.CompareTag("Player")) { return; }
 
-        if (other.gameObject == OwnerPlayer)
+        if (other.gameObject == OwnerPlayer.gameObject)
         {
             OnExitSelf();
         }

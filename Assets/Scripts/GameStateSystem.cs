@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public enum GameState
 {
@@ -18,12 +19,12 @@ public enum GameState
 public class StateObjectPair
 {
     public GameState State;
-    public GameObject StateObject;
+    public List<GameObject> StateObjects;
 }
 
 public class GameStateSystem : MonoSingleton<GameStateSystem>
 {
-    [SerializeField] private List<StateObjectPair> _stateObjects = new List<StateObjectPair>();
+    [FormerlySerializedAs("_stateObjects")] [SerializeField] private List<StateObjectPair> _states = new List<StateObjectPair>();
 
     public GameState CurrentState { get; private set; }
 
@@ -41,9 +42,12 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
         StateTime = 0f;
         CurrentState = state;
 
-        foreach (StateObjectPair pair in _stateObjects)
+        foreach (StateObjectPair pair in _states)
         {
-            pair.StateObject.SetActive(pair.State == state);
+            foreach (GameObject go in pair.StateObjects)
+            {
+                go.SetActive(pair.State == state);
+            }
         }
 
         OnGameStateChanged?.Invoke(state);
