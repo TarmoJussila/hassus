@@ -21,6 +21,8 @@ namespace Hassus.Map
         private MapBlockGroup _mapBlockGroup;
 
         private Transform activeFoliageObject = null;
+        private float cornerSizeMin = 1f;
+        private float cornerSizeMax = 1f;
         private float foliageSway = 1f;
         private float timer;
         private float explosiveForce = 0f;
@@ -40,8 +42,12 @@ namespace Hassus.Map
             }
         }
 
-        public void ToggleGrass(bool toggle)
+        public void ToggleGrass(bool toggle, float scaleMin, float scaleMax)
         {
+            if (toggle)
+            {
+                grassObject.transform.localScale = new Vector3(1f, Random.Range(scaleMin, scaleMax), 1f);
+            }
             grassObject.SetActive(toggle);
         }
 
@@ -65,8 +71,10 @@ namespace Hassus.Map
             }
         }
 
-        public void ToggleCorners(MapBlockGroup mapBlockGroup)
+        public void ToggleCorners(MapBlockGroup mapBlockGroup, float cornerMin, float cornerMax)
         {
+            cornerSizeMin = cornerMin;
+            cornerSizeMax = cornerMax;
             _mapBlockGroup = mapBlockGroup;
             ToggleCorners
             (
@@ -77,11 +85,13 @@ namespace Hassus.Map
                 mapBlockGroup.RightBlock,
                 mapBlockGroup.BottomLeftBlock,
                 mapBlockGroup.BottomBlock,
-                mapBlockGroup.BottomRightBlock
+                mapBlockGroup.BottomRightBlock,
+                cornerMin,
+                cornerMax
             );
         }
         
-        public void TogglePieces(MapBlockGroup mapBlockGroup, float pieceChance)
+        public void TogglePieces(MapBlockGroup mapBlockGroup, float sizeMin, float sizeMax, float pieceChance)
         {
             TogglePieces
             (
@@ -93,6 +103,8 @@ namespace Hassus.Map
                 mapBlockGroup.BottomLeftBlock,
                 mapBlockGroup.BottomBlock,
                 mapBlockGroup.BottomRightBlock,
+                sizeMin,
+                sizeMax,
                 pieceChance
             );
         }
@@ -101,7 +113,7 @@ namespace Hassus.Map
         {
             if (_mapBlockGroup != null)
             {
-                ToggleCorners(_mapBlockGroup);
+                ToggleCorners(_mapBlockGroup, cornerSizeMin, cornerSizeMax);
             }
         }
 
@@ -110,10 +122,11 @@ namespace Hassus.Map
             explosiveForce = force;
         }
 
-        private void TogglePieces(MapBlock topLeftBlock, MapBlock topBlock, MapBlock topRightBlock, MapBlock leftBlock, MapBlock rightBlock, MapBlock bottomLeftBlock, MapBlock bottomBlock, MapBlock bottomRightBlock, float pieceChance)
+        private void TogglePieces(MapBlock topLeftBlock, MapBlock topBlock, MapBlock topRightBlock, MapBlock leftBlock, MapBlock rightBlock, MapBlock bottomLeftBlock, MapBlock bottomBlock, MapBlock bottomRightBlock, float sizeMin, float sizeMax, float pieceChance)
         {
             if (leftBlock == null)
             {
+                leftPiece.transform.localScale = new Vector3(1f, 1f, Random.Range(sizeMin, sizeMax));
                 leftPiece.SetActive(pieceChance > Random.Range(0.0f, 1.0f));
             }
             else
@@ -123,6 +136,7 @@ namespace Hassus.Map
 
             if (rightBlock == null)
             {
+                rightPiece.transform.localScale = new Vector3(1f, 1f, Random.Range(sizeMin, sizeMax));
                 rightPiece.SetActive(pieceChance > Random.Range(0.0f, 1.0f));
             }
             else
@@ -132,6 +146,7 @@ namespace Hassus.Map
 
             if (bottomBlock == null)
             {
+                bottomPiece.transform.localScale = new Vector3(1f, Random.Range(sizeMin, sizeMax), 1f);
                 bottomPiece.SetActive(pieceChance > Random.Range(0.0f, 1.0f));
             }
             else
@@ -140,12 +155,13 @@ namespace Hassus.Map
             }
         }
 
-        private void ToggleCorners(MapBlock topLeftBlock, MapBlock topBlock, MapBlock topRightBlock, MapBlock leftBlock, MapBlock rightBlock, MapBlock bottomLeftBlock, MapBlock bottomBlock, MapBlock bottomRightBlock)
+        private void ToggleCorners(MapBlock topLeftBlock, MapBlock topBlock, MapBlock topRightBlock, MapBlock leftBlock, MapBlock rightBlock, MapBlock bottomLeftBlock, MapBlock bottomBlock, MapBlock bottomRightBlock, float cornerMin, float cornerMax)
         {
             if (topBlock == null || !topBlock.isActiveAndEnabled)
             {
                 if (topLeftBlock != null && topLeftBlock.isActiveAndEnabled)
                 {
+                    topLeftCorner.transform.localScale = new Vector3(1f, Random.Range(cornerMin, cornerMax), Random.Range(cornerMin, cornerMax));
                     topLeftCorner.SetActive(true);
                 }
                 else
@@ -155,6 +171,7 @@ namespace Hassus.Map
 
                 if (topRightBlock != null && topRightBlock.isActiveAndEnabled)
                 {
+                    topRightCorner.transform.localScale = new Vector3(1f, Random.Range(cornerMin, cornerMax), Random.Range(cornerMin, cornerMax));
                     topRightCorner.SetActive(true);
                 }
                 else
@@ -172,6 +189,7 @@ namespace Hassus.Map
             {
                 if (bottomLeftBlock != null && bottomLeftBlock.isActiveAndEnabled)
                 {
+                    bottomLeftCorner.transform.localScale = new Vector3(1f, Random.Range(cornerMin, cornerMax), Random.Range(cornerMin, cornerMax));
                     bottomLeftCorner.SetActive(true);
                 }
                 else
@@ -181,6 +199,7 @@ namespace Hassus.Map
 
                 if (bottomRightBlock != null && bottomRightBlock.isActiveAndEnabled)
                 {
+                    bottomRightCorner.transform.localScale = new Vector3(1f, Random.Range(cornerMin, cornerMax), Random.Range(cornerMin, cornerMax));
                     bottomRightCorner.SetActive(true);
                 }
                 else

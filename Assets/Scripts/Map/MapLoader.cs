@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Hassus.Map
 {
@@ -9,20 +9,25 @@ namespace Hassus.Map
         [Header("Map References")]
         [SerializeField] private TextAsset[] mapTextAssets;
         [SerializeField] private MapBlock mapBlockPrefab;
-        [SerializeField] private Texture2D[] treeTextures;
+        [FormerlySerializedAs("treeTextures")] [SerializeField] private Texture2D[] foliageTextures;
 
         [Header("Map Settings")]
         [SerializeField] [Range(0, 1.0f)] private float foliageChance = 0.5f;
         [SerializeField] [Range(1, 9)] private int foliageHeightSpace = 2;
         [SerializeField] [Range(0, 1.0f)] private float pieceChance = 0.5f;
-        [SerializeField] private Color treeColorVarianceMin = Color.white;
-        [SerializeField] private Color treeColorVarianceMax = Color.white;
+        [SerializeField] [Range(0, 1f)] private float pieceSizeMin = 0.5f;
+        [SerializeField] [Range(1f, 2f)] private float pieceSizeMax = 1.2f;
+        [SerializeField] [Range(0, 1f)] private float cornerSizeMin = 0.5f;
+        [SerializeField] [Range(1f, 2f)] private float cornerSizeMax = 1.2f;
+        [FormerlySerializedAs("treeColorVarianceMin")] [SerializeField] private Color foliageColorVarianceMin = Color.white;
+        [FormerlySerializedAs("treeColorVarianceMax")] [SerializeField] private Color foliageColorVarianceMax = Color.white;
         [SerializeField] [Range(0f, 10f)] private float foliageRotationMax = 5f;
         [SerializeField] [Range(0, 30f)] private float foliageSwayMax = 5f;
+        [SerializeField] [Range(0, 1f)] private float grassScaleMin = 0.7f;
+        [SerializeField] [Range(1f, 2f)] private float grassScaleMax = 1.7f;
         
         private Dictionary<Vector2Int, MapBlock> mapBlocks = new();
         private Dictionary<Vector2Int, BoxCollider2D> mapColliders = new();
-
         private int randomMapIndex = 0;
         
         private readonly int mapWidth = 32;
@@ -147,17 +152,17 @@ namespace Hassus.Map
 
         private void InitializeMapBlock(MapBlock mapBlock, MapBlockGroup adjacentMapBlockGroup, int topEmptySpace)
         {
-            mapBlock.ToggleGrass(topEmptySpace >= 1);
+            mapBlock.ToggleGrass(topEmptySpace >= 1, grassScaleMin, grassScaleMax);
             mapBlock.ToggleFoliage
             (
-                treeTextures[Random.Range(0, treeTextures.Length)],
-                Color.Lerp(treeColorVarianceMin, treeColorVarianceMax, Random.Range(0.0f, 1.0f)),
+                foliageTextures[Random.Range(0, foliageTextures.Length)],
+                Color.Lerp(foliageColorVarianceMin, foliageColorVarianceMax, Random.Range(0.0f, 1.0f)),
                 Random.Range(-foliageRotationMax, foliageRotationMax),
                 Random.Range(0f, foliageSwayMax),
                 topEmptySpace >= foliageHeightSpace ? foliageChance : 0
             );
-            mapBlock.ToggleCorners(adjacentMapBlockGroup);
-            mapBlock.TogglePieces(adjacentMapBlockGroup, pieceChance);
+            mapBlock.ToggleCorners(adjacentMapBlockGroup, cornerSizeMin, cornerSizeMax);
+            mapBlock.TogglePieces(adjacentMapBlockGroup, pieceSizeMin, pieceSizeMax, pieceChance);
         }
         
         private List<string> MapTextAssetToList(TextAsset mapTextAsset)
