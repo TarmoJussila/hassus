@@ -23,6 +23,8 @@ namespace Hassus.Map
         [FormerlySerializedAs("treeColorVarianceMax")] [SerializeField] private Color foliageColorVarianceMax = Color.white;
         [SerializeField] [Range(0f, 10f)] private float foliageRotationMax = 5f;
         [SerializeField] [Range(0, 30f)] private float foliageSwayMax = 5f;
+        [SerializeField] [Range(0, 1f)] private float grassScaleMin = 0.7f;
+        [SerializeField] [Range(1f, 2f)] private float grassScaleMax = 1.7f;
         
         private Dictionary<Vector2Int, MapBlock> mapBlocks = new();
         private Dictionary<Vector2Int, BoxCollider2D> mapColliders = new();
@@ -150,7 +152,7 @@ namespace Hassus.Map
 
         private void InitializeMapBlock(MapBlock mapBlock, MapBlockGroup adjacentMapBlockGroup, int topEmptySpace)
         {
-            mapBlock.ToggleGrass(topEmptySpace >= 1);
+            mapBlock.ToggleGrass(topEmptySpace >= 1, grassScaleMin, grassScaleMax);
             mapBlock.ToggleFoliage
             (
                 foliageTextures[Random.Range(0, foliageTextures.Length)],
