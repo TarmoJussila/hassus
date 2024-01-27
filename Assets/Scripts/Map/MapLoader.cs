@@ -17,6 +17,8 @@ namespace Hassus.Map
         [SerializeField] [Range(0, 1.0f)] private float pieceChance = 0.5f;
         [SerializeField] private Color treeColorVarianceMin = Color.white;
         [SerializeField] private Color treeColorVarianceMax = Color.white;
+        [SerializeField] [Range(0f, 10f)] private float foliageRotationMax = 5f;
+        [SerializeField] [Range(0, 30f)] private float foliageSwayMax = 5f;
         
         private Dictionary<Vector2Int, MapBlock> mapBlocks = new();
         private Dictionary<Vector2Int, BoxCollider2D> mapColliders = new();
@@ -150,6 +152,8 @@ namespace Hassus.Map
             (
                 treeTextures[Random.Range(0, treeTextures.Length)],
                 Color.Lerp(treeColorVarianceMin, treeColorVarianceMax, Random.Range(0.0f, 1.0f)),
+                Random.Range(-foliageRotationMax, foliageRotationMax),
+                Random.Range(0f, foliageSwayMax),
                 topEmptySpace >= foliageHeightSpace ? foliageChance : 0
             );
             mapBlock.ToggleCorners(adjacentMapBlockGroup);

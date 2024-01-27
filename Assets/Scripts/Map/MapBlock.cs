@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,12 +20,26 @@ namespace Hassus.Map
 
         private MapBlockGroup _mapBlockGroup;
 
+        private Transform activeFoliageObject = null;
+        private float foliageSway = 1f;
+        private float timer;
+
+        private void Update()
+        {
+            if (activeFoliageObject != null)
+            {
+                timer += Time.deltaTime;
+                var localEulerAngles = activeFoliageObject.localEulerAngles;
+                activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Sin(timer) * foliageSway, localEulerAngles.y, localEulerAngles.z);
+            }
+        }
+
         public void ToggleGrass(bool toggle)
         {
             grassObject.SetActive(toggle);
         }
 
-        public void ToggleFoliage(Texture2D texture, Color color, float foliageChance, int index = -1)
+        public void ToggleFoliage(Texture2D texture, Color color, float rotation, float sway, float foliageChance, int index = -1)
         {
             bool enableFoliage = foliageChance > Random.Range(0.0f, 1.0f);
             int randomIndex = index == -1 ? Random.Range(0, foliageObjects.Length) : index;
@@ -34,9 +49,12 @@ namespace Hassus.Map
                 foliageObjects[i].SetActive(toggle);
                 if (toggle)
                 {
+                    foliageSway = sway;
                     var material = foliageObjects[i].GetComponent<MeshRenderer>().material;
                     material.mainTexture = texture;
                     material.color = color;
+                    foliageObjects[i].transform.localRotation = Quaternion.Euler(0f, rotation, 0f);
+                    activeFoliageObject = foliageObjects[i].transform;
                 }
             }
         }
