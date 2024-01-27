@@ -7,19 +7,18 @@ public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _sprite;
 
+    [SerializeField] private Animator _charAnimator;
+    [SerializeField] private Animator _weaponAnimator;
     private PlayerMovement _movement;
-    private Animator _charAnimator;
-    private Animator _weaponAnimator;
     private static readonly int dead = Animator.StringToHash("Dead");
     private static readonly int grounded = Animator.StringToHash("Grounded");
     private static readonly int jumpDir = Animator.StringToHash("JumpDir");
     private static readonly int movement = Animator.StringToHash("Movement");
+    private static readonly int direction = Animator.StringToHash("direction");
 
     private void Awake()
     {
         _movement = GetComponent<PlayerMovement>();
-        _charAnimator = GetComponentInChildren<Animator>();
-        _weaponAnimator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -29,16 +28,12 @@ public class PlayerAnimator : MonoBehaviour
         _charAnimator.SetBool(grounded, _movement.Grounded);
         _charAnimator.SetInteger(jumpDir, _movement.JumpDirection);
         _charAnimator.SetInteger(movement, Mathf.RoundToInt(_movement.Input.x));
+        _weaponAnimator.SetInteger(direction, _movement.LastDirection);
     }
 
-    public void CharacterAnimation(string animation)
+    public void WeaponAnimation(string trigger)
     {
-        _charAnimator.Play(animation);
-    }
-
-    public void WeaponAnimation(string animation)
-    {
-        _weaponAnimator.Play(animation);
+        _weaponAnimator.SetTrigger(trigger);
     }
 
     public void PlayerDead()

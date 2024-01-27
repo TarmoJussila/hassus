@@ -257,12 +257,12 @@ TextureImporter:
       name: Weapons_Chicken
       rect:
         serializedVersion: 2
-        x: 1702
-        y: 748
+        x: 1709
+        y: 759
         width: 328
         height: 964
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.05}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -324,8 +324,8 @@ TextureImporter:
         y: 23
         width: 509
         height: 881
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

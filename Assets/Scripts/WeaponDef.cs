@@ -6,8 +6,7 @@ public class WeaponDef : ScriptableObject
 {
     [FormerlySerializedAs("sprite")] public Sprite Sprite;
     public int MaxUses;
-    [FormerlySerializedAs("PlayerAnimation")] public string CharacterAnimation;
-    public string WeaponAnimation;
+    public string WeaponAnimationTrigger;
     public SpawnedWeaponBase Prefab;
     public Vector2 SpawnOffset;
     public Vector2 SpawnForce;
