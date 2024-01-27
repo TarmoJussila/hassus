@@ -142,7 +142,23 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Update_WaitingPlayers()
     {
-        // Moved stuff from here to StartGame()
+        // TODO: link to input schemes
+        var joinKeys = new List<KeyCode>()
+        {
+            KeyCode.Q,
+            KeyCode.RightControl,
+            KeyCode.R,
+            KeyCode.U
+        };
+
+        for (int i = 0; i < joinKeys.Count; i++)
+        {
+            if (Input.GetKey(joinKeys[i]))
+            {
+                PlayerManager.Instance.OnJoinInput(i);
+                break;
+            }
+        }
     }
 
     private void Update_Fight()

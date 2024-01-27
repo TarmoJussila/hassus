@@ -261,7 +261,19 @@ MonoBehaviour:
     m_ActionId: 307985ff-d162-4c9f-ade5-34a1c290e274
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5237775489259752111, guid: 130b56f20f9437241848581a5f9bc15b, type: 3}
+        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+        m_MethodName: OnJoinInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 170f5d50-3465-49bb-9d24-7f9d4cf33701
     m_ActionName: Player/Join[/Keyboard/q]
   - m_PersistentCalls:
