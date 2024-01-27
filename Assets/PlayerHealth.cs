@@ -32,24 +32,28 @@ public class PlayerHealth : MonoBehaviour
     public int CurrentLives { get; private set; }
     public int MaxLives { get; private set; } = 3;
 
+    [SerializeField] private GameObject _gravePrefab;
+
     private PlayerInput _input;
     private float _respawnTime = 5f;
 
     private PlayerAnimator _animator;
     private PlayerMovement _movement;
+    private PlayerWeapon _weapon;
 
     private void Awake()
     {
         _input = GetComponent<PlayerInput>();
         _animator = GetComponent<PlayerAnimator>();
         _movement = GetComponent<PlayerMovement>();
+        _weapon = GetComponent<PlayerWeapon>();
 
         OnPlayerHealthChanged?.Invoke(_input.playerIndex, MaxHealth, MaxHealth, MaxHealth);
     }
 
     public void TakeDamage(int damage, int sourcePlayer)
     {
-        if (CurrentHealth < 0) { return; }
+        if (CurrentHealth <= 0) { return; }
 
         int oldHealth = CurrentHealth;
         CurrentHealth -= damage;
@@ -73,6 +77,7 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(RespawnTimer());
         _animator.PlayerDead();
         _movement.PlayerDead();
+        _weapon.Disarm();
     }
 
     private IEnumerator RespawnTimer()
@@ -86,6 +91,11 @@ public class PlayerHealth : MonoBehaviour
         CurrentHealth = MaxHealth;
         _animator.PlayerRespawn();
         _movement.PlayerRespawn();
+        OnPlayerHealthChanged?.Invoke(_input.playerIndex, 0, CurrentHealth, MaxHealth);
         OnPlayerRespawn?.Invoke(_input.playerIndex, gameObject);
+
+        Instantiate(_gravePrefab, transform.position + Vector3.up * 0.1f, Quaternion.identity);
+
+        transform.position = Vector2.up; //TODO Find respawn point
     }
 }

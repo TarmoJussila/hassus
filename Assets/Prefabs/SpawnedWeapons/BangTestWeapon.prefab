@@ -49,7 +49,7 @@ MonoBehaviour:
   OwnerPlayer: {fileID: 0}
   _overlapQueryRadius: 2
   _lifeTime: 3
-  Damage: 1
+  Damage: 5
 --- !u!212 &1437523528733729461
 SpriteRenderer:
   m_ObjectHideFlags: 0

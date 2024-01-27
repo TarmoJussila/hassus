@@ -85,7 +85,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         spriteRenderer.flipX = _movement.LastDirection < 0;
         Vector3 pos = spriteRenderer.transform.localPosition;
-        pos.x = _movement.LastDirection * 0.5f;
+        pos.x = _movement.LastDirection * 0.3f;
         spriteRenderer.transform.localPosition = pos;
     }
 }

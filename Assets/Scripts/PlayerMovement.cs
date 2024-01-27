@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
 
-
     [SerializeField] private Vector2 _groundCheckOffset;
     [SerializeField] private LayerMask _groundCheckLayer;
 
@@ -28,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _input;
     private float _jumpBuffer = 0.0f;
     private const float _jumpBufferLength = 0.1f;
-
 
     private void Awake()
     {
@@ -91,11 +89,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerDead()
     {
-        throw new System.NotImplementedException();
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.velocity += Vector2.up * 6;
+        rb.AddTorque(LastDirection * 20);
+        enabled = false;
     }
 
     public void PlayerRespawn()
     {
-        throw new System.NotImplementedException();
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        transform.rotation = Quaternion.identity;
+        enabled = true;
     }
 }
