@@ -23,6 +23,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
     public Dictionary<int, PlayerData> PlayerDatas = new();
     [SerializeField] private PlayerInputManager playerInputManager;
+    [SerializeField] private GameObject playerPrefab;
 
     public void ChangeState(GameState state)
     {
@@ -64,6 +65,28 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         OnPlayerScoreChanged?.Invoke(index, score, PlayerDatas[index].Score);
     }
 
+    public void OnJoinInput(int keyboardSchemeIndex)
+    {
+        // TODO: link to schemes
+        List<string> schemeNames = new List<string>()
+        {
+            "Keyboard&Mouse",
+            "Keyboard arrows",
+            "Keyboard TFGH",
+            "Keyboard IJKL"
+        };
+
+        if (keyboardSchemeIndex >= schemeNames.Count)
+        {
+            Debug.LogWarning($"Failed to join, invalid keyboard scheme ID: {keyboardSchemeIndex}");
+            return;
+        }
+
+        string scheme = schemeNames[keyboardSchemeIndex];
+        Debug.Log($"Join input from keyboard scheme ID {keyboardSchemeIndex} = {scheme}");
+        PlayerInput.Instantiate(playerPrefab, controlScheme: scheme, pairWithDevice: Keyboard.current);
+    }
+
     public void OnPlayerJoined(PlayerInput playerInput)
     {
         //TODO: only allow joining in one state
@@ -84,7 +107,7 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         Debug.Log($"Player joined: {playerInput.playerIndex}");
         // TODO: move player to spawn point
         //playerInput.transform.position = ???
-        
+
         OnPlayerJoin?.Invoke(playerInput.playerIndex);
     }
 
