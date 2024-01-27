@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/WeaponSO", order = 1)]
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/WeaponDef", order = 1)]
 public class WeaponDef : ScriptableObject
 {
     [FormerlySerializedAs("sprite")] public Sprite Sprite;

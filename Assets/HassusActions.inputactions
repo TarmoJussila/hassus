@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "3aeef96d-8a71-49bc-b14f-0c1f3ec1d175",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -374,6 +383,50 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "5b72290d-d7e0-4dbb-9a49-2d2b3ebb97ea",
+                    "path": "<Keyboard>/#(E)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7dd5c43d-a81b-4e55-aa66-f0fffa1fbc27",
+                    "path": "<Keyboard>/#(Y)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard TFGH",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9fbd5d1f-96c9-4bdf-ae45-c85cfa481afd",
+                    "path": "<Keyboard>/#(O)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard IJKL",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a0d07dd7-3eac-41bc-ace9-ef56e5028de8",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard arrows",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
