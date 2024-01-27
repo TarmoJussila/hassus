@@ -512,6 +512,8 @@ MonoBehaviour:
   cornerSizeMax: 1.8
   foliageColorVarianceMin: {r: 1, g: 1, b: 1, a: 1}
   foliageColorVarianceMax: {r: 1, g: 0.6666667, b: 0, a: 1}
+  grassColorVarianceMin: {r: 1, g: 1, b: 1, a: 1}
+  grassColorVarianceMax: {r: 1, g: 0.8349057, b: 0.504717, a: 1}
   foliageRotationMax: 5
   foliageSwayMax: 5
   foliageExplosiveForceMax: 30

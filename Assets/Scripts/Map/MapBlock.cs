@@ -65,11 +65,13 @@ namespace Hassus.Map
             }
         }
 
-        public void ToggleGrass(bool toggle, float scaleMin, float scaleMax)
+        public void ToggleGrass(bool toggle, float scaleMin, float scaleMax, Color color)
         {
             if (toggle)
             {
                 grassObject.transform.localScale = new Vector3(1f, Random.Range(scaleMin, scaleMax), 1f);
+                var material = grassObject.GetComponent<MeshRenderer>().material;
+                material.color = color;
             }
             grassObject.SetActive(toggle);
         }

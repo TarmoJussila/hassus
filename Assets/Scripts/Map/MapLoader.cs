@@ -9,7 +9,7 @@ namespace Hassus.Map
         [Header("Map References")]
         [SerializeField] private TextAsset[] mapTextAssets;
         [SerializeField] private MapBlock mapBlockPrefab;
-        [FormerlySerializedAs("treeTextures")] [SerializeField] private Texture2D[] foliageTextures;
+        [SerializeField] private Texture2D[] foliageTextures;
 
         [Header("Map Settings")]
         [SerializeField] [Range(0, 1.0f)] private float foliageChance = 0.5f;
@@ -19,8 +19,10 @@ namespace Hassus.Map
         [SerializeField] [Range(1f, 2f)] private float pieceSizeMax = 1.2f;
         [SerializeField] [Range(0, 1f)] private float cornerSizeMin = 0.5f;
         [SerializeField] [Range(1f, 2f)] private float cornerSizeMax = 1.2f;
-        [FormerlySerializedAs("treeColorVarianceMin")] [SerializeField] private Color foliageColorVarianceMin = Color.white;
-        [FormerlySerializedAs("treeColorVarianceMax")] [SerializeField] private Color foliageColorVarianceMax = Color.white;
+        [SerializeField] private Color foliageColorVarianceMin = Color.white;
+        [SerializeField] private Color foliageColorVarianceMax = Color.white;
+        [SerializeField] private Color grassColorVarianceMin = Color.white;
+        [SerializeField] private Color grassColorVarianceMax = Color.white;
         [SerializeField] [Range(0f, 10f)] private float foliageRotationMax = 5f;
         [SerializeField] [Range(0, 30f)] private float foliageSwayMax = 5f;
         [SerializeField] private float foliageExplosiveForceMax = 45f;
@@ -153,7 +155,13 @@ namespace Hassus.Map
 
         private void InitializeMapBlock(MapBlock mapBlock, MapBlockGroup adjacentMapBlockGroup, int topEmptySpace)
         {
-            mapBlock.ToggleGrass(topEmptySpace >= 1, grassScaleMin, grassScaleMax);
+            mapBlock.ToggleGrass
+            (
+                topEmptySpace >= 1,
+                grassScaleMin,
+                grassScaleMax,
+                Color.Lerp(grassColorVarianceMin, grassColorVarianceMax, Random.Range(0.0f, 1.0f))
+            );
             mapBlock.ToggleFoliage
             (
                 foliageTextures[Random.Range(0, foliageTextures.Length)],
