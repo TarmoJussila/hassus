@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Hassus.Map
 {
@@ -30,12 +33,15 @@ namespace Hassus.Map
         
         private Dictionary<Vector2Int, MapBlock> mapBlocks = new();
         private Dictionary<Vector2Int, BoxCollider2D> mapColliders = new();
+        private List<Vector3> spawnPoints = new List<Vector3>();
         private int randomMapIndex = 0;
+        private int nextSpawnPointIndex = 0;
         
         private readonly int mapWidth = 32;
         private readonly int mapHeight = 32;
         private readonly string mapEmptySymbol = ".";
         private readonly string mapBlockSymbol = "#";
+        private readonly string mapSpawnSymbol = "S";
         private readonly bool enableDebugInput = true;
         
         private void Start()
@@ -112,8 +118,14 @@ namespace Hassus.Map
                         mapBlocks.Add(new Vector2Int(i, j), mapBlock);
                         mapColliders.Add(new Vector2Int(i, j), boxCollider);
                     }
+                    else if (symbol == mapSpawnSymbol)
+                    {
+                        spawnPoints.Add(new Vector2(i, j));
+                    }
                 }
             }
+            
+            ShuffleSpawnPoints();
             
             for (int i = 0; i < mapWidth; i++)
             {
@@ -196,6 +208,21 @@ namespace Hassus.Map
             return list;
         }
         
+        private void ShuffleSpawnPoints()
+        {
+            spawnPoints = spawnPoints.OrderBy(x => Guid.NewGuid()).ToList();
+        }
+        
+        public Vector3 GetRandomSpawnPoint()
+        {
+            nextSpawnPointIndex++;
+            if (nextSpawnPointIndex >= spawnPoints.Count)
+            {
+                nextSpawnPointIndex = 0;
+            }
+            return spawnPoints[nextSpawnPointIndex];
+        }
+        
         public void Explode(Vector3 center, int circleRadius = 1, bool reverseOrder = false)
         {
             int start = reverseOrder ? circleRadius : -circleRadius;
@@ -232,7 +259,6 @@ namespace Hassus.Map
                 return;
             }
             
-            Gizmos.color = Color.magenta;
             var map = MapTextAssetToList(mapTextAssets[randomMapIndex]);
             
             for (int i = 0; i < mapWidth; i++)
@@ -247,7 +273,37 @@ namespace Hassus.Map
                     }
                     else if (symbol == mapBlockSymbol)
                     {
-                        Gizmos.DrawCube(new Vector2(i, j), Vector3.one);
+                        Gizmos.color = Color.magenta;
+                        Gizmos.DrawWireCube(new Vector2(i, j), Vector3.one);
+                    }
+                    else if (symbol == mapSpawnSymbol)
+                    {
+                        Gizmos.color = Color.red;
+                        Gizmos.DrawSphere(new Vector2(i, j), 1f);
+                    }
+                }
+            }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+            
+            var map = MapTextAssetToList(mapTextAssets[randomMapIndex]);
+            
+            for (int i = 0; i < mapWidth; i++)
+            {
+                for (int j = 0; j < mapHeight; j++)
+                {
+                    string symbol = map[j][i].ToString();
+
+                    if (symbol == mapSpawnSymbol)
+                    {
+                        Gizmos.color = new Color(255f, 0f, 255f, 0.5f);
+                        Gizmos.DrawSphere(new Vector2(i, j), 1f);
                     }
                 }
             }
