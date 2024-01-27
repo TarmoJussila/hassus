@@ -94,7 +94,8 @@ public class PlayerHealth : MonoBehaviour
         OnPlayerHealthChanged?.Invoke(_input.playerIndex, 0, CurrentHealth, MaxHealth);
         OnPlayerRespawn?.Invoke(_input.playerIndex, gameObject);
 
-        Instantiate(_gravePrefab, transform.position + Vector3.up * 0.1f, Quaternion.identity);
+        GameObject grave = Instantiate(_gravePrefab, transform.position + Vector3.up * 0.1f, Quaternion.identity);
+        grave.GetComponent<Grave>().SetPlayerIndex(_input.playerIndex);
 
         transform.position = Vector2.up; //TODO Find respawn point
     }
