@@ -14,14 +14,10 @@ public class BangTestWeapon : SpawnedWeaponBase
     protected override void OnStayEnemy(Collider2D other)
     {
         other.GetComponent<PlayerHealth>().TakeDamage(Damage, OwnerPlayer.playerIndex);
-        
-        base.OnOverlapEnemy(other);
     }
 
     protected override void OnStaySelf()
     {
         OwnerPlayer.GetComponent<PlayerHealth>().TakeDamage(Damage, OwnerPlayer.playerIndex);
-
-        base.OnStaySelf();
     }
 }
