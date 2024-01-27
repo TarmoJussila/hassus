@@ -8,6 +8,6 @@ public class Grave : MonoBehaviour
 
     public void SetPlayerIndex(int index)
     {
-        GetComponent<SpriteRenderer>().sprite = _sprites[index];
+        GetComponentInChildren<SpriteRenderer>().sprite = _sprites[index];
     }
 }
