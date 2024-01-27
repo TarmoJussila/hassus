@@ -168,6 +168,39 @@
                 },
                 {
                     "name": "",
+                    "id": "860cc6bb-ce1c-44a7-9a00-670054cca1d7",
+                    "path": "<Keyboard>/rightAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard arrows",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb3a89c7-1d25-4470-8d50-d61637c9084a",
+                    "path": "<Keyboard>/#(-)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard arrows",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2189b486-16b6-4066-bef7-9d2b16b781a3",
+                    "path": "<Keyboard>/{Modifier}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard arrows",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "917a4a48-6464-4083-ab5a-fd30ed483b06",
                     "path": "<Keyboard>/enter",
                     "interactions": "",
@@ -268,7 +301,7 @@
                 {
                     "name": "left",
                     "id": "31eb4bd7-81d5-4ec9-824a-aa8cbb250f04",
-                    "path": "<Keyboard>/#(T)",
+                    "path": "<Keyboard>/#(F)",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard TFGH",

@@ -143,20 +143,22 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
     private void Update_WaitingPlayers()
     {
         // TODO: link to input schemes
-        var joinKeys = new List<KeyCode>()
-        {
-            KeyCode.Q,
-            KeyCode.RightControl,
-            KeyCode.R,
-            KeyCode.U
+        var joinKeys = new List<List<KeyCode>> {
+            new() { KeyCode.Q },
+            new() { KeyCode.RightControl, KeyCode.RightAlt, KeyCode.Minus },
+            new(){ KeyCode.R },
+            new() { KeyCode.U }
         };
 
         for (int i = 0; i < joinKeys.Count; i++)
         {
-            if (Input.GetKey(joinKeys[i]))
+            for (int j = 0; j < joinKeys[i].Count; j++)
             {
-                PlayerManager.Instance.OnJoinInput(i);
-                break;
+                if (Input.GetKeyDown(joinKeys[i][j]))
+                {
+                    PlayerManager.Instance.OnJoinInput(i);
+                    break;
+                }
             }
         }
     }
