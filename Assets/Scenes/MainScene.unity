@@ -636,7 +636,7 @@ PrefabInstance:
     - target: {fileID: 7791358325137713053, guid: 17d3c5c4caaf2f44daba1ea8ca6bcccb, type: 3}
       propertyPath: weaponDefs.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 675f0e625139d5b4bbae1d2cfe36d66b, type: 2}
+      objectReference: {fileID: 11400000, guid: cfee46228ce3f974c91cb120528f6035, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1023,15 +1023,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2618484600814791005, guid: 1c547e211e1ad2549861dc485537faf7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.09853761
+      value: 0.09853764
       objectReference: {fileID: 0}
     - target: {fileID: 2618484600814791005, guid: 1c547e211e1ad2549861dc485537faf7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -5.311781e-15
+      value: 0.000000029657283
       objectReference: {fileID: 0}
     - target: {fileID: 2618484600814791005, guid: 1c547e211e1ad2549861dc485537faf7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 3.5007586e-16
+      value: -0.0000000029366503
       objectReference: {fileID: 0}
     - target: {fileID: 2618484600814791005, guid: 1c547e211e1ad2549861dc485537faf7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
