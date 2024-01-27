@@ -246,7 +246,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7d1f8c94b0a4d779440af3bd400278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapTextAsset: {fileID: 4900000, guid: f688cc412c0784a19a09f96cbbb2a438, type: 3}
+  mapTextAssets:
+  - {fileID: 4900000, guid: 4d6d6789486694767bb14d474946a4f0, type: 3}
+  - {fileID: 4900000, guid: 9c0a8575906794861a373b6b812fce3d, type: 3}
+  - {fileID: 4900000, guid: 058d453892e06479d9fd6197b6e5d0df, type: 3}
+  - {fileID: 4900000, guid: f688cc412c0784a19a09f96cbbb2a438, type: 3}
   mapBlockPrefab: {fileID: 5279498002537231270, guid: 1c449c87a0ca74d56969608feb9612f8, type: 3}
   foliageChance: 0.25
   foliageHeightSpace: 3

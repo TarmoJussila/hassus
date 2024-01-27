@@ -6,7 +6,7 @@ namespace Hassus.Map
     public class MapLoader : MonoBehaviour
     {
         [Header("Map References")]
-        [SerializeField] private TextAsset mapTextAsset;
+        [SerializeField] private TextAsset[] mapTextAssets;
         [SerializeField] private MapBlock mapBlockPrefab;
 
         [Header("Map Settings")]
@@ -16,6 +16,8 @@ namespace Hassus.Map
         
         private Dictionary<Vector2Int, MapBlock> mapBlocks = new();
         private Dictionary<Vector2Int, BoxCollider2D> mapColliders = new();
+
+        private int randomMapIndex = 0;
         
         private readonly int mapWidth = 32;
         private readonly int mapHeight = 32;
@@ -62,7 +64,8 @@ namespace Hassus.Map
 
         private void GenerateMap()
         {
-            var map = MapTextAssetToList(mapTextAsset);
+            randomMapIndex = Random.Range(0, mapTextAssets.Length);
+            var map = MapTextAssetToList(mapTextAssets[randomMapIndex]);
 
             for (int i = 0; i < mapWidth; i++)
             {
@@ -157,7 +160,7 @@ namespace Hassus.Map
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.magenta;
-            var map = MapTextAssetToList(mapTextAsset);
+            var map = MapTextAssetToList(mapTextAssets[randomMapIndex]);
             
             for (int i = 0; i < mapWidth; i++)
             {
