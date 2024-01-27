@@ -25,17 +25,38 @@ public static class ChatMessages
         "Something's about to happen!",
         "This moment is so emotional \ud83d\ude0d \ud83d\ude0d",
         "Can we get some positivity in the chat? \ud83d\ude0d",
-        "What a wild stream!",
-        "Unlucky moment there.",
-        "EZ win \ud83e\udd23, no competition!",
-        "LOL, this stream is hilarious!",
+        $"What a wild stream! {ChatEmotes.GetEmote(ChatEmoteType.Poggers)}",
+        $"Unlucky moment there {ChatEmotes.GetEmote(ChatEmoteType.Kappa)}",
+        $"EZ win \ud83e\udd23, no competition! {ChatEmotes.GetEmote(ChatEmoteType.Kappa)} {ChatEmotes.GetEmote(ChatEmoteType.Kappa)}",
+        $"LOL, this stream is hilarious! {ChatEmotes.GetEmote(ChatEmoteType.Kappa)}",
         "That's a spicy moment!",
         "Wow, the chat is on fire!",
         "Spread love and positivity \ud83d\ude0d \ud83d\ude0d",
-        "That play showed real skill!",
+        $"That play showed real skill! {ChatEmotes.GetEmote(ChatEmoteType.Kappa)} {ChatEmotes.GetEmote(ChatEmoteType.Kappa)}",
         "I'm dying of laughter! \ud83d\ude06",
-        "Well done, clap clap clap!",
+        $"Well done, clap clap clap! {ChatEmotes.GetEmote(ChatEmoteType.Poggers)}",
         "That was a trolling moment! \ud83d\ude06",
         "pog pog pog pog pog pog pog"
+    };
+
+    public static string[] HypeMessages =
+    {
+        ChatEmotes.GetEmote(ChatEmoteType.Poggers) + ChatEmotes.GetEmote(ChatEmoteType.Poggers) + ChatEmotes.GetEmote(ChatEmoteType.Poggers),
+        ChatEmotes.GetEmote(ChatEmoteType.Poggers) + ChatEmotes.GetEmote(ChatEmoteType.Poggers),
+        ChatEmotes.GetEmote(ChatEmoteType.Poggers),
+        "HAHA",
+        ChatEmotes.GetEmote(ChatEmoteType.Kappa),
+        ChatEmotes.GetEmote(ChatEmoteType.Kappa), ChatEmotes.GetEmote(ChatEmoteType.Kappa),
+        "GET REKT",
+        "REKT",
+        "REKT",
+        "F",
+        "F",
+        "F",
+        "f",
+        "f",
+        "f",
+        "f",
+        ChatEmotes.GetEmote(ChatEmoteType.Lul)
     };
 }
