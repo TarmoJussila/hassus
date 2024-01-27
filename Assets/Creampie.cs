@@ -13,11 +13,22 @@ public class Creampie : SpawnedWeaponBase
         PlayerHealth health = coll.gameObject.GetComponent<PlayerHealth>();
         health.TakeDamage(_damage, OwnerPlayer.playerIndex);
 
-        if (health.CurrentHealth <= 0 && _killParticle != null)
-        {
-            Instantiate(_killParticle, health.transform.position, Quaternion.identity);
-        }
+        Destroy(gameObject);
+    }
 
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
         GetComponent<AudioSource>().Play();
+
+        if (_killParticle != null)
+        {
+            Instantiate(_killParticle, transform.position, Quaternion.identity);
+        }
+    }
+
+    protected override void OnCollideOther()
+    {
+        Destroy(gameObject);
     }
 }

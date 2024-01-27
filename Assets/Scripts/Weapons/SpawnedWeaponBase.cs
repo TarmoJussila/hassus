@@ -109,7 +109,7 @@ public class SpawnedWeaponBase : MonoBehaviour
     {
         if (!coll.collider.CompareTag("Player"))
         {
-            OnHitOther();
+            OnCollideOther();
         }
         else if (coll.gameObject == OwnerPlayer.gameObject)
         {
@@ -121,7 +121,7 @@ public class SpawnedWeaponBase : MonoBehaviour
         }
     }
 
-    protected virtual void OnHitOther() { }
+    protected virtual void OnCollideOther() { }
 
     protected virtual void OnCollideSelf() { }
 
