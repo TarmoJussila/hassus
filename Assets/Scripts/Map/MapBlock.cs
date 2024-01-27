@@ -17,24 +17,47 @@ namespace Hassus.Map
         [SerializeField] private GameObject bottomLeftCorner;
         [SerializeField] private GameObject bottomRightCorner;
 
+        private MapBlockGroup _mapBlockGroup;
+
         public void ToggleGrass(bool toggle)
         {
             grassObject.SetActive(toggle);
         }
 
-        public void ToggleFoliage(float foliageChance, int index = -1)
+        public void ToggleFoliage(Texture2D texture, float foliageChance, int index = -1)
         {
             bool enableFoliage = foliageChance > Random.Range(0.0f, 1.0f);
             int randomIndex = index == -1 ? Random.Range(0, foliageObjects.Length) : index;
             for (int i = 0; i < foliageObjects.Length; i++)
             {
-                foliageObjects[i].SetActive(i == randomIndex && enableFoliage);
+                bool toggle = i == randomIndex && enableFoliage;
+                foliageObjects[i].SetActive(toggle);
+                if (toggle)
+                {
+                    foliageObjects[i].GetComponent<MeshRenderer>().material.mainTexture = texture;
+                }
             }
         }
 
-        public void ToggleCorners(MapBlockGroup mapBlockGroup, float pieceChance)
+        public void ToggleCorners(MapBlockGroup mapBlockGroup)
         {
+            _mapBlockGroup = mapBlockGroup;
             ToggleCorners
+            (
+                mapBlockGroup.TopLeftBlock,
+                mapBlockGroup.TopBlock,
+                mapBlockGroup.TopRightBlock,
+                mapBlockGroup.LeftBlock,
+                mapBlockGroup.RightBlock,
+                mapBlockGroup.BottomLeftBlock,
+                mapBlockGroup.BottomBlock,
+                mapBlockGroup.BottomRightBlock
+            );
+        }
+        
+        public void TogglePieces(MapBlockGroup mapBlockGroup, float pieceChance)
+        {
+            TogglePieces
             (
                 mapBlockGroup.TopLeftBlock,
                 mapBlockGroup.TopBlock,
@@ -47,8 +70,16 @@ namespace Hassus.Map
                 pieceChance
             );
         }
+        
+        public void ResolveCorners()
+        {
+            if (_mapBlockGroup != null)
+            {
+                ToggleCorners(_mapBlockGroup);
+            }
+        }
 
-        public void ToggleCorners(MapBlock topLeftBlock, MapBlock topBlock, MapBlock topRightBlock, MapBlock leftBlock, MapBlock rightBlock, MapBlock bottomLeftBlock, MapBlock bottomBlock, MapBlock bottomRightBlock, float pieceChance)
+        private void TogglePieces(MapBlock topLeftBlock, MapBlock topBlock, MapBlock topRightBlock, MapBlock leftBlock, MapBlock rightBlock, MapBlock bottomLeftBlock, MapBlock bottomBlock, MapBlock bottomRightBlock, float pieceChance)
         {
             if (leftBlock == null)
             {
@@ -76,10 +107,13 @@ namespace Hassus.Map
             {
                 bottomPiece.SetActive(false);
             }
+        }
 
-            if (topBlock == null)
+        private void ToggleCorners(MapBlock topLeftBlock, MapBlock topBlock, MapBlock topRightBlock, MapBlock leftBlock, MapBlock rightBlock, MapBlock bottomLeftBlock, MapBlock bottomBlock, MapBlock bottomRightBlock)
+        {
+            if (topBlock == null || !topBlock.isActiveAndEnabled)
             {
-                if (topLeftBlock != null)
+                if (topLeftBlock != null && topLeftBlock.isActiveAndEnabled)
                 {
                     topLeftCorner.SetActive(true);
                 }
@@ -88,7 +122,7 @@ namespace Hassus.Map
                     topLeftCorner.SetActive(false);
                 }
 
-                if (topRightBlock != null)
+                if (topRightBlock != null && topRightBlock.isActiveAndEnabled)
                 {
                     topRightCorner.SetActive(true);
                 }
@@ -103,9 +137,9 @@ namespace Hassus.Map
                 topRightCorner.SetActive(false);
             }
 
-            if (bottomBlock == null)
+            if (bottomBlock == null || !bottomBlock.isActiveAndEnabled)
             {
-                if (bottomLeftBlock != null)
+                if (bottomLeftBlock != null && bottomLeftBlock.isActiveAndEnabled)
                 {
                     bottomLeftCorner.SetActive(true);
                 }
@@ -114,7 +148,7 @@ namespace Hassus.Map
                     bottomLeftCorner.SetActive(false);
                 }
 
-                if (bottomRightBlock != null)
+                if (bottomRightBlock != null && bottomRightBlock.isActiveAndEnabled)
                 {
                     bottomRightCorner.SetActive(true);
                 }
@@ -132,7 +166,18 @@ namespace Hassus.Map
 
         private void OnDisable()
         {
+            if (_mapBlockGroup != null)
+            {
+                if (_mapBlockGroup.TopBlock != null && _mapBlockGroup.TopBlock.isActiveAndEnabled)
+                {
+                    _mapBlockGroup.TopBlock.ResolveCorners();
+                }
 
+                if (_mapBlockGroup.BottomBlock != null && _mapBlockGroup.BottomBlock.isActiveAndEnabled)
+                {
+                    _mapBlockGroup.BottomBlock.ResolveCorners();
+                }
+            }
         }
     }
 }

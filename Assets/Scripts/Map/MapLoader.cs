@@ -8,6 +8,7 @@ namespace Hassus.Map
         [Header("Map References")]
         [SerializeField] private TextAsset[] mapTextAssets;
         [SerializeField] private MapBlock mapBlockPrefab;
+        [SerializeField] private Texture2D[] treeTextures;
 
         [Header("Map Settings")]
         [SerializeField] [Range(0, 1.0f)] private float foliageChance = 0.5f;
@@ -142,8 +143,9 @@ namespace Hassus.Map
         private void InitializeMapBlock(MapBlock mapBlock, MapBlockGroup adjacentMapBlockGroup, int topEmptySpace)
         {
             mapBlock.ToggleGrass(topEmptySpace >= 1);
-            mapBlock.ToggleFoliage(topEmptySpace >= foliageHeightSpace ? foliageChance : 0);
-            mapBlock.ToggleCorners(adjacentMapBlockGroup, pieceChance);
+            mapBlock.ToggleFoliage(treeTextures[Random.Range(0, treeTextures.Length)], topEmptySpace >= foliageHeightSpace ? foliageChance : 0);
+            mapBlock.ToggleCorners(adjacentMapBlockGroup);
+            mapBlock.TogglePieces(adjacentMapBlockGroup, pieceChance);
         }
         
         private List<string> MapTextAssetToList(TextAsset mapTextAsset)
