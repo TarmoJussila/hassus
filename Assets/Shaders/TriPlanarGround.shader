@@ -5,6 +5,7 @@ Shader "Custom/TriPlanarGround"
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Main texture (RGB)", 2D) = "white" {}
         _TopTex ("Top texture (RGB)", 2D) = "white" {}
+        _TextureScale ("Texture scale", float) = 1.0
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
         _BlendOffset ("Blend Offset", Range(0, 0.5)) = 0.25
@@ -28,6 +29,8 @@ Shader "Custom/TriPlanarGround"
 
         sampler2D _MainTex;
         sampler2D _TopTex;
+
+        fixed _TextureScale;
 
         float4 _MainText_ST;
         float4 _TopText_ST;
@@ -92,10 +95,10 @@ Shader "Custom/TriPlanarGround"
             uvX.y += 0.5;
             uvZ.x += 0.5;
 
-            fixed4 xy = tex2D(_MainTex, uvZ + _MainText_ST.xy) * _Color;
-            fixed4 xzTop = tex2D(_TopTex, uvY + _TopText_ST.xy) * _Color;
-            fixed4 xzMain = tex2D(_MainTex, uvY + _MainText_ST.xy) * _Color;
-            fixed4 yz = tex2D(_MainTex, uvX + _MainText_ST.xy) * _Color;
+            fixed4 xy = tex2D(_MainTex, uvZ * _TextureScale) * _Color;
+            fixed4 xzTop = tex2D(_TopTex, uvY * _TextureScale) * _Color;
+            fixed4 xzMain = tex2D(_MainTex, uvY * _TextureScale) * _Color;
+            fixed4 yz = tex2D(_MainTex, uvX * _TextureScale) * _Color;
 
             //fixed4 xz = lerp(xzMain, xzTop, 0);
             fixed up = clamp(dot(fixed3(0, 1, 0), o.Normal), 0, 1);
