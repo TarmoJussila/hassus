@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class SpawnedWeaponBase : MonoBehaviour
 {
-    public GameObject OwnerPlayer;
+    public PlayerInput OwnerPlayer;
 
-    // Use this and don't put a collider if you want a one frame check
+    // Use this for one frame only checks
     [SerializeField] private float _overlapQueryRadius = 0f;
     [SerializeField] private float _lifeTime = 3f;
 
@@ -22,7 +23,16 @@ public class SpawnedWeaponBase : MonoBehaviour
         {
             foreach (Collider2D coll in contacts)
             {
-                OnTriggerEnter2D(coll);
+                if (coll.CompareTag("Player")) { return; }
+
+                if (coll.gameObject == OwnerPlayer.gameObject)
+                {
+                    OnOverlapSelf();
+                }
+                else
+                {
+                    OnOverlapEnemy(coll);
+                }
             }
         }
 
@@ -49,13 +59,13 @@ public class SpawnedWeaponBase : MonoBehaviour
 
     protected virtual void OnOverlapSelf() { }
 
-    protected virtual void OnOverlapEnemy() { }
+    protected virtual void OnOverlapEnemy(Collider2D other) { }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")) { return; }
 
-        if (other.gameObject == OwnerPlayer)
+        if (other.gameObject == OwnerPlayer.gameObject)
         {
             OnHitSelf();
         }
@@ -69,7 +79,7 @@ public class SpawnedWeaponBase : MonoBehaviour
     {
         if (other.CompareTag("Player")) { return; }
 
-        if (other.gameObject == OwnerPlayer)
+        if (other.gameObject == OwnerPlayer.gameObject)
         {
             OnStaySelf();
         }
@@ -83,7 +93,7 @@ public class SpawnedWeaponBase : MonoBehaviour
     {
         if (other.CompareTag("Player")) { return; }
 
-        if (other.gameObject == OwnerPlayer)
+        if (other.gameObject == OwnerPlayer.gameObject)
         {
             OnExitSelf();
         }
