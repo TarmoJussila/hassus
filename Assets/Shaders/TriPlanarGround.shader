@@ -21,7 +21,7 @@ Shader "Custom/TriPlanarGround"
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Standard fullforwardshadows vertex:vert
+        #pragma surface surf Hassus fullforwardshadows vertex:vert
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
@@ -42,6 +42,25 @@ Shader "Custom/TriPlanarGround"
         fixed _BlendOffset;
         fixed _TopPow;
 
+        #include <AutoLight.cginc>
+        #include <Lighting.cginc>
+
+        half4 LightingHassus(SurfaceOutput s, half3 lightDir, half atten)
+        {
+            float NdotL = max(0.0, dot(s.Normal, lightDir));
+
+            float lightBandsMultiplier = 2 / 256;
+            float lightBandsAdditive = 2 / 2;
+            fixed bandedNdotL = (floor((NdotL * 256 + lightBandsAdditive) / 2))
+                * lightBandsMultiplier;
+
+            float3 lightingModel = bandedNdotL * fixed4(1, 1, 1, 1);
+            float attenuation = 1; //LIGHT_ATTENUATION(0.5);
+            float3 attenColor = attenuation * _LightColor0.rgb;
+            float4 finalDiffuse = float4(lightingModel * attenColor, 1);
+            return finalDiffuse;
+        }
+
         void vert(inout appdata_full a, out Input o)
         {
             o.uv_MainTex = a.texcoord;
@@ -55,7 +74,7 @@ Shader "Custom/TriPlanarGround"
             // put more per-instance properties here
         UNITY_INSTANCING_BUFFER_END(Props)
 
-        void surf(Input IN, inout SurfaceOutputStandard o)
+        void surf(Input IN, inout SurfaceOutput o)
         {
             // Albedo comes from a texture tinted by color
             fixed2 uvX = IN.worldPos.zy;
@@ -89,8 +108,8 @@ Shader "Custom/TriPlanarGround"
             o.Albedo = c.rgb;
 
             // Metallic and smoothness come from slider variables
-            o.Metallic = _Metallic;
-            o.Smoothness = _Glossiness;
+            //o.Metallic = _Metallic;
+            //o.Smoothness = _Glossiness;
             o.Alpha = c.a;
         }
         ENDCG
