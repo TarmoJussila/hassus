@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -25,6 +26,8 @@ namespace Hassus.Map
         private float _foliageSway = 1f;
         private float _timer;
         private float _explosionTimer = 1f;
+        private float _explosionAccelerationSpeed = 10f;
+        private float _explosionDecelerationSpeed = 0.2f;
         private float _explosiveForceMax = 1f;
         private float _explosiveForce = 1f;
         private float _currentExplosiveForce = 1f;
@@ -37,15 +40,28 @@ namespace Hassus.Map
             if (_activeFoliageObject != null)
             {
                 _timer += Time.deltaTime;
-
+                
                 if (_explosionTimer < 1f)
                 {
-                    _explosionTimer += Time.deltaTime;
-                    _currentExplosiveForce = Mathf.Lerp(_explosiveForce, 1f, _explosionTimer);
+                    _explosionTimer += Time.deltaTime * _explosionAccelerationSpeed;
+                    _currentExplosiveForce = Mathf.Lerp(1f, _explosiveForce, _explosionTimer);
+                    
+                    var localEulerAngles = _activeFoliageObject.localEulerAngles;
+                    _activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Clamp(Mathf.Sin(_timer) * _currentExplosiveForce, foliageMinRotation, foliageMaxRotation), localEulerAngles.y, localEulerAngles.z);
                 }
-                
-                var localEulerAngles = _activeFoliageObject.localEulerAngles;
-                _activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Clamp(Mathf.Sin(_timer) * _foliageSway * _currentExplosiveForce, foliageMinRotation, foliageMaxRotation), localEulerAngles.y, localEulerAngles.z);
+                else if (_explosionTimer < 2f)
+                {
+                    _explosionTimer += Time.deltaTime * _explosionDecelerationSpeed;
+                    _currentExplosiveForce = Mathf.Lerp(_explosiveForce, 1f, _explosionTimer - 1f);
+                    
+                    var localEulerAngles = _activeFoliageObject.localEulerAngles;
+                    _activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Clamp(Mathf.Sin(_timer) * _currentExplosiveForce, foliageMinRotation, foliageMaxRotation), localEulerAngles.y, localEulerAngles.z);
+                }
+                else
+                {
+                    var localEulerAngles = _activeFoliageObject.localEulerAngles;
+                    _activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Clamp(Mathf.Sin(_timer) * _foliageSway, foliageMinRotation, foliageMaxRotation), localEulerAngles.y, localEulerAngles.z);
+                }
             }
         }
 
@@ -127,6 +143,7 @@ namespace Hassus.Map
 
         public void SetExplosiveForce(float force)
         {
+            _timer = 180f;
             _explosionTimer = 0f;
             _explosiveForce = force;
         }
