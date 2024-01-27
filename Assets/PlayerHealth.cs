@@ -40,6 +40,8 @@ public class PlayerHealth : MonoBehaviour
         int oldHealth = CurrentHealth;
         CurrentHealth -= damage;
 
+        Debug.Log("Health: " + oldHealth + " - " + damage + " = " + CurrentHealth);
+
         OnPlayerHealthChanged?.Invoke(_input.playerIndex, oldHealth, CurrentHealth, MaxHealth);
 
         if (CurrentHealth <= 0)

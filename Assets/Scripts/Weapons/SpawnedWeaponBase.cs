@@ -22,7 +22,7 @@ public class SpawnedWeaponBase : MonoBehaviour
         {
             foreach (Collider2D coll in contacts)
             {
-                if (coll.CompareTag("Player")) { return; }
+                if (!coll.CompareTag("Player")) { return; }
 
                 if (coll.gameObject == OwnerPlayer)
                 {
@@ -62,7 +62,7 @@ public class SpawnedWeaponBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) { return; }
+        if (!other.CompareTag("Player")) { return; }
 
         if (other.gameObject == OwnerPlayer)
         {
@@ -76,7 +76,7 @@ public class SpawnedWeaponBase : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) { return; }
+        if (!other.CompareTag("Player")) { return; }
 
         if (other.gameObject == OwnerPlayer)
         {
@@ -90,7 +90,7 @@ public class SpawnedWeaponBase : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) { return; }
+        if (!other.CompareTag("Player")) { return; }
 
         if (other.gameObject == OwnerPlayer)
         {

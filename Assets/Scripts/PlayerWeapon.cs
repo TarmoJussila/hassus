@@ -43,11 +43,17 @@ public class PlayerWeapon : MonoBehaviour
         }
 
         SpawnedWeaponBase weapon = Instantiate(currentWeapon.Prefab);
+        weapon.transform.position = transform.position;
         weapon.OwnerPlayer = gameObject;
     }
 
     private void Update()
     {
         spriteRenderer.flipX = _movement.LastDirection < 0;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            UseWeapon();
+        }
     }
 }
