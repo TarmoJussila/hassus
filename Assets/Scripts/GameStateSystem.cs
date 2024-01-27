@@ -122,10 +122,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Update_WaitingPlayers()
     {
-        if (StateTime > 2f && Input.GetKeyDown(KeyCode.Return))
-        {
-            ChangeGameState(GameState.COUNTDOWN);
-        }
+        // Moved stuff from here to StartGame()
     }
 
     private void Update_Fight()
@@ -138,6 +135,15 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
+        //TODO: only allow joining in one state
+        /*
+        if (CurrentState != GameState.WAITING_FOR_PLAYERS)
+        {
+            Debug.Log($"Player failed to join on State: {CurrentState}");
+            Destroy(playerInput.gameObject);
+            return;
+        }
+        */
         Debug.Log($"Player joined: {playerInput.playerIndex}");
         // TODO: move player to spawn point
         //playerInput.transform.position = ???
@@ -151,6 +157,20 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     public void StartGame(InputAction.CallbackContext context)
     {
-        Debug.Log("Start Game!");
+        if (CurrentState != GameState.WAITING_FOR_PLAYERS)
+        {
+            Debug.Log($"Start game input ignored on state: {CurrentState}");
+            return;
+        }
+
+        if (StateTime < 2f)
+        {
+            Debug.Log($"Start game input ignored: StateTime too low");
+            return;
+        }
+
+        // TODO: check for number of players
+        Debug.Log("Start Game input accepted!");
+        ChangeGameState(GameState.COUNTDOWN);
     }
 }
