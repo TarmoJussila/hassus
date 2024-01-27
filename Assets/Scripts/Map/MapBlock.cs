@@ -25,7 +25,7 @@ namespace Hassus.Map
         private float _cornerSizeMax = 1f;
         private float _foliageSway = 1f;
         private float _timer;
-        private float _explosionTimer = 1f;
+        private float _explosionTimer = 2f;
         private float _explosionAccelerationSpeed = 10f;
         private float _explosionDecelerationSpeed = 0.2f;
         private float _explosiveForceMax = 1f;
