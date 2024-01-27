@@ -36,6 +36,7 @@ namespace Hassus.Map
         private readonly int mapHeight = 32;
         private readonly string mapEmptySymbol = ".";
         private readonly string mapBlockSymbol = "#";
+        private readonly bool enableDebugInput = true;
         
         private void Start()
         {
@@ -45,10 +46,20 @@ namespace Hassus.Map
         private void Update()
         {
             #if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.R))
+            if (enableDebugInput)
             {
-                DestroyMap();
-                GenerateMap();
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    DestroyMap();
+                    GenerateMap();
+                }
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    int randomX = Random.Range(0, mapWidth);
+                    int randomY = Random.Range(0, mapHeight);
+                    Explode(new Vector2(randomX, randomY), Random.Range(1, 5), Random.Range(0f, 1f) > 0.5f);
+                }
             }
             #endif
         }
@@ -183,6 +194,35 @@ namespace Hassus.Map
                 list.Add(line);
             }
             return list;
+        }
+        
+        public void Explode(Vector3 center, int circleRadius = 1, bool reverseOrder = false)
+        {
+            int start = reverseOrder ? circleRadius : -circleRadius;
+            int end = reverseOrder ? -circleRadius : circleRadius;
+            int step = reverseOrder ? -1 : 1;
+
+            for (int x = start; x != end + step; x += step)
+            {
+                for (int y = start; y != end + step; y += step)
+                {
+                    if (x * x + y * y <= circleRadius * circleRadius)
+                    {
+                        var coordinate = new Vector2Int(Mathf.RoundToInt(center.x + x), Mathf.RoundToInt(center.y + y));
+
+                        mapColliders.TryGetValue(coordinate, out var collider);
+                        mapBlocks.TryGetValue(coordinate, out var block);
+                        if (block != null)
+                        {
+                            block.gameObject.SetActive(false);
+                        }
+                        if (collider != null)
+                        {
+                            collider.enabled = false;
+                        }
+                    }
+                }
+            }
         }
         
         private void OnDrawGizmos()
