@@ -208,7 +208,7 @@ namespace Hassus.Map
         private List<string> MapTextAssetToList(TextAsset mapTextAsset)
         {
             var list = new List<string>();
-            var lineArray = mapTextAsset.text.Split('\n');
+            var lineArray = mapTextAsset.text.Split('\n').Reverse();
             foreach (var line in lineArray)
             {
                 list.Add(line);
