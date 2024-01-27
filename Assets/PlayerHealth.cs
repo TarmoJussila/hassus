@@ -52,6 +52,15 @@ public class PlayerHealth : MonoBehaviour
         OnPlayerHealthChanged?.Invoke(_input.playerIndex, MaxHealth, MaxHealth, MaxHealth);
     }
 
+    private void Update()
+    {
+        if (transform.position.y < -10 && CurrentHealth > 0)
+        {
+            TakeDamage(1000, -1);
+            Die();
+        }
+    }
+
     public void TakeDamage(int damage, int sourcePlayer)
     {
         if (CurrentHealth <= 0) { return; }

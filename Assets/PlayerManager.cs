@@ -58,7 +58,11 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
     private void OnDamageDealt(int index, int sourceIndex, int amount, bool kill)
     {
-        GivePlayerScore(sourceIndex, amount + (kill ? 10 : 0));
+        if (sourceIndex > 0)
+        {
+            GivePlayerScore(sourceIndex, amount + (kill ? 10 : 0));
+        }
+
         GivePlayerScore(index, kill ? -5 : 0);
     }
 
