@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -247,9 +247,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapTextAsset: {fileID: 4900000, guid: f688cc412c0784a19a09f96cbbb2a438, type: 3}
-  mapBlockPrefab: {fileID: 5279498002537231270, guid: 37488e5952be44da1ae2ce4d4966a1da, type: 3}
+  mapBlockPrefab: {fileID: 5279498002537231270, guid: 1c449c87a0ca74d56969608feb9612f8, type: 3}
   foliageChance: 0.25
   foliageHeightSpace: 3
+  pieceChance: 0.5
 --- !u!4 &1540308514
 Transform:
   m_ObjectHideFlags: 0

@@ -1,29 +1,138 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MapBlock : MonoBehaviour
+namespace Hassus.Map
 {
-    [SerializeField] private GameObject[] foliageObjects;
-    [SerializeField] private GameObject grassObject;
-
-    public void ToggleGrass(bool toggle)
+    public class MapBlock : MonoBehaviour
     {
-        grassObject.SetActive(toggle);
-    }
+        [SerializeField] private GameObject[] foliageObjects;
+        [SerializeField] private GameObject grassObject;
 
-    public void ToggleFoliage(float chance, int index = -1)
-    {
-        bool enableFoliage = chance > Random.Range(0.0f, 1.0f);
-        int randomIndex = index == -1 ? Random.Range(0, foliageObjects.Length) : index;
-        for (int i = 0; i < foliageObjects.Length; i++)
+        [SerializeField] private GameObject leftPiece;
+        [SerializeField] private GameObject rightPiece;
+        [SerializeField] private GameObject bottomPiece;
+
+        [SerializeField] private GameObject topLeftCorner;
+        [SerializeField] private GameObject topRightCorner;
+        [SerializeField] private GameObject bottomLeftCorner;
+        [SerializeField] private GameObject bottomRightCorner;
+
+        public void ToggleGrass(bool toggle)
         {
-            foliageObjects[i].SetActive(i == randomIndex && enableFoliage);
+            grassObject.SetActive(toggle);
         }
-    }
 
-    private void OnDisable()
-    {
-        
+        public void ToggleFoliage(float foliageChance, int index = -1)
+        {
+            bool enableFoliage = foliageChance > Random.Range(0.0f, 1.0f);
+            int randomIndex = index == -1 ? Random.Range(0, foliageObjects.Length) : index;
+            for (int i = 0; i < foliageObjects.Length; i++)
+            {
+                foliageObjects[i].SetActive(i == randomIndex && enableFoliage);
+            }
+        }
+
+        public void ToggleCorners(MapBlockGroup mapBlockGroup, float pieceChance)
+        {
+            ToggleCorners
+            (
+                mapBlockGroup.TopLeftBlock,
+                mapBlockGroup.TopBlock,
+                mapBlockGroup.TopRightBlock,
+                mapBlockGroup.LeftBlock,
+                mapBlockGroup.RightBlock,
+                mapBlockGroup.BottomLeftBlock,
+                mapBlockGroup.BottomBlock,
+                mapBlockGroup.BottomRightBlock,
+                pieceChance
+            );
+        }
+
+        public void ToggleCorners(MapBlock topLeftBlock, MapBlock topBlock, MapBlock topRightBlock, MapBlock leftBlock, MapBlock rightBlock, MapBlock bottomLeftBlock, MapBlock bottomBlock, MapBlock bottomRightBlock, float pieceChance)
+        {
+            if (leftBlock == null)
+            {
+                leftPiece.SetActive(pieceChance > Random.Range(0.0f, 1.0f));
+            }
+            else
+            {
+                leftPiece.SetActive(false);
+            }
+
+            if (rightBlock == null)
+            {
+                rightPiece.SetActive(pieceChance > Random.Range(0.0f, 1.0f));
+            }
+            else
+            {
+                rightPiece.SetActive(false);
+            }
+
+            if (bottomBlock == null)
+            {
+                bottomPiece.SetActive(pieceChance > Random.Range(0.0f, 1.0f));
+            }
+            else
+            {
+                bottomPiece.SetActive(false);
+            }
+
+            if (topBlock == null)
+            {
+                if (topLeftBlock != null)
+                {
+                    topLeftCorner.SetActive(true);
+                }
+                else
+                {
+                    topLeftCorner.SetActive(false);
+                }
+
+                if (topRightBlock != null)
+                {
+                    topRightCorner.SetActive(true);
+                }
+                else
+                {
+                    topRightCorner.SetActive(false);
+                }
+            }
+            else
+            {
+                topLeftCorner.SetActive(false);
+                topRightCorner.SetActive(false);
+            }
+
+            if (bottomBlock == null)
+            {
+                if (bottomLeftBlock != null)
+                {
+                    bottomLeftCorner.SetActive(true);
+                }
+                else
+                {
+                    bottomLeftCorner.SetActive(false);
+                }
+
+                if (bottomRightBlock != null)
+                {
+                    bottomRightCorner.SetActive(true);
+                }
+                else
+                {
+                    bottomRightCorner.SetActive(false);
+                }
+            }
+            else
+            {
+                bottomLeftCorner.SetActive(false);
+                bottomRightCorner.SetActive(false);
+            }
+        }
+
+        private void OnDisable()
+        {
+
+        }
     }
 }
