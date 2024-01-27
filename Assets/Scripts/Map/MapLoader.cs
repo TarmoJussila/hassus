@@ -40,7 +40,7 @@ namespace Hassus.Map
         private int nextSpawnPointIndex = 0;
         
         private readonly int mapWidth = 32;
-        private readonly int mapHeight = 32;
+        private readonly int mapHeight = 24;
         private readonly string mapEmptySymbol = ".";
         private readonly string mapBlockSymbol = "#";
         private readonly string mapSpawnSymbol = "S";
