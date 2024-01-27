@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MapBlock : MonoBehaviour
 {
@@ -20,5 +20,10 @@ public class MapBlock : MonoBehaviour
         {
             foliageObjects[i].SetActive(i == randomIndex && enableFoliage);
         }
+    }
+
+    private void OnDisable()
+    {
+        
     }
 }
