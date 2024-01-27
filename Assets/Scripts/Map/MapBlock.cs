@@ -24,7 +24,7 @@ namespace Hassus.Map
             grassObject.SetActive(toggle);
         }
 
-        public void ToggleFoliage(Texture2D texture, float foliageChance, int index = -1)
+        public void ToggleFoliage(Texture2D texture, Color color, float foliageChance, int index = -1)
         {
             bool enableFoliage = foliageChance > Random.Range(0.0f, 1.0f);
             int randomIndex = index == -1 ? Random.Range(0, foliageObjects.Length) : index;
@@ -34,7 +34,9 @@ namespace Hassus.Map
                 foliageObjects[i].SetActive(toggle);
                 if (toggle)
                 {
-                    foliageObjects[i].GetComponent<MeshRenderer>().material.mainTexture = texture;
+                    var material = foliageObjects[i].GetComponent<MeshRenderer>().material;
+                    material.mainTexture = texture;
+                    material.color = color;
                 }
             }
         }
