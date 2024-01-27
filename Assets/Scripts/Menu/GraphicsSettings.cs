@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GraphicsSettings : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private TMP_Dropdown resolutionDropdown;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        Resolution[] resolutions = Screen.resolutions;
+        resolutionDropdown.ClearOptions();
+
+        foreach (Resolution resolution in resolutions)
+        {
+            string text = resolution.width + "x" + resolution.height + " " + resolution.refreshRate + "Hz";
+            resolutionDropdown.options.Add(new TMP_Dropdown.OptionData
+            {
+                text = text
+            });
+        }
     }
 }
