@@ -23,7 +23,8 @@ public class StateObjectPair
 
 public class GameStateSystem : MonoSingleton<GameStateSystem>
 {
-    [FormerlySerializedAs("_stateObjects")] [SerializeField] private List<StateObjectPair> _states = new List<StateObjectPair>();
+    [FormerlySerializedAs("_stateObjects")] [SerializeField]
+    private List<StateObjectPair> _states = new List<StateObjectPair>();
 
     public GameState CurrentState { get; private set; }
 
@@ -45,7 +46,18 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
         {
             foreach (GameObject go in pair.StateObjects)
             {
-                go.SetActive(pair.State == state);
+                go.SetActive(false);
+            }
+        }
+
+        foreach (StateObjectPair pair in _states)
+        {
+            foreach (GameObject go in pair.StateObjects)
+            {
+                if (pair.State == state)
+                {
+                    go.SetActive(true);
+                }
             }
         }
 
