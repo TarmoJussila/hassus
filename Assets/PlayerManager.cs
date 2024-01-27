@@ -58,7 +58,14 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         GivePlayerScore(index, kill ? -5 : 0);
     }
 
-    public void GivePlayerScore(int index, int score)
+    public void SetPlayerScore(int index, int score)
+    {
+        PlayerDatas[index].Score = score;
+
+        OnPlayerScoreChanged?.Invoke(index, score, score);
+    }
+
+    private void GivePlayerScore(int index, int score)
     {
         PlayerDatas[index].Score += score;
 
@@ -109,12 +116,13 @@ public class PlayerManager : MonoSingleton<PlayerManager>
         //playerInput.transform.position = ???
 
         OnPlayerJoin?.Invoke(playerInput);
+        SetPlayerScore(playerInput.playerIndex, 0);
     }
 
     public void OnPlayerLeft(PlayerInput playerInput)
     {
         Debug.Log($"Player left: {playerInput.playerIndex}");
-        
+
         OnPlayerLeave?.Invoke(playerInput);
     }
 }

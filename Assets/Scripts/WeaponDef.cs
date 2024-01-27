@@ -9,4 +9,6 @@ public class WeaponDef : ScriptableObject
     [FormerlySerializedAs("PlayerAnimation")] public string CharacterAnimation;
     public string WeaponAnimation;
     public SpawnedWeaponBase Prefab;
+    public Vector2 SpawnOffset;
+    public Vector2 SpawnForce;
 }

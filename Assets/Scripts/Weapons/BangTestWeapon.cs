@@ -6,11 +6,6 @@ public class BangTestWeapon : SpawnedWeaponBase
 {
     public int Damage;
 
-    protected override void OnStart()
-    {
-        transform.position = OwnerPlayer.transform.position;
-    }
-
     protected override void OnStayEnemy(Collider2D other)
     {
         other.GetComponent<PlayerHealth>().TakeDamage(Damage, OwnerPlayer.playerIndex);

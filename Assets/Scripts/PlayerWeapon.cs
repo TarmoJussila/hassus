@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerWeapon : MonoBehaviour
 {
     public bool HasWeapon => currentWeapon != null;
-    
+
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     private WeaponDef currentWeapon;
@@ -35,43 +35,44 @@ public class PlayerWeapon : MonoBehaviour
 
     public void UseWeapon(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed) { return; }
+
+        if (usesLeft <= 0)
         {
-            if (usesLeft > 0)
-            {
-                usesLeft--;
+            // TODO: Taunt?
+        }
 
-                if (string.IsNullOrEmpty(currentWeapon.CharacterAnimation))
-                {
-                    _animator.CharacterAnimation(currentWeapon.CharacterAnimation);
-                }
+        usesLeft--;
 
-                if (string.IsNullOrEmpty(currentWeapon.WeaponAnimation))
-                {
-                    _animator.WeaponAnimation(currentWeapon.WeaponAnimation);
-                }
+        if (string.IsNullOrEmpty(currentWeapon.CharacterAnimation))
+        {
+            _animator.CharacterAnimation(currentWeapon.CharacterAnimation);
+        }
 
-                SpawnedWeaponBase weapon = Instantiate(currentWeapon.Prefab);
-                weapon.OwnerPlayer = _input;
+        if (string.IsNullOrEmpty(currentWeapon.WeaponAnimation))
+        {
+            _animator.WeaponAnimation(currentWeapon.WeaponAnimation);
+        }
 
-                Debug.Log("Player: " + weapon.OwnerPlayer.playerIndex + " used " + currentWeapon.name);
+        SpawnedWeaponBase weapon = Instantiate(currentWeapon.Prefab);
+        weapon.OwnerPlayer = _input;
 
-                if (usesLeft <= 0)
-                {
-                    Disarm();
-                }
-            }
-            else
-            {
-                // TODO: Taunt?
-            }
+        weapon.transform.position = transform.position + (Vector3)currentWeapon.SpawnOffset;
+
+        if (currentWeapon.SpawnForce != Vector2.zero)
+        {
+            weapon.GetComponent<Rigidbody2D>().AddForce(new Vector2( _movement.LastDirection * currentWeapon.SpawnForce.x, currentWeapon.SpawnForce.y));
+        }
+
+        Debug.Log("Player: " + weapon.OwnerPlayer.playerIndex + " used " + currentWeapon.name);
+
+        if (usesLeft <= 0)
+        {
+            Disarm();
         }
     }
 
-    public void UseWeapon()
-    {
-
-    }
+    public void UseWeapon() { }
 
     public void Disarm()
     {

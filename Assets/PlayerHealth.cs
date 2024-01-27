@@ -26,8 +26,8 @@ public class PlayerHealth : MonoBehaviour
     /// </summary>
     public static event Action<int, GameObject> OnPlayerRespawn;
 
-    public int MaxHealth { get; private set; } = 20;
-    public int CurrentHealth { get; private set; } = 20;
+    public int MaxHealth { get; private set; } = 1000;
+    public int CurrentHealth { get; private set; } = 1000;
 
     public int CurrentLives { get; private set; }
     public int MaxLives { get; private set; } = 3;
