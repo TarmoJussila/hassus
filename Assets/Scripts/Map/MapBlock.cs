@@ -20,25 +20,29 @@ namespace Hassus.Map
 
         private MapBlockGroup _mapBlockGroup;
 
-        private Transform activeFoliageObject = null;
-        private float cornerSizeMin = 1f;
-        private float cornerSizeMax = 1f;
-        private float foliageSway = 1f;
-        private float timer;
-        private float explosiveForce = 0f;
+        private Transform _activeFoliageObject = null;
+        private float _cornerSizeMin = 1f;
+        private float _cornerSizeMax = 1f;
+        private float _foliageSway = 1f;
+        private float _timer;
+        private float _explosionTimer = 0f;
+        private float _explosiveForceMax = 1f;
+        private float _explosiveForce = 1f;
 
         private void Update()
         {
-            if (activeFoliageObject != null)
+            if (_activeFoliageObject != null)
             {
-                timer += Time.deltaTime;
-                if (explosiveForce > 0f)
+                _timer += Time.deltaTime;
+
+                if (_explosionTimer < 1f)
                 {
-                    explosiveForce -= Time.deltaTime;
-                    explosiveForce = Mathf.Max(0f, explosiveForce);
+                    _explosionTimer += Time.deltaTime;
+                    _explosiveForce = Mathf.Lerp(_explosiveForce, 1f, _explosionTimer);
                 }
-                var localEulerAngles = activeFoliageObject.localEulerAngles;
-                activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Sin(timer * (1f + explosiveForce)) * foliageSway, localEulerAngles.y, localEulerAngles.z);
+                
+                var localEulerAngles = _activeFoliageObject.localEulerAngles;
+                _activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Sin(_timer) * _foliageSway * _explosiveForce, localEulerAngles.y, localEulerAngles.z);
             }
         }
 
@@ -51,8 +55,9 @@ namespace Hassus.Map
             grassObject.SetActive(toggle);
         }
 
-        public void ToggleFoliage(Texture2D texture, Color color, float rotation, float sway, float foliageChance, int index = -1)
+        public void ToggleFoliage(Texture2D texture, Color color, float rotation, float sway, float foliageChance, float explosiveForceMax, int index = -1)
         {
+            _explosiveForceMax = explosiveForceMax;
             bool enableFoliage = foliageChance > Random.Range(0.0f, 1.0f);
             int randomIndex = index == -1 ? Random.Range(0, foliageObjects.Length) : index;
             for (int i = 0; i < foliageObjects.Length; i++)
@@ -61,20 +66,20 @@ namespace Hassus.Map
                 foliageObjects[i].SetActive(toggle);
                 if (toggle)
                 {
-                    foliageSway = sway;
+                    _foliageSway = sway;
                     var material = foliageObjects[i].GetComponent<MeshRenderer>().material;
                     material.mainTexture = texture;
                     material.color = color;
                     foliageObjects[i].transform.localRotation = Quaternion.Euler(0f, rotation, 0f);
-                    activeFoliageObject = foliageObjects[i].transform;
+                    _activeFoliageObject = foliageObjects[i].transform;
                 }
             }
         }
 
         public void ToggleCorners(MapBlockGroup mapBlockGroup, float cornerMin, float cornerMax)
         {
-            cornerSizeMin = cornerMin;
-            cornerSizeMax = cornerMax;
+            _cornerSizeMin = cornerMin;
+            _cornerSizeMax = cornerMax;
             _mapBlockGroup = mapBlockGroup;
             ToggleCorners
             (
@@ -113,13 +118,13 @@ namespace Hassus.Map
         {
             if (_mapBlockGroup != null)
             {
-                ToggleCorners(_mapBlockGroup, cornerSizeMin, cornerSizeMax);
+                ToggleCorners(_mapBlockGroup, _cornerSizeMin, _cornerSizeMax);
             }
         }
 
         public void SetExplosiveForce(float force)
         {
-            explosiveForce = force;
+            _explosiveForce = force;
         }
 
         private void TogglePieces(MapBlock topLeftBlock, MapBlock topBlock, MapBlock topRightBlock, MapBlock leftBlock, MapBlock rightBlock, MapBlock bottomLeftBlock, MapBlock bottomBlock, MapBlock bottomRightBlock, float sizeMin, float sizeMax, float pieceChance)
@@ -221,13 +226,33 @@ namespace Hassus.Map
                 if (_mapBlockGroup.TopBlock != null && _mapBlockGroup.TopBlock.isActiveAndEnabled)
                 {
                     _mapBlockGroup.TopBlock.ResolveCorners();
-                    _mapBlockGroup.TopBlock.SetExplosiveForce(50f);
                 }
 
                 if (_mapBlockGroup.BottomBlock != null && _mapBlockGroup.BottomBlock.isActiveAndEnabled)
                 {
                     _mapBlockGroup.BottomBlock.ResolveCorners();
-                    _mapBlockGroup.BottomBlock.SetExplosiveForce(50f);
+                }
+
+                if (_mapBlockGroup.LeftBlock != null && _mapBlockGroup.LeftBlock.isActiveAndEnabled)
+                {
+                    _mapBlockGroup.LeftBlock.SetExplosiveForce(_explosiveForceMax);
+
+                    var block = _mapBlockGroup.LeftBlock._mapBlockGroup.LeftBlock;
+                    if (block != null && block.isActiveAndEnabled)
+                    {
+                        block.SetExplosiveForce(_explosiveForceMax / 2f);
+                    }
+                }
+                
+                if (_mapBlockGroup.RightBlock != null && _mapBlockGroup.RightBlock.isActiveAndEnabled)
+                {
+                    _mapBlockGroup.RightBlock.SetExplosiveForce(-_explosiveForceMax);
+                    
+                    var block = _mapBlockGroup.RightBlock._mapBlockGroup.RightBlock;
+                    if (block != null && block.isActiveAndEnabled)
+                    {
+                        block.SetExplosiveForce(-_explosiveForceMax / 2f);
+                    }
                 }
             }
         }

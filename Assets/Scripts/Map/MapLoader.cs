@@ -23,6 +23,7 @@ namespace Hassus.Map
         [FormerlySerializedAs("treeColorVarianceMax")] [SerializeField] private Color foliageColorVarianceMax = Color.white;
         [SerializeField] [Range(0f, 10f)] private float foliageRotationMax = 5f;
         [SerializeField] [Range(0, 30f)] private float foliageSwayMax = 5f;
+        [SerializeField] private float foliageExplosiveForceMax = 45f;
         [SerializeField] [Range(0, 1f)] private float grassScaleMin = 0.7f;
         [SerializeField] [Range(1f, 2f)] private float grassScaleMax = 1.7f;
         
@@ -159,7 +160,8 @@ namespace Hassus.Map
                 Color.Lerp(foliageColorVarianceMin, foliageColorVarianceMax, Random.Range(0.0f, 1.0f)),
                 Random.Range(-foliageRotationMax, foliageRotationMax),
                 Random.Range(0f, foliageSwayMax),
-                topEmptySpace >= foliageHeightSpace ? foliageChance : 0
+                topEmptySpace >= foliageHeightSpace ? foliageChance : 0,
+                foliageExplosiveForceMax
             );
             mapBlock.ToggleCorners(adjacentMapBlockGroup, cornerSizeMin, cornerSizeMax);
             mapBlock.TogglePieces(adjacentMapBlockGroup, pieceSizeMin, pieceSizeMax, pieceChance);
