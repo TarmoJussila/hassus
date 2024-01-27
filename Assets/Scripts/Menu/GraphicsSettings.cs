@@ -19,4 +19,9 @@ public class GraphicsSettings : MonoBehaviour
             });
         }
     }
+
+    public void SelectResolution(int index)
+    {
+        Debug.Log($"Selected: {resolutionDropdown.options[index].text}");
+    }
 }
