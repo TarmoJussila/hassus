@@ -17,6 +17,8 @@ public class PlayerWeapon : MonoBehaviour
     private PlayerMovement _movement;
     private PlayerInput _input;
 
+    private float _cooldown = 0.0f;
+
     private void Awake()
     {
         _input = GetComponent<PlayerInput>();
@@ -35,12 +37,14 @@ public class PlayerWeapon : MonoBehaviour
 
     public void UseWeapon(InputAction.CallbackContext context)
     {
-        if (context.performed || currentWeapon == null) { return; }
+        if (!context.started || currentWeapon == null || _cooldown > 0.0f) { return; }
 
         if (usesLeft <= 0)
         {
             // TODO: Taunt?
         }
+
+        _cooldown = currentWeapon.Cooldown;
 
         usesLeft--;
 
@@ -85,6 +89,8 @@ public class PlayerWeapon : MonoBehaviour
 
     private void Update()
     {
+        _cooldown -= Time.deltaTime;
+        
         spriteRenderer.flipX = _movement.LastDirection < 0;
         Vector3 pos = spriteRenderer.transform.localPosition;
         pos.x = _movement.LastDirection * 0.3f;

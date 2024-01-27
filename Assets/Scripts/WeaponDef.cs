@@ -10,4 +10,5 @@ public class WeaponDef : ScriptableObject
     public SpawnedWeaponBase Prefab;
     public Vector2 SpawnOffset;
     public Vector2 SpawnForce;
+    public float Cooldown = 0.1f;
 }
