@@ -23,6 +23,11 @@ public class WeaponSpawner : MonoBehaviour
 
     void CheckCollisions()
     {
+        if (delayedWeaponSpawn != null)
+        {
+            return;
+        }
+        
         Collider2D[] colliders = Physics2D.OverlapBoxAll(pickupCollider.bounds.center, pickupCollider.bounds.size, 0f);
 
         foreach (Collider2D collider in colliders)
@@ -35,6 +40,7 @@ public class WeaponSpawner : MonoBehaviour
                 if (delayedWeaponSpawn == null)
                 {
                     delayedWeaponSpawn = StartCoroutine(SpawnWeaponAfterSeconds(spawnDelaySeconds));
+                    break;
                 }
             }
         }
