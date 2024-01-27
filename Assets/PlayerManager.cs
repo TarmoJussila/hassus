@@ -22,6 +22,24 @@ public class PlayerManager : MonoSingleton<PlayerManager>
     }
 
     public Dictionary<int, PlayerData> PlayerDatas = new();
+    [SerializeField] private PlayerInputManager playerInputManager;
+
+    public void ChangeState(GameState state)
+    {
+        if (state == GameState.WAITING_FOR_PLAYERS)
+        {
+            if (!playerInputManager.joiningEnabled)
+            {
+                Debug.Log("PlayerInputManager joining enabled");
+                playerInputManager.EnableJoining();
+            }
+        }
+        else if (playerInputManager.joiningEnabled)
+        {
+            Debug.Log("PlayerInputManager joining disabled");
+            playerInputManager.DisableJoining();
+        }
+    }
 
     protected override void OnAwake()
     {

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,7 +14,7 @@ public enum GameState
     OUTRO
 }
 
-[System.Serializable]
+[Serializable]
 public class StateObjectPair
 {
     public GameState State;
@@ -48,6 +47,11 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
             {
                 go.SetActive(pair.State == state);
             }
+        }
+
+        if (PlayerManager.Instance != null)
+        {
+            PlayerManager.Instance.ChangeState(state);
         }
 
         OnGameStateChanged?.Invoke(state);
@@ -139,13 +143,13 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     public void StartGame(InputAction.CallbackContext context)
     {
-        if (CurrentState != GameState.WAITING_FOR_PLAYERS)
+        if (Instance.CurrentState != GameState.WAITING_FOR_PLAYERS)
         {
-            Debug.Log($"Start game input ignored on state: {CurrentState}");
+            Debug.Log($"Start game input ignored on state: {Instance.CurrentState}");
             return;
         }
 
-        if (StateTime < 2f)
+        if (Instance.StateTime < 2f)
         {
             Debug.Log($"Start game input ignored: StateTime too low");
             return;
@@ -153,6 +157,6 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
         // TODO: check for number of players
         Debug.Log("Start Game input accepted!");
-        ChangeGameState(GameState.COUNTDOWN);
+        Instance.ChangeGameState(GameState.COUNTDOWN);
     }
 }
