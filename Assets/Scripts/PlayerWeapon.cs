@@ -61,7 +61,8 @@ public class PlayerWeapon : MonoBehaviour
 
         if (currentWeapon.SpawnForce != Vector2.zero)
         {
-            weapon.GetComponent<Rigidbody2D>().AddForce(new Vector2( _movement.LastDirection * currentWeapon.SpawnForce.x, currentWeapon.SpawnForce.y));
+            weapon.GetComponent<Rigidbody2D>()
+                .AddForce(new Vector2(_movement.LastDirection * currentWeapon.SpawnForce.x, currentWeapon.SpawnForce.y));
         }
 
         Debug.Log("Player: " + weapon.OwnerPlayer.playerIndex + " used " + currentWeapon.name);
@@ -83,5 +84,8 @@ public class PlayerWeapon : MonoBehaviour
     private void Update()
     {
         spriteRenderer.flipX = _movement.LastDirection < 0;
+        Vector3 pos = spriteRenderer.transform.localPosition;
+        pos.x = _movement.LastDirection * 0.5f;
+        spriteRenderer.transform.localPosition = pos;
     }
 }

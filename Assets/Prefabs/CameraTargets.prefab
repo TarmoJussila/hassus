@@ -50,7 +50,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_Targets:
   - target: {fileID: 1079520171637587503}
-    weight: 1
+    weight: 0.2
     radius: 10
 --- !u!114 &3184120778685081286
 MonoBehaviour:

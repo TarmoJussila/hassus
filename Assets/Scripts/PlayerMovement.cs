@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,18 +11,24 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    private Vector2 _input;
 
     [SerializeField] private Vector2 _groundCheckOffset;
     [SerializeField] private LayerMask _groundCheckLayer;
 
-    private bool _grounded = true;
-    private bool _jumped = false;
-
-    private float _jumpBuffer = 0.0f;
-    private const float _jumpBufferLength = 0.1f; 
-
+    public Vector2 Input => _input;
+    public bool Grounded { get; private set; } = true;
     public int LastDirection { get; private set; }
+    public int JumpDirection
+    {
+        get
+        {
+            return Mathf.RoundToInt(rb.velocity.y);
+        }
+    }
+    private Vector2 _input;
+    private float _jumpBuffer = 0.0f;
+    private const float _jumpBufferLength = 0.1f;
+
 
     private void Awake()
     {
@@ -37,16 +44,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        _grounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, _groundCheckRadius, _groundCheckLayer);
+        Grounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, _groundCheckRadius, _groundCheckLayer);
 
-        if (_jumpBuffer > 0f && _grounded)
+        if (_jumpBuffer > 0f && Grounded)
         {
             _jumpBuffer = 0.0f;
             Jump();
         }
 
         _jumpBuffer -= Time.deltaTime;
-        
+
         if (_input == Vector2.zero)
         {
             return;
