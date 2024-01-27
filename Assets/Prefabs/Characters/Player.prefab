@@ -344,6 +344,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 860ada42394fd5343be016f85da0f6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _overrides:
+  - {fileID: 22100000, guid: 5e7bb945b04257a47a10304a0ad9433e, type: 2}
+  - {fileID: 22100000, guid: 6d8523161f4655e44a10b55e3beab0cf, type: 2}
+  - {fileID: 22100000, guid: 83d15f12e02af5b4b9188dda356c8340, type: 2}
+  - {fileID: 22100000, guid: 588c9b2e520b4ae4faf10f0db2809882, type: 2}
   _sprite: {fileID: 1301486342028358678}
   _charAnimator: {fileID: 8205747902130901095}
   _weaponAnimator: {fileID: 8696144947200585087}
@@ -455,7 +460,7 @@ Animator:
   m_GameObject: {fileID: 8843667878087445163}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e0304f40363554d4aad8e933288d19ea, type: 2}
+  m_Controller: {fileID: 22100000, guid: 5e7bb945b04257a47a10304a0ad9433e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

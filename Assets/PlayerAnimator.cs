@@ -2,14 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAnimator : MonoBehaviour
 {
+    [SerializeField] private List<AnimatorOverrideController> _overrides;
     [SerializeField] private SpriteRenderer _sprite;
 
     [SerializeField] private Animator _charAnimator;
     [SerializeField] private Animator _weaponAnimator;
+
     private PlayerMovement _movement;
+    private PlayerInput _input;
+
     private static readonly int dead = Animator.StringToHash("Dead");
     private static readonly int grounded = Animator.StringToHash("Grounded");
     private static readonly int jumpDir = Animator.StringToHash("JumpDir");
@@ -18,7 +23,9 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Awake()
     {
+        _input = GetComponent<PlayerInput>();
         _movement = GetComponent<PlayerMovement>();
+        _charAnimator.runtimeAnimatorController = _overrides[_input.playerIndex];
     }
 
     private void Update()

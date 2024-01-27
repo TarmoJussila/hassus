@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: jump_down
+  m_Name: die 4
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -2130034453, guid: a3e93ca5232964f42bbe87eae4c1d247, type: 3}
+      value: {fileID: 1558419990, guid: ba38c1609c905e946bbc73b97f615a4b, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,7 +44,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -2130034453, guid: a3e93ca5232964f42bbe87eae4c1d247, type: 3}
+    - {fileID: 1558419990, guid: ba38c1609c905e946bbc73b97f615a4b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
