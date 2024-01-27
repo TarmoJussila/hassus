@@ -16,12 +16,24 @@ public class PlayerManager : MonoSingleton<PlayerManager>
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
+        //TODO: only allow joining in one state
+        /*
+        if (CurrentState != GameState.WAITING_FOR_PLAYERS)
+        {
+            Debug.Log($"Player failed to join on State: {CurrentState}");
+            Destroy(playerInput.gameObject);
+            return;
+        }
+        */
+
         PlayerDatas[playerInput.playerIndex] = new PlayerData()
         {
             Name = "Clown" + playerInput.playerIndex, PlayerObject = playerInput.gameObject
         };
 
         Debug.Log($"Player joined: {playerInput.playerIndex}");
+        // TODO: move player to spawn point
+        //playerInput.transform.position = ???
     }
 
     public void OnPlayerLeft(PlayerInput playerInput)

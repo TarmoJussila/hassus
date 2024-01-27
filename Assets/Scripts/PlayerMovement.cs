@@ -22,9 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        Debug.Log($"pressed={context.control.IsPressed()} | {context.ReadValue<Vector2>()}");
-        Vector2 temp = context.ReadValue<Vector2>();
-        _input = temp;
+        _input = context.ReadValue<Vector2>();
         _input.y = 0;
         _input.Normalize();
     }
