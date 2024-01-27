@@ -95,10 +95,10 @@ MonoBehaviour:
     value: 0.000425
   blend1:
     overrideState: 1
-    value: 0.153
+    value: 0.679
   blend2:
     overrideState: 1
-    value: 0.497
+    value: 0.659
   blend3:
     overrideState: 1
     value: 1
