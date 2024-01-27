@@ -8,6 +8,8 @@ namespace Hassus.Map
 {
     public class MapLoader : MonoBehaviour
     {
+        public static MapLoader Instance;
+        
         [Header("Map References")]
         [SerializeField] private TextAsset[] mapTextAssets;
         [SerializeField] private MapBlock mapBlockPrefab;
@@ -43,7 +45,12 @@ namespace Hassus.Map
         private readonly string mapBlockSymbol = "#";
         private readonly string mapSpawnSymbol = "S";
         private readonly bool enableDebugInput = true;
-        
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         private void Start()
         {
             GenerateMap();
@@ -113,6 +120,7 @@ namespace Hassus.Map
                         
                         var boxCollider = new GameObject().AddComponent<BoxCollider2D>();
                         boxCollider.transform.position = new Vector2(i, j);
+                        boxCollider.gameObject.layer = 8;
                         boxCollider.transform.parent = transform;
                         
                         mapBlocks.Add(new Vector2Int(i, j), mapBlock);
