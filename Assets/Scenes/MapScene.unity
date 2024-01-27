@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -252,7 +252,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 058d453892e06479d9fd6197b6e5d0df, type: 3}
   - {fileID: 4900000, guid: f688cc412c0784a19a09f96cbbb2a438, type: 3}
   mapBlockPrefab: {fileID: 5279498002537231270, guid: 1c449c87a0ca74d56969608feb9612f8, type: 3}
-  treeTextures:
+  foliageTextures:
   - {fileID: 2800000, guid: ead37c6a66432fb4bb1ea36e6c3a56d3, type: 3}
   - {fileID: 2800000, guid: 64a0f4a0bb69bba409278269b2e05a93, type: 3}
   - {fileID: 2800000, guid: c8b486f0659cba645877c026cb01555f, type: 3}
@@ -505,9 +505,17 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 070aed93f028a7f4484059efc758c686, type: 3}
   foliageChance: 0.4
   foliageHeightSpace: 3
-  pieceChance: 0.5
-  treeColorVarianceMin: {r: 1, g: 1, b: 1, a: 1}
-  treeColorVarianceMax: {r: 1, g: 0.6666667, b: 0, a: 1}
+  pieceChance: 0.9
+  pieceSizeMin: 0.25
+  pieceSizeMax: 1.5
+  cornerSizeMin: 0.7
+  cornerSizeMax: 1.8
+  foliageColorVarianceMin: {r: 1, g: 1, b: 1, a: 1}
+  foliageColorVarianceMax: {r: 1, g: 0.6666667, b: 0, a: 1}
+  foliageRotationMax: 5
+  foliageSwayMax: 5
+  grassScaleMin: 0.7
+  grassScaleMax: 1.7
 --- !u!4 &1540308514
 Transform:
   m_ObjectHideFlags: 0
