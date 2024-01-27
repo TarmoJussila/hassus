@@ -47,3 +47,4 @@ MonoBehaviour:
   WeaponDefs:
   - {fileID: 11400000, guid: 675f0e625139d5b4bbae1d2cfe36d66b, type: 2}
   - {fileID: 11400000, guid: 4ceb00c484b6dcd4b902fa608b40fe4f, type: 2}
+  - {fileID: 11400000, guid: cfee46228ce3f974c91cb120528f6035, type: 2}

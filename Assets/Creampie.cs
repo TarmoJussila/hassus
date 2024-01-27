@@ -8,16 +8,27 @@ public class Creampie : SpawnedWeaponBase
     [SerializeField] private int _damage;
     [SerializeField] private GameObject _killParticle;
 
-    protected override void OnHitEnemy(Collider2D other)
+    protected override void OnCollideEnemy(Collision2D coll)
     {
-        PlayerHealth health = other.GetComponent<PlayerHealth>();
+        PlayerHealth health = coll.gameObject.GetComponent<PlayerHealth>();
         health.TakeDamage(_damage, OwnerPlayer.playerIndex);
 
-        if (health.CurrentHealth <= 0)
-        {
-            Instantiate(_killParticle, health.transform.position, Quaternion.identity);
-        }
+        Destroy(gameObject);
+    }
 
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
         GetComponent<AudioSource>().Play();
+
+        if (_killParticle != null)
+        {
+            Instantiate(_killParticle, transform.position, Quaternion.identity);
+        }
+    }
+
+    protected override void OnCollideOther()
+    {
+        Destroy(gameObject);
     }
 }

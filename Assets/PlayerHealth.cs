@@ -33,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
     public int MaxLives { get; private set; } = 3;
 
     [SerializeField] private GameObject _gravePrefab;
+    [SerializeField] private GameObject _deathParticle;
 
     private PlayerInput _input;
     private float _respawnTime = 5f;
@@ -78,6 +79,7 @@ public class PlayerHealth : MonoBehaviour
         _animator.PlayerDead();
         _movement.PlayerDead();
         _weapon.Disarm();
+        Instantiate(_deathParticle, transform.position + Vector3.up * 0.1f, Quaternion.identity);
     }
 
     private IEnumerator RespawnTimer()

@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gravePrefab: {fileID: 4917369501950261073, guid: 8f09448d2f647c2499c493d7683f119d, type: 3}
+  _deathParticle: {fileID: 1313029398430282, guid: 516cbd5a530bfbd449d65cb5c567e131, type: 3}
 --- !u!1 &8843667878087445163
 GameObject:
   m_ObjectHideFlags: 0
