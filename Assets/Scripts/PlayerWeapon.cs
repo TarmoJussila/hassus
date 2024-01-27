@@ -33,42 +33,43 @@ public class PlayerWeapon : MonoBehaviour
         spriteRenderer.enabled = true;
     }
 
+    public void UseWeapon(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            usesLeft--;
+
+            if (string.IsNullOrEmpty(currentWeapon.CharacterAnimation))
+            {
+                _animator.CharacterAnimation(currentWeapon.CharacterAnimation);
+            }
+
+            if (string.IsNullOrEmpty(currentWeapon.WeaponAnimation))
+            {
+                _animator.WeaponAnimation(currentWeapon.WeaponAnimation);
+            }
+
+            SpawnedWeaponBase weapon = Instantiate(currentWeapon.Prefab);
+            weapon.OwnerPlayer = _input;
+
+            Debug.Log("Player: " + weapon.OwnerPlayer.playerIndex + " used " + currentWeapon.name);
+
+            if (usesLeft <= 0)
+            {
+                Disarm();
+            }
+
+        }
+    }
+
     public void UseWeapon()
     {
-        usesLeft--;
 
-        if (string.IsNullOrEmpty(currentWeapon.CharacterAnimation))
-        {
-            _animator.CharacterAnimation(currentWeapon.CharacterAnimation);
-        }
-
-        if (string.IsNullOrEmpty(currentWeapon.WeaponAnimation))
-        {
-            _animator.WeaponAnimation(currentWeapon.WeaponAnimation);
-        }
-
-        SpawnedWeaponBase weapon = Instantiate(currentWeapon.Prefab);
-        weapon.OwnerPlayer = _input;
-
-        if (usesLeft <= 0)
-        {
-            Disarm();
-        }
     }
 
     public void Disarm()
     {
         currentWeapon = null;
         spriteRenderer.enabled = false;
-    }
-
-    private void Update()
-    {
-        spriteRenderer.flipX = _movement.LastDirection < 0;
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            UseWeapon();
-        }
     }
 }

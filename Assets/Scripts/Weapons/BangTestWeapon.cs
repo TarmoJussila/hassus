@@ -5,7 +5,12 @@ using UnityEngine;
 public class BangTestWeapon : SpawnedWeaponBase
 {
     public int Damage;
-    
+
+    private void Awake()
+    {
+        //transform.position = OwnerPlayer.transform.position;
+    }
+
     protected override void OnStayEnemy(Collider2D other)
     {
         other.GetComponent<PlayerHealth>().TakeDamage(Damage, OwnerPlayer.playerIndex);
@@ -15,7 +20,7 @@ public class BangTestWeapon : SpawnedWeaponBase
 
     protected override void OnStaySelf()
     {
-        OwnerPlayer.GetComponent<PlayerHealth>().TakeDamage(Damage);
+        OwnerPlayer.GetComponent<PlayerHealth>().TakeDamage(Damage, OwnerPlayer.playerIndex);
 
         base.OnStaySelf();
     }

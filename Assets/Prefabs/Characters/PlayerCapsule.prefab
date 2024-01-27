@@ -282,9 +282,9 @@ MonoBehaviour:
     m_ActionName: Player/Start game[/Keyboard/enter]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -7850476766968038806}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: Fire
+      - m_Target: {fileID: 4009284308194818800}
+        m_TargetAssemblyTypeName: PlayerWeapon, Assembly-CSharp
+        m_MethodName: UseWeapon
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
