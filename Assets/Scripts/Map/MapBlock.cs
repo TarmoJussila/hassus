@@ -23,14 +23,20 @@ namespace Hassus.Map
         private Transform activeFoliageObject = null;
         private float foliageSway = 1f;
         private float timer;
+        private float explosiveForce = 0f;
 
         private void Update()
         {
             if (activeFoliageObject != null)
             {
                 timer += Time.deltaTime;
+                if (explosiveForce > 0f)
+                {
+                    explosiveForce -= Time.deltaTime;
+                    explosiveForce = Mathf.Max(0f, explosiveForce);
+                }
                 var localEulerAngles = activeFoliageObject.localEulerAngles;
-                activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Sin(timer) * foliageSway, localEulerAngles.y, localEulerAngles.z);
+                activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Sin(timer * (1f + explosiveForce)) * foliageSway, localEulerAngles.y, localEulerAngles.z);
             }
         }
 
@@ -97,6 +103,11 @@ namespace Hassus.Map
             {
                 ToggleCorners(_mapBlockGroup);
             }
+        }
+
+        public void SetExplosiveForce(float force)
+        {
+            explosiveForce = force;
         }
 
         private void TogglePieces(MapBlock topLeftBlock, MapBlock topBlock, MapBlock topRightBlock, MapBlock leftBlock, MapBlock rightBlock, MapBlock bottomLeftBlock, MapBlock bottomBlock, MapBlock bottomRightBlock, float pieceChance)
@@ -191,11 +202,13 @@ namespace Hassus.Map
                 if (_mapBlockGroup.TopBlock != null && _mapBlockGroup.TopBlock.isActiveAndEnabled)
                 {
                     _mapBlockGroup.TopBlock.ResolveCorners();
+                    _mapBlockGroup.TopBlock.SetExplosiveForce(50f);
                 }
 
                 if (_mapBlockGroup.BottomBlock != null && _mapBlockGroup.BottomBlock.isActiveAndEnabled)
                 {
                     _mapBlockGroup.BottomBlock.ResolveCorners();
+                    _mapBlockGroup.BottomBlock.SetExplosiveForce(50f);
                 }
             }
         }
