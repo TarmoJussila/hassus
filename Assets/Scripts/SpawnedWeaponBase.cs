@@ -2,20 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SpawnedWeaponBase : MonoBehaviour
 {
     public GameObject OwnerPlayer;
-    
+
     // Use this and don't put a collider if you want a one frame check
-    public float OverlapQueryRadius = 0f;
+    [SerializeField] private float _overlapQueryRadius = 0f;
+    [SerializeField] private float _lifeTime = 3f;
 
     private List<Collider2D> contacts = new List<Collider2D>();
 
     private void Awake()
     {
-        if (OverlapQueryRadius > float.Epsilon
-            && Physics2D.OverlapCircle(transform.position, OverlapQueryRadius, new ContactFilter2D(), contacts) > 0) { }
+        if (_overlapQueryRadius > float.Epsilon
+            && Physics2D.OverlapCircle(transform.position, _overlapQueryRadius, new ContactFilter2D(), contacts) > 0) { }
 
         {
             foreach (Collider2D coll in contacts)
@@ -24,7 +26,23 @@ public class SpawnedWeaponBase : MonoBehaviour
             }
         }
 
+        if (_lifeTime > 0f)
+        {
+            StartCoroutine(DestroyTimer());
+        }
+
         OnAwake();
+    }
+
+    private IEnumerator DestroyTimer()
+    {
+        yield return new WaitForSeconds(_lifeTime);
+        DestroyWeapon();
+    }
+
+    protected void DestroyWeapon()
+    {
+        Destroy(gameObject);
     }
 
     protected virtual void OnAwake() { }

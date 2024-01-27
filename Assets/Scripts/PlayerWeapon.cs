@@ -42,7 +42,8 @@ public class PlayerWeapon : MonoBehaviour
             animator.WeaponAnimation(currentWeapon.WeaponAnimation);
         }
 
-        Instantiate(currentWeapon.Prefab);
+        SpawnedWeaponBase weapon = Instantiate(currentWeapon.Prefab);
+        weapon.OwnerPlayer = gameObject;
     }
 
     private void Update()

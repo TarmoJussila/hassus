@@ -8,5 +8,5 @@ public class WeaponDef : ScriptableObject
     public int MaxUses;
     [FormerlySerializedAs("PlayerAnimation")] public string CharacterAnimation;
     public string WeaponAnimation;
-    public GameObject Prefab;
+    public SpawnedWeaponBase Prefab;
 }
