@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7961665459088005558}
   - component: {fileID: 6760612223175153080}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4009284308194818800}
   - component: {fileID: 2955194465017728213}
   - component: {fileID: -2515962519727476866}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerCapsule
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -342,11 +342,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _jumpForce: 4
-  _groundCheckOffset: {x: 0, y: 0}
+  _jumpForce: 25
+  _groundCheckRadius: 0.5
+  _groundCheckOffset: {x: 0, y: -0.7}
   _groundCheckLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!114 &4009284308194818800
 MonoBehaviour:
   m_ObjectHideFlags: 0
