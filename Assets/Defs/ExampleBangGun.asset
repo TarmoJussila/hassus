@@ -16,4 +16,4 @@ MonoBehaviour:
   MaxUses: 3
   CharacterAnimation: 
   WeaponAnimation: 
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1356383632892484393, guid: 58ca4968225e22a458514d2eb76ae136, type: 3}

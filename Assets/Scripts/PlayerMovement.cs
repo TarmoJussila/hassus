@@ -74,9 +74,12 @@ public class PlayerMovement : MonoBehaviour
         _input.Normalize();
     }
 
-    public void Join(InputAction.CallbackContext context)
+    public void Fire(InputAction.CallbackContext context)
     {
-        Debug.Log("Join!");
+        if (context.performed)
+        {
+            Debug.Log("Fire!");
+        }
     }
 
     public void PlayerDead()

@@ -15,7 +15,7 @@ public class SpawnedWeaponBase : MonoBehaviour
 
     private List<Collider2D> contacts = new List<Collider2D>();
 
-    private void Awake()
+    private void Start()
     {
         if (_overlapQueryRadius > float.Epsilon
             && Physics2D.OverlapCircle(transform.position, _overlapQueryRadius, new ContactFilter2D(), contacts) > 0) { }
@@ -23,7 +23,7 @@ public class SpawnedWeaponBase : MonoBehaviour
         {
             foreach (Collider2D coll in contacts)
             {
-                if (coll.CompareTag("Player")) { return; }
+                if (!coll.CompareTag("Player")) { return; }
 
                 if (coll.gameObject == OwnerPlayer.gameObject)
                 {
@@ -41,7 +41,7 @@ public class SpawnedWeaponBase : MonoBehaviour
             StartCoroutine(DestroyTimer());
         }
 
-        OnAwake();
+        OnStart();
     }
 
     private IEnumerator DestroyTimer()
@@ -57,13 +57,15 @@ public class SpawnedWeaponBase : MonoBehaviour
 
     protected virtual void OnAwake() { }
 
+    protected virtual void OnStart() { }
+
     protected virtual void OnOverlapSelf() { }
 
     protected virtual void OnOverlapEnemy(Collider2D other) { }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) { return; }
+        if (!other.CompareTag("Player")) { return; }
 
         if (other.gameObject == OwnerPlayer.gameObject)
         {
@@ -77,7 +79,7 @@ public class SpawnedWeaponBase : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) { return; }
+        if (!other.CompareTag("Player")) { return; }
 
         if (other.gameObject == OwnerPlayer.gameObject)
         {
@@ -91,7 +93,7 @@ public class SpawnedWeaponBase : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) { return; }
+        if (!other.CompareTag("Player")) { return; }
 
         if (other.gameObject == OwnerPlayer.gameObject)
         {
