@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Hassus.Map
 {
@@ -188,6 +187,11 @@ namespace Hassus.Map
         
         private void OnDrawGizmos()
         {
+            if (Application.isPlaying)
+            {
+                return;
+            }
+            
             Gizmos.color = Color.magenta;
             var map = MapTextAssetToList(mapTextAssets[randomMapIndex]);
             
