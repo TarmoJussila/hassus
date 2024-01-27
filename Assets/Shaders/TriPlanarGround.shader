@@ -5,6 +5,12 @@ Shader "Custom/TriPlanarGround"
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Main texture (RGB)", 2D) = "white" {}
         _TopTex ("Top texture (RGB)", 2D) = "white" {}
+        _NoiseTex ("Noise texture (RGB)", 2D) = "white" {}
+        _Dissolve ("Dissolve", Range(0,1)) = 0
+        _DissolveMin ("DissolveMin", Range(0,1)) = 0
+        _DissolveMax ("DissolveMax", Range(0,1)) = 1
+        _TextureScale ("Texture scale", float) = 1.0
+        _NoiseScale ("Noise scale", float) = 1.0
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
         _BlendOffset ("Blend Offset", Range(0, 0.5)) = 0.25
@@ -15,9 +21,13 @@ Shader "Custom/TriPlanarGround"
     {
         Tags
         {
-            "RenderType"="Opaque"
+            "RenderType"="TransparentCutout" "Queue"="AlphaTest"
         }
         LOD 200
+        ZWrite On
+       // Blend SrcAlpha OneMinusSrcAlpha
+        Cull Off
+        ZTest LEqual
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
@@ -28,6 +38,13 @@ Shader "Custom/TriPlanarGround"
 
         sampler2D _MainTex;
         sampler2D _TopTex;
+        sampler2D _NoiseTex;
+
+        fixed _TextureScale;
+        fixed _NoiseScale;
+
+        float4 _MainText_ST;
+        float4 _TopText_ST;
 
         struct Input
         {
@@ -42,6 +59,11 @@ Shader "Custom/TriPlanarGround"
         fixed _BlendOffset;
         fixed _TopPow;
 
+        fixed _Dissolve;
+
+        fixed _DissolveMin;
+        fixed _DissolveMax;
+
         #include <AutoLight.cginc>
         #include <Lighting.cginc>
 
@@ -49,8 +71,8 @@ Shader "Custom/TriPlanarGround"
         {
             float NdotL = max(0.0, dot(s.Normal, lightDir));
 
-            float lightBandsMultiplier = 2 / 256;
-            float lightBandsAdditive = 2 / 2;
+            float lightBandsMultiplier = 4 / 256;
+            float lightBandsAdditive = 4 / 2;
             fixed bandedNdotL = (floor((NdotL * 256 + lightBandsAdditive) / 2))
                 * lightBandsMultiplier;
 
@@ -74,6 +96,11 @@ Shader "Custom/TriPlanarGround"
             // put more per-instance properties here
         UNITY_INSTANCING_BUFFER_END(Props)
 
+        fixed invLerp(fixed a, fixed b, fixed t)
+        {
+            return (t - a) / (b - a);
+        }
+
         void surf(Input IN, inout SurfaceOutput o)
         {
             // Albedo comes from a texture tinted by color
@@ -89,10 +116,12 @@ Shader "Custom/TriPlanarGround"
             uvX.y += 0.5;
             uvZ.x += 0.5;
 
-            fixed4 xy = tex2D(_MainTex, uvZ) * _Color;
-            fixed4 xzTop = tex2D(_TopTex, uvY) * _Color;
-            fixed4 xzMain = tex2D(_MainTex, uvY) * _Color;
-            fixed4 yz = tex2D(_MainTex, uvX) * _Color;
+            fixed4 xy = tex2D(_MainTex, uvZ * _TextureScale) * _Color;
+            fixed4 xzTop = tex2D(_TopTex, uvY * _TextureScale) * _Color;
+            fixed4 xzMain = tex2D(_MainTex, uvY * _TextureScale) * _Color;
+            fixed4 yz = tex2D(_MainTex, uvX * _TextureScale) * _Color;
+
+            fixed4 noise = tex2D(_NoiseTex, uvZ * _NoiseScale);
 
             //fixed4 xz = lerp(xzMain, xzTop, 0);
             fixed up = clamp(dot(fixed3(0, 1, 0), o.Normal), 0, 1);
@@ -110,7 +139,10 @@ Shader "Custom/TriPlanarGround"
             // Metallic and smoothness come from slider variables
             //o.Metallic = _Metallic;
             //o.Smoothness = _Glossiness;
-            o.Alpha = c.a;
+
+            fixed n = invLerp(_DissolveMin, _DissolveMax, length(noise));
+
+            clip(1 - _Dissolve * n);
         }
         ENDCG
     }

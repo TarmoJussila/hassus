@@ -8,7 +8,7 @@ public class BangTestWeapon : SpawnedWeaponBase
     
     protected override void OnStayEnemy(Collider2D other)
     {
-        other.GetComponent<PlayerHealth>().TakeDamage(Damage);
+        other.GetComponent<PlayerHealth>().TakeDamage(Damage, OwnerPlayer.playerIndex);
         
         base.OnOverlapEnemy(other);
     }

@@ -2,20 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerWeapon : MonoBehaviour
 {
+    public bool HasWeapon => currentWeapon != null;
+    
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     private WeaponDef currentWeapon;
     private int usesLeft;
 
-    private PlayerAnimator animator;
+    private PlayerAnimator _animator;
     private PlayerMovement _movement;
+    private PlayerInput _input;
 
     private void Awake()
     {
-        animator = GetComponent<PlayerAnimator>();
+        _input = GetComponent<PlayerInput>();
+        _animator = GetComponent<PlayerAnimator>();
         _movement = GetComponent<PlayerMovement>();
     }
 
@@ -34,17 +39,27 @@ public class PlayerWeapon : MonoBehaviour
 
         if (string.IsNullOrEmpty(currentWeapon.CharacterAnimation))
         {
-            animator.CharacterAnimation(currentWeapon.CharacterAnimation);
+            _animator.CharacterAnimation(currentWeapon.CharacterAnimation);
         }
 
         if (string.IsNullOrEmpty(currentWeapon.WeaponAnimation))
         {
-            animator.WeaponAnimation(currentWeapon.WeaponAnimation);
+            _animator.WeaponAnimation(currentWeapon.WeaponAnimation);
         }
 
         SpawnedWeaponBase weapon = Instantiate(currentWeapon.Prefab);
-        weapon.transform.position = transform.position;
-        weapon.OwnerPlayer = gameObject;
+        weapon.OwnerPlayer = _input;
+
+        if (usesLeft <= 0)
+        {
+            Disarm();
+        }
+    }
+
+    public void Disarm()
+    {
+        currentWeapon = null;
+        spriteRenderer.enabled = false;
     }
 
     private void Update()

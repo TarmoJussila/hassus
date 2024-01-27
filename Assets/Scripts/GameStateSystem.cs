@@ -1,8 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public enum GameState
 {
@@ -14,16 +14,17 @@ public enum GameState
     OUTRO
 }
 
-[System.Serializable]
+[Serializable]
 public class StateObjectPair
 {
     public GameState State;
-    public GameObject StateObject;
+    public List<GameObject> StateObjects;
 }
 
 public class GameStateSystem : MonoSingleton<GameStateSystem>
 {
-    [SerializeField] private List<StateObjectPair> _stateObjects = new List<StateObjectPair>();
+    [FormerlySerializedAs("_stateObjects")] [SerializeField]
+    private List<StateObjectPair> _states = new List<StateObjectPair>();
 
     public GameState CurrentState { get; private set; }
 
@@ -41,9 +42,28 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
         StateTime = 0f;
         CurrentState = state;
 
-        foreach (StateObjectPair pair in _stateObjects)
+        foreach (StateObjectPair pair in _states)
         {
-            pair.StateObject.SetActive(pair.State == state);
+            foreach (GameObject go in pair.StateObjects)
+            {
+                go.SetActive(false);
+            }
+        }
+
+        foreach (StateObjectPair pair in _states)
+        {
+            foreach (GameObject go in pair.StateObjects)
+            {
+                if (pair.State == state)
+                {
+                    go.SetActive(true);
+                }
+            }
+        }
+
+        if (PlayerManager.Instance != null)
+        {
+            PlayerManager.Instance.ChangeState(state);
         }
 
         OnGameStateChanged?.Invoke(state);
@@ -135,13 +155,13 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     public void StartGame(InputAction.CallbackContext context)
     {
-        if (CurrentState != GameState.WAITING_FOR_PLAYERS)
+        if (Instance.CurrentState != GameState.WAITING_FOR_PLAYERS)
         {
-            Debug.Log($"Start game input ignored on state: {CurrentState}");
+            Debug.Log($"Start game input ignored on state: {Instance.CurrentState}");
             return;
         }
 
-        if (StateTime < 2f)
+        if (Instance.StateTime < 2f)
         {
             Debug.Log($"Start game input ignored: StateTime too low");
             return;
@@ -149,6 +169,6 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
         // TODO: check for number of players
         Debug.Log("Start Game input accepted!");
-        ChangeGameState(GameState.COUNTDOWN);
+        Instance.ChangeGameState(GameState.COUNTDOWN);
     }
 }
