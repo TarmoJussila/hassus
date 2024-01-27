@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,12 +20,32 @@ namespace Hassus.Map
 
         private MapBlockGroup _mapBlockGroup;
 
+        private Transform activeFoliageObject = null;
+        private float foliageSway = 1f;
+        private float timer;
+        private float explosiveForce = 0f;
+
+        private void Update()
+        {
+            if (activeFoliageObject != null)
+            {
+                timer += Time.deltaTime;
+                if (explosiveForce > 0f)
+                {
+                    explosiveForce -= Time.deltaTime;
+                    explosiveForce = Mathf.Max(0f, explosiveForce);
+                }
+                var localEulerAngles = activeFoliageObject.localEulerAngles;
+                activeFoliageObject.localRotation = Quaternion.Euler(Mathf.Sin(timer * (1f + explosiveForce)) * foliageSway, localEulerAngles.y, localEulerAngles.z);
+            }
+        }
+
         public void ToggleGrass(bool toggle)
         {
             grassObject.SetActive(toggle);
         }
 
-        public void ToggleFoliage(Texture2D texture, float foliageChance, int index = -1)
+        public void ToggleFoliage(Texture2D texture, Color color, float rotation, float sway, float foliageChance, int index = -1)
         {
             bool enableFoliage = foliageChance > Random.Range(0.0f, 1.0f);
             int randomIndex = index == -1 ? Random.Range(0, foliageObjects.Length) : index;
@@ -34,7 +55,12 @@ namespace Hassus.Map
                 foliageObjects[i].SetActive(toggle);
                 if (toggle)
                 {
-                    foliageObjects[i].GetComponent<MeshRenderer>().material.mainTexture = texture;
+                    foliageSway = sway;
+                    var material = foliageObjects[i].GetComponent<MeshRenderer>().material;
+                    material.mainTexture = texture;
+                    material.color = color;
+                    foliageObjects[i].transform.localRotation = Quaternion.Euler(0f, rotation, 0f);
+                    activeFoliageObject = foliageObjects[i].transform;
                 }
             }
         }
@@ -77,6 +103,11 @@ namespace Hassus.Map
             {
                 ToggleCorners(_mapBlockGroup);
             }
+        }
+
+        public void SetExplosiveForce(float force)
+        {
+            explosiveForce = force;
         }
 
         private void TogglePieces(MapBlock topLeftBlock, MapBlock topBlock, MapBlock topRightBlock, MapBlock leftBlock, MapBlock rightBlock, MapBlock bottomLeftBlock, MapBlock bottomBlock, MapBlock bottomRightBlock, float pieceChance)
@@ -171,11 +202,13 @@ namespace Hassus.Map
                 if (_mapBlockGroup.TopBlock != null && _mapBlockGroup.TopBlock.isActiveAndEnabled)
                 {
                     _mapBlockGroup.TopBlock.ResolveCorners();
+                    _mapBlockGroup.TopBlock.SetExplosiveForce(50f);
                 }
 
                 if (_mapBlockGroup.BottomBlock != null && _mapBlockGroup.BottomBlock.isActiveAndEnabled)
                 {
                     _mapBlockGroup.BottomBlock.ResolveCorners();
+                    _mapBlockGroup.BottomBlock.SetExplosiveForce(50f);
                 }
             }
         }

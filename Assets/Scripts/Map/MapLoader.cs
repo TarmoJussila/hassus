@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Hassus.Map
@@ -14,6 +15,10 @@ namespace Hassus.Map
         [SerializeField] [Range(0, 1.0f)] private float foliageChance = 0.5f;
         [SerializeField] [Range(1, 9)] private int foliageHeightSpace = 2;
         [SerializeField] [Range(0, 1.0f)] private float pieceChance = 0.5f;
+        [SerializeField] private Color treeColorVarianceMin = Color.white;
+        [SerializeField] private Color treeColorVarianceMax = Color.white;
+        [SerializeField] [Range(0f, 10f)] private float foliageRotationMax = 5f;
+        [SerializeField] [Range(0, 30f)] private float foliageSwayMax = 5f;
         
         private Dictionary<Vector2Int, MapBlock> mapBlocks = new();
         private Dictionary<Vector2Int, BoxCollider2D> mapColliders = new();
@@ -143,7 +148,14 @@ namespace Hassus.Map
         private void InitializeMapBlock(MapBlock mapBlock, MapBlockGroup adjacentMapBlockGroup, int topEmptySpace)
         {
             mapBlock.ToggleGrass(topEmptySpace >= 1);
-            mapBlock.ToggleFoliage(treeTextures[Random.Range(0, treeTextures.Length)], topEmptySpace >= foliageHeightSpace ? foliageChance : 0);
+            mapBlock.ToggleFoliage
+            (
+                treeTextures[Random.Range(0, treeTextures.Length)],
+                Color.Lerp(treeColorVarianceMin, treeColorVarianceMax, Random.Range(0.0f, 1.0f)),
+                Random.Range(-foliageRotationMax, foliageRotationMax),
+                Random.Range(0f, foliageSwayMax),
+                topEmptySpace >= foliageHeightSpace ? foliageChance : 0
+            );
             mapBlock.ToggleCorners(adjacentMapBlockGroup);
             mapBlock.TogglePieces(adjacentMapBlockGroup, pieceChance);
         }

@@ -503,9 +503,11 @@ MonoBehaviour:
   - {fileID: 2800000, guid: af0beb32ca2b0434c8193f5141a2f3db, type: 3}
   - {fileID: 2800000, guid: ce80e55495cdde440bc7df39d289203c, type: 3}
   - {fileID: 2800000, guid: 070aed93f028a7f4484059efc758c686, type: 3}
-  foliageChance: 0.25
+  foliageChance: 0.4
   foliageHeightSpace: 3
   pieceChance: 0.5
+  treeColorVarianceMin: {r: 1, g: 1, b: 1, a: 1}
+  treeColorVarianceMax: {r: 1, g: 0.6666667, b: 0, a: 1}
 --- !u!4 &1540308514
 Transform:
   m_ObjectHideFlags: 0
@@ -590,7 +592,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: a3d5dc099abf66748b4d1d808d13ce75, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -609,7 +611,7 @@ Transform:
   m_GameObject: {fileID: 1665722229}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16, y: 16, z: -36}
+  m_LocalPosition: {x: 16, y: 16, z: -34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -784,7 +786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2124163153
 MonoBehaviour:
   m_ObjectHideFlags: 0
