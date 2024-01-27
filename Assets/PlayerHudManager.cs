@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerHudManager : MonoBehaviour
 {
@@ -22,13 +23,13 @@ public class PlayerHudManager : MonoBehaviour
         PlayerManager.OnPlayerLeave -= OnPlayerLeave;
     }
 
-    private void OnPlayerLeave(int index)
+    private void OnPlayerLeave(PlayerInput input)
     {
-        _huds[index].gameObject.SetActive(false);
+        _huds[input.playerIndex].gameObject.SetActive(false);
     }
 
-    private void OnPlayerJoin(int index)
+    private void OnPlayerJoin(PlayerInput input)
     {
-        _huds[index].gameObject.SetActive(true);
+        _huds[input.playerIndex].gameObject.SetActive(true);
     }
 }
