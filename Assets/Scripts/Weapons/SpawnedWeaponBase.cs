@@ -23,16 +23,17 @@ public class SpawnedWeaponBase : MonoBehaviour
         {
             foreach (Collider2D coll in contacts)
             {
-                if (!coll.CompareTag("Player")) { return; }
+                if (coll.CompareTag("Player")) { 
+                    if (coll.gameObject == OwnerPlayer.gameObject)
+                    {
+                        OnOverlapSelf();
+                    }
+                    else
+                    {
+                        OnOverlapEnemy(coll);
+                    }
+                }
 
-                if (coll.gameObject == OwnerPlayer.gameObject)
-                {
-                    OnOverlapSelf();
-                }
-                else
-                {
-                    OnOverlapEnemy(coll);
-                }
             }
         }
 
