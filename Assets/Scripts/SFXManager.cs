@@ -13,7 +13,8 @@ public enum SFXType
     SqueakyRandom,
     Vineboom,
     ChickenRandom,
-    BoingRandom
+    BoingRandom,
+    Pop
 }
 
 [System.Serializable]

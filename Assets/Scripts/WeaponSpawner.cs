@@ -40,6 +40,8 @@ public class WeaponSpawner : MonoBehaviour
                 weaponSprite.enabled = false;
                 playerWeapon.PickUpWeapon(currentWeaponDef);
 
+                SFXManager.Instance.PlayOneShot(SFXType.Pop);
+
                 if (delayedWeaponSpawn == null)
                 {
                     delayedWeaponSpawn = StartCoroutine(SpawnWeaponAfterSeconds(spawnDelaySeconds));
