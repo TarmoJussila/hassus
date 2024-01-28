@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public enum GameState
@@ -231,9 +232,13 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
     {
         if (StateTime > 1f && EnterKeyPressed)
         {
+            /*
             ChangeGameState(GameState.MAIN_MENU);
             MusicManager.Instance.FadeOutMusic(MusicManager.MusicType.OUTRO, 0f);
             MusicManager.Instance.FadeInMusic(MusicManager.MusicType.GAMEPLAY, 2f);
+            */
+            MusicManager.Instance.FadeOutMusic(MusicManager.MusicType.OUTRO, 0f);
+            SceneManager.LoadScene("MainScene");
         }
     }
     
