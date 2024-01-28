@@ -36,16 +36,22 @@ public class PlayerHud : MonoBehaviour
     {
         if (index != _playerIndex) { return; }
 
-        _aliveFace.gameObject.SetActive(true);
-        _deadFace.gameObject.SetActive(false);
+        if (_aliveFace != null)
+        {
+            _aliveFace.gameObject.SetActive(true);
+            _deadFace.gameObject.SetActive(false);
+        }
     }
 
     private void OnPlayerDead(int index, GameObject go)
     {
         if (index != _playerIndex) { return; }
 
-        _aliveFace.gameObject.SetActive(false);
-        _deadFace.gameObject.SetActive(true);
+        if (_aliveFace != null)
+        {
+            _aliveFace.gameObject.SetActive(false);
+            _deadFace.gameObject.SetActive(true);
+        }
 
         _healthText.text = "DEAD!";
     }
