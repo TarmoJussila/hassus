@@ -8,6 +8,8 @@ public class CensoredWeapon : SpawnedWeaponBase
     public int Damage;
     [SerializeField] private GameObject censorBar;
     [SerializeField] private List<AudioClip> collisionSounds;
+    
+    [SerializeField] private List<GameObject> collisionParticles;
 
     protected override void OnCollideEnemy(Collision2D coll)
     {
