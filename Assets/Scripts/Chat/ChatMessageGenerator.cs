@@ -18,7 +18,7 @@ public class ChatMessageGenerator : MonoBehaviour
     private const float CHAT_MESSAGE_GENERATION_INTERVAL_VARIANCE = 0.8f;
     private const float HYPE_CHAT_MESSAGE_GENERATION_INTERVAL = 0.1f;
     private const float HYPE_CHAT_MESSAGE_GENERATION_INTERVAL_VARIANCE = 0.05f;
-    private const float HYPE_CHAT_MESSAGE_GENERATION_COUNT = 100;
+    private const float HYPE_CHAT_MESSAGE_GENERATION_COUNT = 40;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class ChatMessageGenerator : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(NormalMessageLoop());
         PlayerHealth.OnPlayerDead += GenerateHypeMessages;
