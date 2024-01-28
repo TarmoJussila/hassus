@@ -46,6 +46,8 @@ public class PlayerWeapon : MonoBehaviour
             return;
         }
 
+        if (usesLeft < 1) { return; }
+
         _cooldown = currentWeapon.Cooldown;
 
         usesLeft--;
