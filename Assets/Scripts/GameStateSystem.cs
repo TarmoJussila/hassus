@@ -52,7 +52,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     private void Start()
     {
-        MusicManager.Instance.FadeInMusic(MusicManager.MusicType.INTRO);
+        MusicManager.Instance.FadeInMusic(MusicManager.MusicType.INTRO, 0.5f);
     }
 
     public void ChangeGameState(GameState state)
@@ -176,8 +176,8 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
         if (StateTime > 1f && EnterKeyPressed)
         {
             ChangeGameState(GameState.MAIN_MENU);
-            MusicManager.Instance.FadeOutMusic(MusicManager.MusicType.INTRO);
-            MusicManager.Instance.FadeInMusic(MusicManager.MusicType.GAMEPLAY);
+            MusicManager.Instance.FadeOutMusic(MusicManager.MusicType.INTRO, 0f);
+            MusicManager.Instance.FadeInMusic(MusicManager.MusicType.GAMEPLAY, 1f);
         }
     }
 
@@ -202,8 +202,8 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
         if (StateTime > 1f && EnterKeyPressed)
         {
             ChangeGameState(GameState.OUTRO);
-            MusicManager.Instance.FadeOutMusic(MusicManager.MusicType.GAMEPLAY);
-            MusicManager.Instance.FadeInMusic(MusicManager.MusicType.OUTRO);
+            MusicManager.Instance.FadeOutMusic(MusicManager.MusicType.GAMEPLAY, 0f);
+            MusicManager.Instance.FadeInMusic(MusicManager.MusicType.OUTRO, 1f);
         }
     }
 

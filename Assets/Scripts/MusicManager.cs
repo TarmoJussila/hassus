@@ -26,18 +26,20 @@ public class MusicManager : MonoSingleton<MusicManager>
         outroMusicSource.volume = 0f;
     }
 
-    public void FadeInMusic(MusicType type)
+    public void FadeInMusic(MusicType type, float delay)
     {
-        StartCoroutine(FadeInMusicCoroutine(type));
+        StartCoroutine(FadeInMusicCoroutine(type, delay));
     }
     
-    public void FadeOutMusic(MusicType type)
+    public void FadeOutMusic(MusicType type, float delay)
     {
-        StartCoroutine(FadeOutMusicCoroutine(type));
+        StartCoroutine(FadeOutMusicCoroutine(type, delay));
     }
     
-    private IEnumerator FadeInMusicCoroutine(MusicType type)
+    private IEnumerator FadeInMusicCoroutine(MusicType type, float delay)
     {
+        yield return new WaitForSecondsRealtime(delay);
+        
         float initialVolume = 0f;
         if (type == MusicType.INTRO)
         {
@@ -76,8 +78,10 @@ public class MusicManager : MonoSingleton<MusicManager>
         yield break;
     }
     
-    private IEnumerator FadeOutMusicCoroutine(MusicType type)
+    private IEnumerator FadeOutMusicCoroutine(MusicType type, float delay)
     {
+        yield return new WaitForSecondsRealtime(delay);
+        
         float initialVolume = 0f;
         if (type == MusicType.INTRO)
         {
