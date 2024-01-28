@@ -15,7 +15,15 @@ public class MusicManager : MonoSingleton<MusicManager>
     [SerializeField] private AudioSource outroMusicSource;
 
     private readonly float fadeInSpeed = 0.1f;
-    private readonly float fadeOutSpeed = 0.1f;
+    private readonly float fadeOutSpeed = 0.5f;
+
+    protected override void OnAwake()
+    {
+        base.OnAwake();
+        introMusicSource.volume = 0f;
+        gameplayMusicSource.volume = 0f;
+        outroMusicSource.volume = 0f;
+    }
 
     public void FadeInMusic(MusicType type)
     {
@@ -48,15 +56,15 @@ public class MusicManager : MonoSingleton<MusicManager>
             timer += Time.deltaTime * fadeInSpeed;
             if (type == MusicType.INTRO)
             {
-                introMusicSource.volume = Mathf.Lerp(0f, 1f, timer);
+                introMusicSource.volume = Mathf.Lerp(introMusicSource.volume, 1f, timer);
             }
             else if (type == MusicType.GAMEPLAY)
             {
-                gameplayMusicSource.volume = Mathf.Lerp(0f, 1f, timer);
+                gameplayMusicSource.volume = Mathf.Lerp(gameplayMusicSource.volume, 1f, timer);
             }
             else if (type == MusicType.OUTRO)
             {
-                outroMusicSource.volume = Mathf.Lerp(0f, 1f, timer);
+                outroMusicSource.volume = Mathf.Lerp(outroMusicSource.volume, 1f, timer);
             }
             yield return null;
         }
@@ -71,15 +79,15 @@ public class MusicManager : MonoSingleton<MusicManager>
             timer += Time.deltaTime * fadeOutSpeed;
             if (type == MusicType.INTRO)
             {
-                introMusicSource.volume = Mathf.Lerp(1f, 0f, timer);
+                introMusicSource.volume = Mathf.Lerp(introMusicSource.volume, 0f, timer);
             }
             else if (type == MusicType.GAMEPLAY)
             {
-                gameplayMusicSource.volume = Mathf.Lerp(1f, 0f, timer);
+                gameplayMusicSource.volume = Mathf.Lerp(gameplayMusicSource.volume, 0f, timer);
             }
             else if (type == MusicType.OUTRO)
             {
-                outroMusicSource.volume = Mathf.Lerp(1f, 0f, timer);
+                outroMusicSource.volume = Mathf.Lerp(outroMusicSource.volume, 0f, timer);
             }
             yield return null;
         }
