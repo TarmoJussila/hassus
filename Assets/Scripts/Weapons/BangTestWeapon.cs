@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Hassus.Map;
 using UnityEngine;
 
 public class BangTestWeapon : SpawnedWeaponBase
 {
     public int Damage;
     [SerializeField] private GameObject _killParticle;
+
+    protected override void OnStart()
+    {
+        MapLoader.Instance.Explode(transform.position, 1);
+    }
 
     protected override void OnStayEnemy(Collider2D other)
     {
