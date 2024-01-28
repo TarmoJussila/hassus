@@ -142,9 +142,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OwnerPlayer: {fileID: 0}
-  _overlapQueryRadius: 1
+  _overlapQueryRadius: 2
   _lifeTime: 3
   _damage: 500
+  mapDestructionRadius: 2
   _honks:
   - {fileID: 8300000, guid: 3726ed6fd415d714ba4838577e65847d, type: 3}
   - {fileID: 8300000, guid: bc1b5646c4c410547bd136f0faec779c, type: 3}

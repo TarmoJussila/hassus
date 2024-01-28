@@ -11,4 +11,6 @@ public class WeaponDef : ScriptableObject
     public Vector2 SpawnOffset;
     public Vector2 SpawnForce;
     public float Cooldown = 0.1f;
+    public float spawnRotationForce;
+    public float spriteHideDelay;
 }
