@@ -15,7 +15,7 @@ MonoBehaviour:
   Sprite: {fileID: -1121837525, guid: 2e239b6792bd1b746914574a6d9798dc, type: 3}
   MaxUses: 1
   WeaponAnimationTrigger: throw
-  Prefab: {fileID: 5290096743210598612, guid: 50f42743d57126b49b09ca9d33bb1285, type: 3}
+  Prefab: {fileID: 2333148854426444322, guid: 50f42743d57126b49b09ca9d33bb1285, type: 3}
   SpawnOffset: {x: 1.2, y: 0.5}
   SpawnForce: {x: 20, y: 10}
   Cooldown: 0.1

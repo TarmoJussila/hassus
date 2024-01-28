@@ -10,6 +10,7 @@ public class BangTestWeapon : SpawnedWeaponBase
 
     protected override void OnStart()
     {
+        SFXManager.Instance.PlayOneShot(SFXType.FartRandom);
         MapLoader.Instance.Explode(transform.position, 1);
     }
 
@@ -23,6 +24,11 @@ public class BangTestWeapon : SpawnedWeaponBase
     {
         PlayerHealth health = OwnerPlayer.GetComponent<PlayerHealth>();
         DealDamage(health);
+    }
+
+    protected override void OnHitEnemy(Collider2D other)
+    {
+        SFXManager.Instance.PlayOneShot(SFXType.Bruh);
     }
 
     private void DealDamage(PlayerHealth health)
