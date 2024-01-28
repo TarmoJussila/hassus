@@ -1,3 +1,4 @@
+using Hassus.Map;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class CensoredWeapon : SpawnedWeaponBase
 
     protected override void OnCollideOther()
     {
+        MapLoader.Instance.Explode(transform.position, 1);
         PlayCollisionSound();
     }
 
@@ -32,5 +34,11 @@ public class CensoredWeapon : SpawnedWeaponBase
     private void Update()
     {
         censorBar.transform.rotation = Quaternion.identity;
+    }
+
+    private void OnDestroy()
+    {
+        MapLoader.Instance.Explode(transform.position, 5);
+        SFXManager.Instance.PlayOneShot(SFXType.ExplosionRandom);
     }
 }

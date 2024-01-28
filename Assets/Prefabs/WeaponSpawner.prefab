@@ -260,7 +260,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb47936aef08b694c8113748fef02e8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDefs: []
+  weaponDefs:
+  - {fileID: 11400000, guid: c67574c1ce2b414459d3c3953dc69e17, type: 2}
+  - {fileID: 11400000, guid: 216e6638db91dd6408d5080013f6f129, type: 2}
+  - {fileID: 11400000, guid: 675f0e625139d5b4bbae1d2cfe36d66b, type: 2}
+  - {fileID: 11400000, guid: 933af112f4cd3bf40afb36c36ae36dac, type: 2}
+  - {fileID: 11400000, guid: cfee46228ce3f974c91cb120528f6035, type: 2}
+  - {fileID: 11400000, guid: 4ceb00c484b6dcd4b902fa608b40fe4f, type: 2}
   spawnDelaySeconds: 3
   weaponSprite: {fileID: 2026531437654374344}
   pickupCollider: {fileID: 8476026092085353595}
