@@ -44,9 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7d1f8c94b0a4d779440af3bd400278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyParticle: {fileID: 165672, guid: 930ca281c00bcfb429e9158a4eacabf1, type: 3}
   mapTextAssets:
   - {fileID: 4900000, guid: 05589ccad8568a346b4948e95b4dbdb6, type: 3}
   - {fileID: 4900000, guid: 95f579ec7d7caa248afc008b4ae80f22, type: 3}
+  - {fileID: 4900000, guid: 058d453892e06479d9fd6197b6e5d0df, type: 3}
+  - {fileID: 4900000, guid: f89ed02821ffe4837bdcaba344b08e57, type: 3}
   mapBlockPrefab: {fileID: 5279498002537231270, guid: 1c449c87a0ca74d56969608feb9612f8, type: 3}
   foliageTextures:
   - {fileID: 2800000, guid: ead37c6a66432fb4bb1ea36e6c3a56d3, type: 3}

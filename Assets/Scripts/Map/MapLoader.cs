@@ -12,6 +12,8 @@ namespace Hassus.Map
 
         public List<Vector3> ItemPoints => itemPoints;
 
+        [SerializeField] private GameObject _destroyParticle;
+
         [Header("Map References")]
         [SerializeField] private TextAsset[] mapTextAssets;
         [SerializeField] private MapBlock mapBlockPrefab;
@@ -34,14 +36,14 @@ namespace Hassus.Map
         [SerializeField] private float foliageExplosiveForceMax = 45f;
         [SerializeField] [Range(0, 1f)] private float grassScaleMin = 0.7f;
         [SerializeField] [Range(1f, 2f)] private float grassScaleMax = 1.7f;
-        
+
         private Dictionary<Vector2Int, MapBlock> mapBlocks = new();
         private Dictionary<Vector2Int, BoxCollider2D> mapColliders = new();
         private List<Vector3> spawnPoints = new List<Vector3>();
         private List<Vector3> itemPoints = new List<Vector3>();
         private int randomMapIndex = 0;
         private int nextSpawnPointIndex = 0;
-        
+
         private readonly int mapWidth = 40;
         private readonly int mapHeight = 16;
         private readonly string mapEmptySymbol = ".";
@@ -62,7 +64,7 @@ namespace Hassus.Map
 
         private void Update()
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             if (enableDebugInput)
             {
                 if (Input.GetKeyDown(KeyCode.Z))
@@ -78,7 +80,7 @@ namespace Hassus.Map
                     Explode(new Vector2(randomX, randomY), Random.Range(1, 5), Random.Range(0f, 1f) > 0.5f);
                 }
             }
-            #endif
+#endif
         }
 
         private void DestroyMap()
@@ -92,6 +94,7 @@ namespace Hassus.Map
                     {
                         Destroy(mapBlock.gameObject);
                     }
+
                     mapColliders.TryGetValue(new Vector2Int(i, j), out var mapCollider);
                     if (mapCollider != null)
                     {
@@ -99,6 +102,7 @@ namespace Hassus.Map
                     }
                 }
             }
+
             mapBlocks.Clear();
             mapColliders.Clear();
             itemPoints.Clear();
@@ -109,7 +113,6 @@ namespace Hassus.Map
         {
             randomMapIndex = Random.Range(0, mapTextAssets.Length);
             var map = MapTextAssetToList(mapTextAssets[randomMapIndex]);
-            
 
             for (int i = 0; i < mapWidth; i++)
             {
@@ -124,12 +127,12 @@ namespace Hassus.Map
                     else if (symbol == mapBlockSymbol)
                     {
                         var mapBlock = Instantiate(mapBlockPrefab, new Vector2(i, j), Quaternion.Euler(0, -90f, 0), transform);
-                        
+
                         var boxCollider = new GameObject().AddComponent<BoxCollider2D>();
                         boxCollider.transform.position = new Vector2(i, j);
                         boxCollider.gameObject.layer = 8;
                         boxCollider.transform.parent = transform;
-                        
+
                         mapBlocks.Add(new Vector2Int(i, j), mapBlock);
                         mapColliders.Add(new Vector2Int(i, j), boxCollider);
                     }
@@ -143,9 +146,9 @@ namespace Hassus.Map
                     }
                 }
             }
-            
+
             ShuffleSpawnPoints();
-            
+
             for (int i = 0; i < mapWidth; i++)
             {
                 for (int j = 0; j < mapHeight; j++)
@@ -163,7 +166,7 @@ namespace Hassus.Map
                             break;
                         }
                     }
-                    
+
                     mapBlocks.TryGetValue(new Vector2Int(i, j), out var mapBlock);
                     if (mapBlock != null)
                     {
@@ -175,19 +178,19 @@ namespace Hassus.Map
                                 mapBlocks.TryGetValue(new Vector2Int(i + x, j + y), out var adjacentMapBlock);
                                 if (adjacentMapBlock != null)
                                 {
-                                    if (x == -1 && y ==  1) adjacentMapBlockGroup.TopLeftBlock = adjacentMapBlock;
-                                    if (x ==  0 && y ==  1) adjacentMapBlockGroup.TopBlock = adjacentMapBlock;
-                                    if (x ==  1 && y ==  1) adjacentMapBlockGroup.TopRightBlock = adjacentMapBlock;
-                                    if (x == -1 && y ==  0) adjacentMapBlockGroup.LeftBlock = adjacentMapBlock;
-                                    if (x ==  0 && y ==  0) adjacentMapBlockGroup.CenterBlock = adjacentMapBlock;
-                                    if (x ==  1 && y ==  0) adjacentMapBlockGroup.RightBlock = adjacentMapBlock;
+                                    if (x == -1 && y == 1) adjacentMapBlockGroup.TopLeftBlock = adjacentMapBlock;
+                                    if (x == 0 && y == 1) adjacentMapBlockGroup.TopBlock = adjacentMapBlock;
+                                    if (x == 1 && y == 1) adjacentMapBlockGroup.TopRightBlock = adjacentMapBlock;
+                                    if (x == -1 && y == 0) adjacentMapBlockGroup.LeftBlock = adjacentMapBlock;
+                                    if (x == 0 && y == 0) adjacentMapBlockGroup.CenterBlock = adjacentMapBlock;
+                                    if (x == 1 && y == 0) adjacentMapBlockGroup.RightBlock = adjacentMapBlock;
                                     if (x == -1 && y == -1) adjacentMapBlockGroup.BottomLeftBlock = adjacentMapBlock;
-                                    if (x ==  0 && y == -1) adjacentMapBlockGroup.BottomBlock = adjacentMapBlock;
-                                    if (x ==  1 && y == -1) adjacentMapBlockGroup.BottomRightBlock = adjacentMapBlock;
+                                    if (x == 0 && y == -1) adjacentMapBlockGroup.BottomBlock = adjacentMapBlock;
+                                    if (x == 1 && y == -1) adjacentMapBlockGroup.BottomRightBlock = adjacentMapBlock;
                                 }
                             }
                         }
-                        
+
                         InitializeMapBlock(mapBlock, adjacentMapBlockGroup, topEmptySpace);
                     }
                 }
@@ -196,15 +199,13 @@ namespace Hassus.Map
 
         private void InitializeMapBlock(MapBlock mapBlock, MapBlockGroup adjacentMapBlockGroup, int topEmptySpace)
         {
-            mapBlock.ToggleGrass
-            (
+            mapBlock.ToggleGrass(
                 topEmptySpace >= 1,
                 grassScaleMin,
                 grassScaleMax,
                 Color.Lerp(grassColorVarianceMin, grassColorVarianceMax, Random.Range(0.0f, 1.0f))
             );
-            mapBlock.ToggleFoliage
-            (
+            mapBlock.ToggleFoliage(
                 foliageTextures[Random.Range(0, foliageTextures.Length)],
                 Color.Lerp(foliageColorVarianceMin, foliageColorVarianceMax, Random.Range(0.0f, 1.0f)),
                 Random.Range(-foliageRotationMax, foliageRotationMax),
@@ -215,7 +216,7 @@ namespace Hassus.Map
             mapBlock.ToggleCorners(adjacentMapBlockGroup, cornerSizeMin, cornerSizeMax);
             mapBlock.TogglePieces(adjacentMapBlockGroup, pieceSizeMin, pieceSizeMax, pieceChance);
         }
-        
+
         private List<string> MapTextAssetToList(TextAsset mapTextAsset)
         {
             var list = new List<string>();
@@ -224,14 +225,15 @@ namespace Hassus.Map
             {
                 list.Add(line);
             }
+
             return list;
         }
-        
+
         private void ShuffleSpawnPoints()
         {
             spawnPoints = spawnPoints.OrderBy(x => Guid.NewGuid()).ToList();
         }
-        
+
         public Vector3 GetRandomSpawnPoint()
         {
             nextSpawnPointIndex++;
@@ -239,6 +241,7 @@ namespace Hassus.Map
             {
                 nextSpawnPointIndex = 0;
             }
+
             return spawnPoints[nextSpawnPointIndex];
         }
 
@@ -246,12 +249,14 @@ namespace Hassus.Map
         {
             return itemPoints[Random.Range(0, itemPoints.Count)];
         }
-        
+
         public void Explode(Vector3 center, int circleRadius = 1, bool reverseOrder = false)
         {
             int start = reverseOrder ? circleRadius : -circleRadius;
             int end = reverseOrder ? -circleRadius : circleRadius;
             int step = reverseOrder ? -1 : 1;
+
+            bool destroyedSomething = false;
 
             for (int x = start; x != end + step; x += step)
             {
@@ -265,8 +270,10 @@ namespace Hassus.Map
                         mapBlocks.TryGetValue(coordinate, out var block);
                         if (block != null)
                         {
+                            destroyedSomething = true;
                             block.gameObject.SetActive(false);
                         }
+
                         if (collider != null)
                         {
                             collider.enabled = false;
@@ -274,17 +281,22 @@ namespace Hassus.Map
                     }
                 }
             }
+
+            if (destroyedSomething)
+            {
+                Instantiate(_destroyParticle, center, Quaternion.identity);
+            }
         }
-        
+
         private void OnDrawGizmos()
         {
             if (Application.isPlaying)
             {
                 return;
             }
-            
+
             var map = MapTextAssetToList(mapTextAssets[randomMapIndex]);
-            
+
             for (int i = 0; i < mapWidth; i++)
             {
                 for (int j = 0; j < mapHeight; j++)
@@ -320,9 +332,9 @@ namespace Hassus.Map
             {
                 return;
             }
-            
+
             var map = MapTextAssetToList(mapTextAssets[randomMapIndex]);
-            
+
             for (int i = 0; i < mapWidth; i++)
             {
                 for (int j = 0; j < mapHeight; j++)

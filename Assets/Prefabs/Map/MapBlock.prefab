@@ -200,6 +200,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 908228390403765455, guid: b31b895340584f0498a0183097d2134d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b31b895340584f0498a0183097d2134d, type: 3}
       propertyPath: m_Name
       value: MapBlock
@@ -308,7 +312,6 @@ MonoBehaviour:
   foliageObjects:
   - {fileID: 1145780908766872422}
   - {fileID: 6776105206077597177}
-  - {fileID: 1495935937423727615}
   - {fileID: 2337841672206576286}
   grassObject: {fileID: 8079681752541136611}
   leftPiece: {fileID: 1198187355756063002}
@@ -318,11 +321,6 @@ MonoBehaviour:
   topRightCorner: {fileID: 945902943416586004}
   bottomLeftCorner: {fileID: 512149686948555539}
   bottomRightCorner: {fileID: 6466832083593857198}
---- !u!1 &1495935937423727615 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 908228390403765455, guid: b31b895340584f0498a0183097d2134d, type: 3}
-  m_PrefabInstance: {fileID: 1754166518499847984}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2337841672206576286 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5176426273787132498, guid: b31b895340584f0498a0183097d2134d, type: 3}
