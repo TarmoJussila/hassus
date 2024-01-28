@@ -57,7 +57,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.y < -10 && CurrentHealth > 0)
+        if (transform.position.y < 0 && CurrentHealth > 0)
         {
             TakeDamage(1000, -1);
             Die();

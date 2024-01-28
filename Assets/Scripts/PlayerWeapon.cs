@@ -85,6 +85,8 @@ public class PlayerWeapon : MonoBehaviour
 
     public void Disarm()
     {
+        if (currentWeapon == null) { return; }
+
         StartCoroutine(DelaySpriteHide());
     }
 
@@ -98,7 +100,7 @@ public class PlayerWeapon : MonoBehaviour
     private void Update()
     {
         _cooldown -= Time.deltaTime;
-        
+
         spriteRenderer.flipX = _movement.LastDirection < 0;
         Vector3 pos = spriteRenderer.transform.localPosition;
         pos.x = _movement.LastDirection * 0.3f;

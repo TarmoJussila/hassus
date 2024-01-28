@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _jumpForce: 25
+  _jumpForce: 32
   _groundCheckRadius: 0.41
   _groundCheckOffset: {x: 0, y: -0.31}
   _groundCheckLayer:
