@@ -65,7 +65,7 @@ namespace Hassus.Map
             #if UNITY_EDITOR
             if (enableDebugInput)
             {
-                if (Input.GetKeyDown(KeyCode.R))
+                if (Input.GetKeyDown(KeyCode.Z))
                 {
                     DestroyMap();
                     GenerateMap();
