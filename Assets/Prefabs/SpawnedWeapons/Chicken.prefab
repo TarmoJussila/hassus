@@ -144,7 +144,7 @@ MonoBehaviour:
   OwnerPlayer: {fileID: 0}
   _overlapQueryRadius: 1
   _lifeTime: 3
-  _damage: 100
+  _damage: 501
   _honks:
   - {fileID: 8300000, guid: 5c28d998cde7a2f42af3d136d22b0bbc, type: 3}
   - {fileID: 8300000, guid: 9470fe8444938d1479576f224de883bb, type: 3}

@@ -26,15 +26,11 @@ public class BangTestWeapon : SpawnedWeaponBase
         DealDamage(health);
     }
 
-    protected override void OnHitEnemy(Collider2D other)
-    {
-        SFXManager.Instance.PlayOneShot(SFXType.Bruh);
-    }
-
     private void DealDamage(PlayerHealth health)
     {
         if (health.TakeDamage(Damage, OwnerPlayer.playerIndex))
         {
+            SFXManager.Instance.PlayOneShot(SFXType.Vineboom);
             Instantiate(_killParticle, health.transform.position, Quaternion.identity);
         }
     }
