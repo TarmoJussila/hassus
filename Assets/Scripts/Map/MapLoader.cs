@@ -9,7 +9,9 @@ namespace Hassus.Map
     public class MapLoader : MonoBehaviour
     {
         public static MapLoader Instance;
-        
+
+        public List<Vector3> ItemPoints => itemPoints;
+
         [Header("Map References")]
         [SerializeField] private TextAsset[] mapTextAssets;
         [SerializeField] private MapBlock mapBlockPrefab;
