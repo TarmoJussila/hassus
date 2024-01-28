@@ -5,14 +5,25 @@ using UnityEngine;
 public class BangTestWeapon : SpawnedWeaponBase
 {
     public int Damage;
+    [SerializeField] private GameObject _killParticle;
 
     protected override void OnStayEnemy(Collider2D other)
     {
-        other.GetComponent<PlayerHealth>().TakeDamage(Damage, OwnerPlayer.playerIndex);
+        PlayerHealth health = other.GetComponent<PlayerHealth>();
+        DealDamage(health);
     }
 
     protected override void OnStaySelf()
     {
-        OwnerPlayer.GetComponent<PlayerHealth>().TakeDamage(Damage, OwnerPlayer.playerIndex);
+        PlayerHealth health = OwnerPlayer.GetComponent<PlayerHealth>();
+        DealDamage(health);
+    }
+
+    private void DealDamage(PlayerHealth health)
+    {
+        if (health.TakeDamage(Damage, OwnerPlayer.playerIndex))
+        {
+            Instantiate(_killParticle, health.transform.position, Quaternion.identity);
+        }
     }
 }

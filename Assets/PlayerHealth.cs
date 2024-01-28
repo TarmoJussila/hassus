@@ -61,9 +61,9 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage, int sourcePlayer)
+    public bool TakeDamage(int damage, int sourcePlayer)
     {
-        if (CurrentHealth <= 0) { return; }
+        if (CurrentHealth <= 0) { return false; }
 
         int oldHealth = CurrentHealth;
         CurrentHealth -= damage;
@@ -79,6 +79,8 @@ public class PlayerHealth : MonoBehaviour
         }
 
         OnDamageDealt?.Invoke(_input.playerIndex, sourcePlayer, damage, CurrentHealth <= 0);
+
+        return CurrentHealth <= 0;
     }
 
     private void Die()
