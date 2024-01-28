@@ -8,6 +8,11 @@ public class Creampie : SpawnedWeaponBase
     [SerializeField] private int _damage;
     [SerializeField] private GameObject _killParticle;
 
+    protected override void OnStart()
+    {
+        SFXManager.Instance.PlayOneShot(SFXType.Wobble);
+    }
+
     protected override void OnCollideEnemy(Collision2D coll)
     {
         PlayerHealth health = coll.gameObject.GetComponent<PlayerHealth>();
