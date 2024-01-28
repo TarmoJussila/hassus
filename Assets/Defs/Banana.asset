@@ -19,3 +19,5 @@ MonoBehaviour:
   SpawnOffset: {x: 1.2, y: 0.5}
   SpawnForce: {x: 20, y: 10}
   Cooldown: 0.1
+  spawnRotationForce: 50
+  spriteHideDelay: 0

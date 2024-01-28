@@ -74,19 +74,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1045d2dd40e85f43895a82e9b40f20f, type: 3}
   m_Name: LooksHassus
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
   blend:
     overrideState: 1
-    value: 0.322
+    value: 0.377
   depthMin:
     overrideState: 1
-    value: 13
+    value: 24
   depthMax:
     overrideState: 1
-    value: 1.3
+    value: 33.4
   lineWidth:
     overrideState: 1
     value: 1
@@ -95,10 +95,10 @@ MonoBehaviour:
     value: 0.000425
   blend1:
     overrideState: 1
-    value: 0.679
+    value: 0.708
   blend2:
     overrideState: 1
-    value: 0.659
+    value: 0.745
   blend3:
     overrideState: 1
     value: 1
