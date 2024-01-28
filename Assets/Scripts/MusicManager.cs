@@ -14,8 +14,9 @@ public class MusicManager : MonoSingleton<MusicManager>
     [SerializeField] private AudioSource gameplayMusicSource;
     [SerializeField] private AudioSource outroMusicSource;
 
-    private readonly float fadeInSpeed = 0.1f;
+    private readonly float fadeInSpeed = 0.2f;
     private readonly float fadeOutSpeed = 0.5f;
+    private readonly float volumeMax = 0.5f;
 
     protected override void OnAwake()
     {
@@ -37,16 +38,20 @@ public class MusicManager : MonoSingleton<MusicManager>
     
     private IEnumerator FadeInMusicCoroutine(MusicType type)
     {
+        float initialVolume = 0f;
         if (type == MusicType.INTRO)
         {
+            initialVolume = introMusicSource.volume;
             introMusicSource.Play();
         }
         else if (type == MusicType.GAMEPLAY)
         {
+            initialVolume = gameplayMusicSource.volume;
             gameplayMusicSource.Play();
         }
         else if (type == MusicType.OUTRO)
         {
+            initialVolume = outroMusicSource.volume;
             outroMusicSource.Play();
         }
         
@@ -56,15 +61,15 @@ public class MusicManager : MonoSingleton<MusicManager>
             timer += Time.deltaTime * fadeInSpeed;
             if (type == MusicType.INTRO)
             {
-                introMusicSource.volume = Mathf.Lerp(introMusicSource.volume, 1f, timer);
+                introMusicSource.volume = Mathf.Lerp(initialVolume, volumeMax, timer);
             }
             else if (type == MusicType.GAMEPLAY)
             {
-                gameplayMusicSource.volume = Mathf.Lerp(gameplayMusicSource.volume, 1f, timer);
+                gameplayMusicSource.volume = Mathf.Lerp(initialVolume, volumeMax, timer);
             }
             else if (type == MusicType.OUTRO)
             {
-                outroMusicSource.volume = Mathf.Lerp(outroMusicSource.volume, 1f, timer);
+                outroMusicSource.volume = Mathf.Lerp(initialVolume, volumeMax, timer);
             }
             yield return null;
         }
@@ -73,21 +78,35 @@ public class MusicManager : MonoSingleton<MusicManager>
     
     private IEnumerator FadeOutMusicCoroutine(MusicType type)
     {
+        float initialVolume = 0f;
+        if (type == MusicType.INTRO)
+        {
+            initialVolume = introMusicSource.volume;
+        }
+        else if (type == MusicType.GAMEPLAY)
+        {
+            initialVolume = gameplayMusicSource.volume;
+        }
+        else if (type == MusicType.OUTRO)
+        {
+            initialVolume = outroMusicSource.volume;
+        }
+        
         float timer = 0f;
         while (timer < 1f)
         {
             timer += Time.deltaTime * fadeOutSpeed;
             if (type == MusicType.INTRO)
             {
-                introMusicSource.volume = Mathf.Lerp(introMusicSource.volume, 0f, timer);
+                introMusicSource.volume = Mathf.Lerp(initialVolume, 0f, timer);
             }
             else if (type == MusicType.GAMEPLAY)
             {
-                gameplayMusicSource.volume = Mathf.Lerp(gameplayMusicSource.volume, 0f, timer);
+                gameplayMusicSource.volume = Mathf.Lerp(initialVolume, 0f, timer);
             }
             else if (type == MusicType.OUTRO)
             {
-                outroMusicSource.volume = Mathf.Lerp(outroMusicSource.volume, 0f, timer);
+                outroMusicSource.volume = Mathf.Lerp(initialVolume, 0f, timer);
             }
             yield return null;
         }
