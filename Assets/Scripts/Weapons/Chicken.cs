@@ -1,3 +1,4 @@
+using Hassus.Map;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,13 @@ using UnityEngine;
 public class Chicken : SpawnedWeaponBase
 {
     [SerializeField] private int _damage;
-    [SerializeField] private List<AudioClip> _honks;
+    [SerializeField] private int mapDestructionRadius;
 
     protected override void OnStart()
     {
-        GetComponent<AudioSource>().PlayOneShot(_honks[Random.Range(0, _honks.Count)]);
+        int direction = OwnerPlayer.GetComponent<PlayerMovement>().LastDirection;
+        MapLoader.Instance.Explode(transform.position + new Vector3(direction * 1.5f, 0.3f), mapDestructionRadius);
+        SFXManager.Instance.PlayOneShot(SFXType.SqueakyRandom);
     }
 
     protected override void OnOverlapEnemy(Collider2D other)

@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 331a9f704098ce444bfe1e253742dc9e, type: 3}
-  m_Name: Fart
+  m_Name: CensoredWeapon
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 2084497036, guid: 2e239b6792bd1b746914574a6d9798dc, type: 3}
+  Sprite: {fileID: 766916576, guid: 2e239b6792bd1b746914574a6d9798dc, type: 3}
   MaxUses: 1
-  WeaponAnimationTrigger: melee
-  Prefab: {fileID: 1356383632892484393, guid: 58ca4968225e22a458514d2eb76ae136, type: 3}
-  SpawnOffset: {x: 0, y: 0}
-  SpawnForce: {x: 0, y: 0}
-  Cooldown: 0.1
-  spawnRotationForce: 0
-  spriteHideDelay: 0.3
+  WeaponAnimationTrigger: 
+  Prefab: {fileID: 6678709444419249085, guid: 62a52c8af21e16242824a987ed2a6284, type: 3}
+  SpawnOffset: {x: 0.5, y: 0.5}
+  SpawnForce: {x: 500, y: 500}
+  spawnRotationForce: -50
+  spriteHideDelay: 3
