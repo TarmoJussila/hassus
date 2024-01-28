@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHud : MonoBehaviour
 {
+    [SerializeField] private Image _aliveFace;
+    [SerializeField] private Image _deadFace;
     [SerializeField] private TextMeshProUGUI _healthText;
     [SerializeField] private TextMeshProUGUI _scoreText;
 
@@ -32,11 +35,23 @@ public class PlayerHud : MonoBehaviour
     private void OnPlayerRespawn(int index, GameObject go)
     {
         if (index != _playerIndex) { return; }
+
+        if (_aliveFace != null)
+        {
+            _aliveFace.gameObject.SetActive(true);
+            _deadFace.gameObject.SetActive(false);
+        }
     }
 
     private void OnPlayerDead(int index, GameObject go)
     {
         if (index != _playerIndex) { return; }
+
+        if (_aliveFace != null)
+        {
+            _aliveFace.gameObject.SetActive(false);
+            _deadFace.gameObject.SetActive(true);
+        }
 
         _healthText.text = "DEAD!";
     }

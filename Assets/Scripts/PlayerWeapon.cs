@@ -55,11 +55,12 @@ public class PlayerWeapon : MonoBehaviour
             _animator.WeaponAnimation(currentWeapon.WeaponAnimationTrigger);
         }
 
-        SpawnedWeaponBase weapon = Instantiate(currentWeapon.Prefab);
+        SpawnedWeaponBase weapon = Instantiate(
+            currentWeapon.Prefab,
+            transform.position + new Vector3(currentWeapon.SpawnOffset.x * _movement.LastDirection, currentWeapon.SpawnOffset.y),
+            Quaternion.identity
+        );
         weapon.OwnerPlayer = _input;
-
-        weapon.transform.position =
-            transform.position + new Vector3(currentWeapon.SpawnOffset.x * _movement.LastDirection, currentWeapon.SpawnOffset.y);
 
         if (currentWeapon.SpawnForce != Vector2.zero)
         {
