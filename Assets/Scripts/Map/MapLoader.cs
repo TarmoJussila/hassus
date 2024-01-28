@@ -40,7 +40,7 @@ namespace Hassus.Map
         private int nextSpawnPointIndex = 0;
         
         private readonly int mapWidth = 32;
-        private readonly int mapHeight = 32;
+        private readonly int mapHeight = 24;
         private readonly string mapEmptySymbol = ".";
         private readonly string mapBlockSymbol = "#";
         private readonly string mapSpawnSymbol = "S";
@@ -208,7 +208,7 @@ namespace Hassus.Map
         private List<string> MapTextAssetToList(TextAsset mapTextAsset)
         {
             var list = new List<string>();
-            var lineArray = mapTextAsset.text.Split('\n');
+            var lineArray = mapTextAsset.text.Split('\n').Reverse();
             foreach (var line in lineArray)
             {
                 list.Add(line);

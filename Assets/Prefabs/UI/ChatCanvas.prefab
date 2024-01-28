@@ -315,6 +315,7 @@ MonoBehaviour:
   chatMessagePrefab: {fileID: 4820207140419095605, guid: f80fc7ec8bf95409eb266bc237244376, type: 3}
   chatMessageContainer: {fileID: 3738617905209867366}
   scrollRect: {fileID: 5571384322797240872}
+  layoutGroup: {fileID: 0}
 --- !u!1 &8659927233496936909
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +375,7 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
