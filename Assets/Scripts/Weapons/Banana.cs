@@ -16,6 +16,9 @@ public class Banana : SpawnedWeaponBase
     protected override void OnCollideEnemy(Collision2D coll)
     {
         PlayerHealth health = coll.gameObject.GetComponent<PlayerHealth>();
+
+        if (health.CurrentHealth <= 0) return;
+
         health.TakeDamage(_damage, OwnerPlayer.playerIndex);
 
         Destroy(gameObject);
@@ -26,6 +29,8 @@ public class Banana : SpawnedWeaponBase
     protected override void OnCollideSelf()
     {
         PlayerHealth health = OwnerPlayer.gameObject.GetComponent<PlayerHealth>();
+
+        if (health.CurrentHealth <= 0) return;
         health.TakeDamage(_damage, OwnerPlayer.playerIndex);
 
         Destroy(gameObject);

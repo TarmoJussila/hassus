@@ -16,6 +16,8 @@ public class Creampie : SpawnedWeaponBase
     protected override void OnCollideEnemy(Collision2D coll)
     {
         PlayerHealth health = coll.gameObject.GetComponent<PlayerHealth>();
+
+        if (health.CurrentHealth <= 0) return;
         if (health.TakeDamage(_damage, OwnerPlayer.playerIndex))
         {
             SFXManager.Instance.PlayOneShot(SFXType.Bruh);
