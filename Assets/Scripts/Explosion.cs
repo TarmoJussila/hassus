@@ -7,6 +7,7 @@ public class Explosion : MonoBehaviour
 {
     public int Radius;
     public int SpawnerPlayer = -1;
+    public int Damage = 500; 
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,7 @@ public class Explosion : MonoBehaviour
         {
             if (coll.TryGetComponent<PlayerHealth>(out PlayerHealth health))
             {
-                health.TakeDamage(500, SpawnerPlayer);
+                health.TakeDamage(Damage, SpawnerPlayer);
             }
         }
 
