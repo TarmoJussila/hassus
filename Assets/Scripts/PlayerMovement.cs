@@ -27,7 +27,9 @@ public class PlayerMovement : MonoBehaviour
     }
     private Vector2 _input;
     private float _jumpBuffer = 0.0f;
+    private float _jumpCooldown = 0.0f;
     private const float _jumpBufferLength = 0.1f;
+    private const float _jumpCooldownLength = 0.2f;
 
     private bool canMove = false;
 
@@ -68,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
+        _jumpCooldown -= Time.deltaTime;
         _jumpBuffer -= Time.deltaTime;
 
         if (_input == Vector2.zero)
@@ -81,6 +84,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
+        if (_jumpCooldown > 0.0f) { return; }
+
+        _jumpCooldown = _jumpCooldownLength;
         rb.velocity = Vector2.up * _jumpForce;
     }
 

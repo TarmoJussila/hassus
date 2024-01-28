@@ -43,7 +43,7 @@ namespace Hassus.Map
         private int nextSpawnPointIndex = 0;
         
         private readonly int mapWidth = 40;
-        private readonly int mapHeight = 14;
+        private readonly int mapHeight = 16;
         private readonly string mapEmptySymbol = ".";
         private readonly string mapBlockSymbol = "#";
         private readonly string mapSpawnSymbol = "S";
@@ -101,12 +101,15 @@ namespace Hassus.Map
             }
             mapBlocks.Clear();
             mapColliders.Clear();
+            itemPoints.Clear();
+            spawnPoints.Clear();
         }
 
         private void GenerateMap()
         {
             randomMapIndex = Random.Range(0, mapTextAssets.Length);
             var map = MapTextAssetToList(mapTextAssets[randomMapIndex]);
+            
 
             for (int i = 0; i < mapWidth; i++)
             {
