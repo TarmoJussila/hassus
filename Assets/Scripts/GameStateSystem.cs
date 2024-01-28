@@ -7,7 +7,10 @@ using UnityEngine.Serialization;
 
 public enum GameState
 {
-    INTRO,
+    INTRO_1,
+    INTRO_2,
+    INTRO_3,
+    MAIN_MENU,
     WAITING_FOR_PLAYERS,
     COUNTDOWN,
     FIGHT,
@@ -44,7 +47,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
     protected override void OnAwake()
     {
-        ChangeGameState(GameState.INTRO);
+        ChangeGameState(GameState.INTRO_1);
     }
 
     public void ChangeGameState(GameState state)
@@ -85,9 +88,24 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
 
         switch (CurrentState)
         {
-            case GameState.INTRO:
+            case GameState.INTRO_1:
             {
-                Update_Intro();
+                Update_Intro1();
+                break;
+            }
+            case GameState.INTRO_2:
+            {
+                Update_Intro2();
+                break;
+            }
+            case GameState.INTRO_3:
+            {
+                Update_Intro3();
+                break;
+            }
+            case GameState.MAIN_MENU:
+            {
+                Update_MainMenu();
                 break;
             }
             case GameState.WAITING_FOR_PLAYERS:
@@ -131,16 +149,40 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
             Application.Quit();
         }
     }
+    
+    private void Update_Intro1()
+    {
+        if (StateTime > 1f && EnterKeyPressed)
+        {
+            ChangeGameState(GameState.INTRO_2);
+        }
+    }
+    
+    private void Update_Intro2()
+    {
+        if (StateTime > 1f && EnterKeyPressed)
+        {
+            ChangeGameState(GameState.INTRO_3);
+        }
+    }
+    
+    private void Update_Intro3()
+    {
+        if (StateTime > 1f && EnterKeyPressed)
+        {
+            ChangeGameState(GameState.MAIN_MENU);
+        }
+    }
 
     private void Update_Outro()
     {
         if (StateTime > 1f && EnterKeyPressed)
         {
-            ChangeGameState(GameState.INTRO);
+            ChangeGameState(GameState.MAIN_MENU);
         }
     }
 
-    private void Update_Intro()
+    private void Update_MainMenu()
     {
         if (StateTime > 1f && EnterKeyPressed)
         {
