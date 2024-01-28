@@ -23,9 +23,13 @@ The game was created with **Unity 2022.3.18f1**.
 
 # Controls
 
-| Action        | Bind           |
-| ------------- |:-------------:|
-| Insert text | Insert text |
+| Action           | Bind          | Controller        |
+| ---------------- |:-------------:|:-----------------:|
+| Menu navigation  | Enter         | Start Button      |
+| Close game       | Hold ESC      | Hold Select       |
+| Move             | WASD          | Left Stick        |
+| Join             | Q             | A                 |
+| Fire             | E             | B                 |
 
 # Credits - Team Hassus
 
