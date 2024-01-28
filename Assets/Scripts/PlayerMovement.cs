@@ -86,6 +86,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_jumpCooldown > 0.0f) { return; }
 
+        SFXManager.Instance.PlayOneShot(SFXType.BoingRandom);
+        
         _jumpCooldown = _jumpCooldownLength;
         rb.velocity = Vector2.up * _jumpForce;
     }

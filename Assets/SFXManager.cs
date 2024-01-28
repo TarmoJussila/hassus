@@ -12,13 +12,15 @@ public enum SFXType
     Wobble,
     SqueakyRandom,
     Vineboom,
-    ChickenRandom
+    ChickenRandom,
+    BoingRandom
 }
 
 [System.Serializable]
 public class SFXPair
 {
     public SFXType Type;
+    public float Volume = 1;
     public AudioClip[] Clips;
 }
 
@@ -30,7 +32,8 @@ public class SFXManager : MonoSingleton<SFXManager>
 
     public void PlayOneShot(SFXType type)
     {
-        AudioClip[] clips = _sfxPairs.FirstOrDefault(pair => pair.Type == type).Clips;
-        _source.PlayOneShot(clips[Random.Range(0, clips.Length)]);
+        var pair = _sfxPairs.FirstOrDefault(pair => pair.Type == type);
+        AudioClip[] clips = pair.Clips;
+        _source.PlayOneShot(clips[Random.Range(0, clips.Length)], pair.Volume);
     }
 }

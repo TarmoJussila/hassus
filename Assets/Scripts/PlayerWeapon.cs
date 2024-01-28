@@ -38,7 +38,7 @@ public class PlayerWeapon : MonoBehaviour
 
     public void UseWeapon(InputAction.CallbackContext context)
     {
-        if (!context.started || _cooldown > 0.0f) { return; }
+        if (!context.started || _cooldown > 0.0f || GameStateSystem.Instance.CurrentState != GameState.FIGHT) { return; }
 
         if (currentWeapon == null)
         {
