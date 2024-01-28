@@ -188,17 +188,6 @@
                 },
                 {
                     "name": "",
-                    "id": "cb3a89c7-1d25-4470-8d50-d61637c9084a",
-                    "path": "<Keyboard>/#(-)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard arrows",
-                    "action": "Join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "2189b486-16b6-4066-bef7-9d2b16b781a3",
                     "path": "<Keyboard>/{Modifier}",
                     "interactions": "",
