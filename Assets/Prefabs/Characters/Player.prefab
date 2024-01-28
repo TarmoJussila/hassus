@@ -272,6 +272,9 @@ MonoBehaviour:
   _speed: 5
   _jumpForce: 32
   _groundCheckRadius: 0.41
+  walkSounds:
+  - {fileID: 8300000, guid: d210c9f561cff7d498906dd486cc8115, type: 3}
+  - {fileID: 8300000, guid: 6085ddf6a58b36e4f8ba80bdae6f7896, type: 3}
   _groundCheckOffset: {x: 0, y: -0.31}
   _groundCheckLayer:
     serializedVersion: 2

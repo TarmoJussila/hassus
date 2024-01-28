@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Hassus.Map;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 10;
     [SerializeField] private float _jumpForce = 10f;
     [SerializeField] private float _groundCheckRadius = 0.5f;
+    [SerializeField] private List<AudioClip> walkSounds;
 
     private Rigidbody2D rb;
 
@@ -31,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     private const float _jumpBufferLength = 0.1f;
     private const float _jumpCooldownLength = 0.2f;
 
+    private AudioSource audioSource;
+
     private bool canMove = false;
 
     private void Awake()
@@ -39,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = MapLoader.Instance.GetRandomSpawnPoint();
 
         GameStateSystem.OnGameStateChanged += OnGameStateChanged;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnDestroy()
@@ -80,6 +85,11 @@ public class PlayerMovement : MonoBehaviour
 
         LastDirection = Mathf.RoundToInt(Mathf.Sign(_input.x));
         rb.velocity = new Vector2(_input.x * _speed, rb.velocity.y);
+
+        if (!audioSource.isPlaying && Grounded)
+        {
+            audioSource.PlayOneShot(walkSounds[UnityEngine.Random.Range(0, walkSounds.Count)]);
+        }
     }
 
     public void Jump()
