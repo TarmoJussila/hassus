@@ -22,6 +22,7 @@ public class Creampie : SpawnedWeaponBase
         {
             SFXManager.Instance.PlayOneShot(SFXType.Bruh);
         }
+        ExplosionManager.Instance.SpawnExplosion(transform.position).Radius = 1;
 
         Destroy(gameObject);
     }
