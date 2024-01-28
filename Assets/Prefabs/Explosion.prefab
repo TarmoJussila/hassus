@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 180860, guid: 215f3b4f37823354fa11a405ba8533a2, type: 3}
       propertyPath: m_Name
-      value: Particles_Explosion_Fire
+      value: Explosion
       objectReference: {fileID: 0}
     - target: {fileID: 419716, guid: 215f3b4f37823354fa11a405ba8533a2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55,5 +55,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 180860, guid: 215f3b4f37823354fa11a405ba8533a2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8962939528861745529}
   m_SourcePrefab: {fileID: 100100000, guid: 215f3b4f37823354fa11a405ba8533a2, type: 3}
+--- !u!1 &2884388352543339549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 180860, guid: 215f3b4f37823354fa11a405ba8533a2, type: 3}
+  m_PrefabInstance: {fileID: 2884388352543192673}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8962939528861745529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2884388352543339549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d99b2b346e03714f9a8989456104f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Radius: 0
+  SpawnerPlayer: -1
+  Damage: 500
