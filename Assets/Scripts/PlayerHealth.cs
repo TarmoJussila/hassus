@@ -37,9 +37,13 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private GameObject _gravePrefab;
     [SerializeField] private GameObject _deathParticle;
+    [SerializeField] private GameObject _damageParticle;
 
     private PlayerInput _input;
     private float _respawnTime = 5f;
+
+    private float _damageCooldown;
+    private const float _damageCooldownLength = 0.1f;
 
     private PlayerAnimator _animator;
     private PlayerMovement _movement;
@@ -57,6 +61,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        _damageCooldown -= Time.deltaTime;
+        
         if (transform.position.y < 0 && CurrentHealth > 0)
         {
             TakeDamage(1000, -1);
@@ -80,16 +86,19 @@ public class PlayerHealth : MonoBehaviour
             Die();
             OnPlayerDead?.Invoke(_input.playerIndex, gameObject);
         }
+        else if (_damageCooldown < 0.0f)
+        {
+            _damageCooldown = _damageCooldownLength;
+            Instantiate(_damageParticle, transform.position + Vector3.up * 0.1f, Quaternion.identity);
+        }
 
         OnDamageDealt?.Invoke(_input.playerIndex, sourcePlayer, damage, CurrentHealth <= 0);
-
-
 
         if (!GetComponent<AudioSource>().isPlaying)
         {
             GetComponent<AudioSource>().PlayOneShot(damageSounds[UnityEngine.Random.Range(0, damageSounds.Count)]);
         }
-        
+
         return CurrentHealth <= 0;
     }
 
