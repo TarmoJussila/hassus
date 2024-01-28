@@ -17,18 +17,18 @@ public class BangTestWeapon : SpawnedWeaponBase
     protected override void OnStayEnemy(Collider2D other)
     {
         PlayerHealth health = other.GetComponent<PlayerHealth>();
-        DealDamage(health);
+        DealDamage(health, Damage);
     }
 
     protected override void OnStaySelf()
     {
         PlayerHealth health = OwnerPlayer.GetComponent<PlayerHealth>();
-        DealDamage(health);
+        DealDamage(health, Mathf.RoundToInt(Damage / 4f));
     }
 
-    private void DealDamage(PlayerHealth health)
+    private void DealDamage(PlayerHealth health, int damageAmount)
     {
-        if (health.TakeDamage(Damage, OwnerPlayer.playerIndex))
+        if (health.TakeDamage(damageAmount, OwnerPlayer.playerIndex))
         {
             SFXManager.Instance.PlayOneShot(SFXType.Vineboom);
             Instantiate(_killParticle, health.transform.position, Quaternion.identity);
