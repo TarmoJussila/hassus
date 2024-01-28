@@ -18,5 +18,6 @@ MonoBehaviour:
   Prefab: {fileID: 6678709444419249085, guid: 62a52c8af21e16242824a987ed2a6284, type: 3}
   SpawnOffset: {x: 0.5, y: 0.5}
   SpawnForce: {x: 500, y: 500}
+  Cooldown: 0.1
   spawnRotationForce: -50
-  spriteHideDelay: 3
+  spriteHideDelay: 0

@@ -83,7 +83,13 @@ public class PlayerHealth : MonoBehaviour
 
         OnDamageDealt?.Invoke(_input.playerIndex, sourcePlayer, damage, CurrentHealth <= 0);
 
-        GetComponent<AudioSource>().PlayOneShot(damageSounds[UnityEngine.Random.Range(0, damageSounds.Count)]);
+
+
+        if (!GetComponent<AudioSource>().isPlaying)
+        {
+            GetComponent<AudioSource>().PlayOneShot(damageSounds[UnityEngine.Random.Range(0, damageSounds.Count)]);
+        }
+        
         return CurrentHealth <= 0;
     }
 
