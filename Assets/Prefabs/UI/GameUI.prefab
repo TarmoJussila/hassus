@@ -605,7 +605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6867109040482406678, guid: b9c35093155414dd584af4e6c479e478, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -837,6 +837,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026007612119997343}
     m_Modifications:
+    - target: {fileID: 2485030258121520807, guid: eb6d4a0ba1e59c54cb13df60f5d0bf66, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2485030258121520807, guid: eb6d4a0ba1e59c54cb13df60f5d0bf66, type: 3}
+      propertyPath: m_margin.y
+      value: 53.464355
+      objectReference: {fileID: 0}
+    - target: {fileID: 2485030258121520807, guid: eb6d4a0ba1e59c54cb13df60f5d0bf66, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 2910588128510704370, guid: eb6d4a0ba1e59c54cb13df60f5d0bf66, type: 3}
       propertyPath: m_Name
       value: Fight
@@ -844,6 +856,10 @@ PrefabInstance:
     - target: {fileID: 2910588128510704370, guid: eb6d4a0ba1e59c54cb13df60f5d0bf66, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960870125366494278, guid: eb6d4a0ba1e59c54cb13df60f5d0bf66, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -87
       objectReference: {fileID: 0}
     - target: {fileID: 5734841667677644159, guid: eb6d4a0ba1e59c54cb13df60f5d0bf66, type: 3}
       propertyPath: m_Pivot.x
@@ -1860,6 +1876,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1026007612119997343}
     m_Modifications:
+    - target: {fileID: 5143342805394557500, guid: 61a59c0ddaa29f946922c1e1a081ef09, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -193
+      objectReference: {fileID: 0}
     - target: {fileID: 7348056837754890638, guid: 61a59c0ddaa29f946922c1e1a081ef09, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
