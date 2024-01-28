@@ -15,7 +15,9 @@ public enum GameState
     COUNTDOWN,
     FIGHT,
     GAME_OVER,
-    OUTRO,
+    OUTRO_0,
+    OUTRO_1,
+    OUTRO_2,
 }
 
 [Serializable]
@@ -133,9 +135,19 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
                 Update_GameOver();
                 break;
             }
-            case GameState.OUTRO:
+            case GameState.OUTRO_0:
             {
-                Update_Outro();
+                Update_Outro0();
+                break;
+            }
+            case GameState.OUTRO_1:
+            {
+                Update_Outro1();
+                break;
+            }
+            case GameState.OUTRO_2:
+            {
+                Update_Outro2();
                 break;
             }
         }
@@ -181,14 +193,6 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
         }
     }
 
-    private void Update_Outro()
-    {
-        if (StateTime > 1f && EnterKeyPressed)
-        {
-            ChangeGameState(GameState.MAIN_MENU);
-        }
-    }
-
     private void Update_MainMenu()
     {
         if (StateTime > 1f && EnterKeyPressed)
@@ -201,12 +205,38 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
     {
         if (StateTime > 1f && EnterKeyPressed)
         {
-            ChangeGameState(GameState.OUTRO);
+            ChangeGameState(GameState.OUTRO_0);
             MusicManager.Instance.FadeOutMusic(MusicManager.MusicType.GAMEPLAY, 0f);
-            MusicManager.Instance.FadeInMusic(MusicManager.MusicType.OUTRO, 1f);
+            MusicManager.Instance.FadeInMusic(MusicManager.MusicType.OUTRO, 2f);
         }
     }
-
+    
+    private void Update_Outro0()
+    {
+        if (StateTime > 1f && EnterKeyPressed)
+        {
+            ChangeGameState(GameState.OUTRO_1);
+        }
+    }
+    
+    private void Update_Outro1()
+    {
+        if (StateTime > 1f && EnterKeyPressed)
+        {
+            ChangeGameState(GameState.OUTRO_2);
+        }
+    }
+    
+    private void Update_Outro2()
+    {
+        if (StateTime > 1f && EnterKeyPressed)
+        {
+            ChangeGameState(GameState.MAIN_MENU);
+            MusicManager.Instance.FadeOutMusic(MusicManager.MusicType.OUTRO, 0f);
+            MusicManager.Instance.FadeInMusic(MusicManager.MusicType.GAMEPLAY, 2f);
+        }
+    }
+    
     private void Update_Countdown()
     {
         if (StateTime > GameSettings.Instance.Countdown)
