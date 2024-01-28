@@ -51,7 +51,7 @@ MonoBehaviour:
   OwnerPlayer: {fileID: 0}
   _overlapQueryRadius: 0
   _lifeTime: 5
-  _damage: 700
+  _damage: 1001
   _killParticle: {fileID: 0}
 --- !u!82 &6216742048894647018
 AudioSource:

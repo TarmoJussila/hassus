@@ -14,6 +14,7 @@ public class Banana : SpawnedWeaponBase
         health.TakeDamage(_damage, OwnerPlayer.playerIndex);
 
         Destroy(gameObject);
+        SFXManager.Instance.PlayOneShot(SFXType.Wobble);
     }
 
     protected override void OnCollideSelf()
@@ -22,6 +23,7 @@ public class Banana : SpawnedWeaponBase
         health.TakeDamage(_damage, OwnerPlayer.playerIndex);
 
         Destroy(gameObject);
+        SFXManager.Instance.PlayOneShot(SFXType.Wobble);
     }
 
     private void OnDestroy()
