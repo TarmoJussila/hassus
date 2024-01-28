@@ -176,6 +176,8 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
         if (StateTime > 1f && EnterKeyPressed)
         {
             ChangeGameState(GameState.MAIN_MENU);
+            MusicManager.Instance.FadeOutMusic(MusicManager.MusicType.INTRO);
+            MusicManager.Instance.FadeInMusic(MusicManager.MusicType.GAMEPLAY);
         }
     }
 
@@ -200,6 +202,8 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
         if (StateTime > 1f && EnterKeyPressed)
         {
             ChangeGameState(GameState.OUTRO);
+            MusicManager.Instance.FadeOutMusic(MusicManager.MusicType.GAMEPLAY);
+            MusicManager.Instance.FadeInMusic(MusicManager.MusicType.OUTRO);
         }
     }
 
