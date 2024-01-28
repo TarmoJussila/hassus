@@ -5,7 +5,7 @@ public class MonoSingleton<T> : MonoBehaviour
 {
     public static T Instance = null;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {

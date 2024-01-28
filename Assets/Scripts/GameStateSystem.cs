@@ -15,7 +15,7 @@ public enum GameState
     COUNTDOWN,
     FIGHT,
     GAME_OVER,
-    OUTRO
+    OUTRO,
 }
 
 [Serializable]
@@ -48,6 +48,11 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
     protected override void OnAwake()
     {
         ChangeGameState(GameState.INTRO_1);
+    }
+
+    private void Start()
+    {
+        MusicManager.Instance.FadeInMusic(MusicManager.MusicType.INTRO);
     }
 
     public void ChangeGameState(GameState state)

@@ -29,6 +29,19 @@ public class MusicManager : MonoSingleton<MusicManager>
     
     private IEnumerator FadeInMusicCoroutine(MusicType type)
     {
+        if (type == MusicType.INTRO)
+        {
+            introMusicSource.Play();
+        }
+        else if (type == MusicType.GAMEPLAY)
+        {
+            gameplayMusicSource.Play();
+        }
+        else if (type == MusicType.OUTRO)
+        {
+            outroMusicSource.Play();
+        }
+        
         float timer = 0f;
         while (timer < 1f)
         {
@@ -69,6 +82,19 @@ public class MusicManager : MonoSingleton<MusicManager>
                 outroMusicSource.volume = Mathf.Lerp(1f, 0f, timer);
             }
             yield return null;
+        }
+        
+        if (type == MusicType.INTRO)
+        {
+            introMusicSource.Stop();
+        }
+        else if (type == MusicType.GAMEPLAY)
+        {
+            gameplayMusicSource.Stop();
+        }
+        else if (type == MusicType.OUTRO)
+        {
+            outroMusicSource.Stop();
         }
         yield break;
     }
