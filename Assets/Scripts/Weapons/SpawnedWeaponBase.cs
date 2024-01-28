@@ -17,11 +17,10 @@ public class SpawnedWeaponBase : MonoBehaviour
 
     private void Start()
     {
-        if (_overlapQueryRadius > float.Epsilon
-            && Physics2D.OverlapCircle(transform.position, _overlapQueryRadius, new ContactFilter2D(), contacts) > 0) { }
-
+        if (_overlapQueryRadius > float.Epsilon)
         {
-            foreach (Collider2D coll in contacts)
+            
+            foreach (Collider2D coll in Physics2D.OverlapCircleAll(transform.position, _overlapQueryRadius))
             {
                 if (!coll.CompareTag("Player")) { break; }
 

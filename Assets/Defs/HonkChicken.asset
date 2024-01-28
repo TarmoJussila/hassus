@@ -16,7 +16,7 @@ MonoBehaviour:
   MaxUses: 5
   WeaponAnimationTrigger: melee
   Prefab: {fileID: 4206063997405541529, guid: ce8eeb682c456a841b1589b7917cde7a, type: 3}
-  SpawnOffset: {x: 0.5, y: 0}
+  SpawnOffset: {x: 0.3, y: 0}
   SpawnForce: {x: 0, y: 0}
   Cooldown: 0.1
   spawnRotationForce: 0
