@@ -146,3 +146,5 @@ MonoBehaviour:
   _lifeTime: 3
   _damage: 501
   mapDestructionRadius: 0
+  sfxMiss: 7
+  sfxHit: 7
