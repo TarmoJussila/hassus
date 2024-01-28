@@ -146,6 +146,5 @@ MonoBehaviour:
   _lifeTime: 3
   _damage: 500
   _honks:
-  - {fileID: 8300000, guid: ee63a2d2b11113a45b994f71a81d3f84, type: 3}
   - {fileID: 8300000, guid: 3726ed6fd415d714ba4838577e65847d, type: 3}
   - {fileID: 8300000, guid: bc1b5646c4c410547bd136f0faec779c, type: 3}

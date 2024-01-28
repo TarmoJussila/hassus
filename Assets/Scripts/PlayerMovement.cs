@@ -1,4 +1,5 @@
 using System;
+using Hassus.Map;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -28,9 +29,24 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpBuffer = 0.0f;
     private const float _jumpBufferLength = 0.1f;
 
+    private bool canMove = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        transform.position = MapLoader.Instance.GetRandomSpawnPoint();
+
+        GameStateSystem.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateSystem.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState state)
+    {
+        canMove = state == GameState.FIGHT;
     }
 
 #if UNITY_EDITOR
@@ -42,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!canMove) { return; }
+
         Grounded = Physics2D.OverlapCircle((Vector2)transform.position + _groundCheckOffset, _groundCheckRadius, _groundCheckLayer);
 
         if (_jumpBuffer > 0f && Grounded)

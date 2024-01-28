@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ebdd015e7628df4aba1ada3966051c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnerPrefab: {fileID: 7686188453750944719, guid: 17d3c5c4caaf2f44daba1ea8ca6bcccb, type: 3}
   WeaponDefs:
   - {fileID: 11400000, guid: 675f0e625139d5b4bbae1d2cfe36d66b, type: 2}
   - {fileID: 11400000, guid: 4ceb00c484b6dcd4b902fa608b40fe4f, type: 2}
   - {fileID: 11400000, guid: cfee46228ce3f974c91cb120528f6035, type: 2}
+  - {fileID: 11400000, guid: 933af112f4cd3bf40afb36c36ae36dac, type: 2}
+  - {fileID: 11400000, guid: c67574c1ce2b414459d3c3953dc69e17, type: 2}

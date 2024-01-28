@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hammer
   m_EditorClassIdentifier: 
   Sprite: {fileID: -1459632975, guid: 2e239b6792bd1b746914574a6d9798dc, type: 3}
-  MaxUses: 2
+  MaxUses: 3
   WeaponAnimationTrigger: melee
   Prefab: {fileID: 4206063997405541529, guid: 20f2ad8e9686c9046afd9f54b91a66c4, type: 3}
   SpawnOffset: {x: 0, y: 0}

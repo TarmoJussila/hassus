@@ -302,8 +302,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: af0beb32ca2b0434c8193f5141a2f3db, type: 3}
   - {fileID: 2800000, guid: ce80e55495cdde440bc7df39d289203c, type: 3}
   - {fileID: 2800000, guid: 070aed93f028a7f4484059efc758c686, type: 3}
-  foliageChance: 0.4
-  foliageHeightSpace: 3
+  foliageChance: 0.25
+  foliageHeightSpace: 4
   pieceChance: 0.9
   pieceSizeMin: 0.25
   pieceSizeMax: 1.5
