@@ -221,7 +221,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
         var joinKeys = new List<List<KeyCode>>
         {
             new() { KeyCode.Q },
-            new() { KeyCode.RightControl, KeyCode.RightAlt, KeyCode.Minus },
+            new() { KeyCode.RightControl, KeyCode.RightAlt },
             new() { KeyCode.R },
             new() { KeyCode.U }
         };
