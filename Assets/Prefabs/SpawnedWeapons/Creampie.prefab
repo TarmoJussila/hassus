@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OwnerPlayer: {fileID: 0}
-  _overlapQueryRadius: 0
+  _overlapQueryRadius: 1
   _lifeTime: 5
   _damage: 1001
   _killParticle: {fileID: 0}

@@ -77,6 +77,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d99b2b346e03714f9a8989456104f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 0
+  Radius: 1
   SpawnerPlayer: -1
   Damage: 500

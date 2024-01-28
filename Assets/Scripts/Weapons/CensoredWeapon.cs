@@ -8,7 +8,7 @@ public class CensoredWeapon : SpawnedWeaponBase
     public int Damage;
     [SerializeField] private GameObject censorBar;
     [SerializeField] private List<AudioClip> collisionSounds;
-    
+
     [SerializeField] private List<GameObject> collisionParticles;
 
     protected override void OnCollideEnemy(Collision2D coll)
@@ -40,7 +40,6 @@ public class CensoredWeapon : SpawnedWeaponBase
 
     private void OnDestroy()
     {
-        MapLoader.Instance.Explode(transform.position, 5);
-        SFXManager.Instance.PlayOneShot(SFXType.ExplosionRandom);
+        ExplosionManager.Instance.SpawnExplosion(transform.position).Radius = 4;
     }
 }

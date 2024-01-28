@@ -37,7 +37,7 @@ public class Creampie : SpawnedWeaponBase
 
     protected override void OnCollideOther()
     {
-        ExplosionManager.Instance.SpawnExplosion(transform.position).Radius = 0;
+        ExplosionManager.Instance.SpawnExplosion(transform.position).Radius = 1;
         Destroy(gameObject);
     }
 }
