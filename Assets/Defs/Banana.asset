@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 331a9f704098ce444bfe1e253742dc9e, type: 3}
+  m_Name: Banana
+  m_EditorClassIdentifier: 
+  Sprite: {fileID: -1121837525, guid: 2e239b6792bd1b746914574a6d9798dc, type: 3}
+  MaxUses: 1
+  WeaponAnimationTrigger: throw
+  Prefab: {fileID: 5290096743210598612, guid: 50f42743d57126b49b09ca9d33bb1285, type: 3}
+  SpawnOffset: {x: 1.2, y: 0.5}
+  SpawnForce: {x: 20, y: 10}
+  Cooldown: 0.1

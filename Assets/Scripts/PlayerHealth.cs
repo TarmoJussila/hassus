@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Hassus.Map;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -113,6 +114,6 @@ public class PlayerHealth : MonoBehaviour
         GameObject grave = Instantiate(_gravePrefab, transform.position + Vector3.up * 0.1f, Quaternion.identity);
         grave.GetComponent<Grave>().SetPlayerIndex(_input.playerIndex);
 
-        transform.position = Vector2.up; //TODO Find respawn point
+        transform.position = MapLoader.Instance.GetRandomSpawnPoint();
     }
 }
