@@ -49,7 +49,7 @@ MonoBehaviour:
   OwnerPlayer: {fileID: 0}
   _overlapQueryRadius: 0
   _lifeTime: 5
-  Damage: 5
+  Damage: 25
   _killParticle: {fileID: 1393394035347250, guid: 257bea6ae235de14f93eb4c9e430599f, type: 3}
 --- !u!70 &8143056228781307491
 CapsuleCollider2D:
