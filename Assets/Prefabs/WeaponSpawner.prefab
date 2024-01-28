@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDefs:
+  - {fileID: 11400000, guid: 216e6638db91dd6408d5080013f6f129, type: 2}
   - {fileID: 11400000, guid: 933af112f4cd3bf40afb36c36ae36dac, type: 2}
   spawnDelaySeconds: 3
   weaponSprite: {fileID: 2026531437654374344}

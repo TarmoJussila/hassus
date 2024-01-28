@@ -9,6 +9,7 @@ public class PlayerWeapon : MonoBehaviour
     public bool HasWeapon => currentWeapon != null;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private List<AudioClip> tauntSounds;
 
     private WeaponDef currentWeapon;
     private int usesLeft;
@@ -37,11 +38,12 @@ public class PlayerWeapon : MonoBehaviour
 
     public void UseWeapon(InputAction.CallbackContext context)
     {
-        if (!context.started || currentWeapon == null || _cooldown > 0.0f) { return; }
+        if (!context.started || _cooldown > 0.0f) { return; }
 
-        if (usesLeft <= 0)
+        if (currentWeapon == null)
         {
-            // TODO: Taunt?
+            PlayTauntSound();
+            return;
         }
 
         _cooldown = currentWeapon.Cooldown;
@@ -61,8 +63,9 @@ public class PlayerWeapon : MonoBehaviour
 
         if (currentWeapon.SpawnForce != Vector2.zero)
         {
-            weapon.GetComponent<Rigidbody2D>()
-                .AddForce(new Vector2(_movement.LastDirection * currentWeapon.SpawnForce.x, currentWeapon.SpawnForce.y));
+            Rigidbody2D rb = weapon.GetComponent<Rigidbody2D>();
+            rb.AddForce(new Vector2(_movement.LastDirection * currentWeapon.SpawnForce.x, currentWeapon.SpawnForce.y));
+            rb.AddTorque(_movement.LastDirection * currentWeapon.spawnRotationForce);
         }
 
         Debug.Log("Player: " + weapon.OwnerPlayer.playerIndex + " used " + currentWeapon.name);
@@ -73,18 +76,23 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+    private void PlayTauntSound()
+    {
+        GetComponent<AudioSource>().PlayOneShot(tauntSounds[UnityEngine.Random.Range(0, tauntSounds.Count)]);
+    }
+
     public void UseWeapon() { }
 
     public void Disarm()
     {
-        currentWeapon = null;
         StartCoroutine(DelaySpriteHide());
     }
 
     private IEnumerator DelaySpriteHide()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(currentWeapon.spriteHideDelay);
         spriteRenderer.enabled = false;
+        currentWeapon = null;
     }
 
     private void Update()
