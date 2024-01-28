@@ -48,6 +48,7 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
     protected override void OnAwake()
     {
         ChangeGameState(GameState.INTRO_1);
+        MusicManager.Instance.FadeInMusic(MusicManager.MusicType.INTRO);
     }
 
     public void ChangeGameState(GameState state)
