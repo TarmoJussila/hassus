@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.7190557, g: 0.48127073, b: 0.58281, a: 1}
+  m_IndirectSpecularColor: {r: 0.7190563, g: 0.48127103, b: 0.5828111, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -574,27 +574,15 @@ PrefabInstance:
       value: SFXManager
       objectReference: {fileID: 0}
     - target: {fileID: 7961212434189698592, guid: c58754bb4d6539e4493f52babeb18494, type: 3}
-      propertyPath: _sfxPairs.Array.data[6].Type
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7961212434189698592, guid: c58754bb4d6539e4493f52babeb18494, type: 3}
-      propertyPath: _sfxPairs.Array.data[6].Clips.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7961212434189698592, guid: c58754bb4d6539e4493f52babeb18494, type: 3}
-      propertyPath: _sfxPairs.Array.data[6].Clips.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 5c28d998cde7a2f42af3d136d22b0bbc, type: 3}
-    - target: {fileID: 7961212434189698592, guid: c58754bb4d6539e4493f52babeb18494, type: 3}
-      propertyPath: _sfxPairs.Array.data[6].Clips.Array.data[1]
+      propertyPath: _sfxPairs.Array.data[7].Clips.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: 9470fe8444938d1479576f224de883bb, type: 3}
     - target: {fileID: 7961212434189698592, guid: c58754bb4d6539e4493f52babeb18494, type: 3}
-      propertyPath: _sfxPairs.Array.data[6].Clips.Array.data[2]
+      propertyPath: _sfxPairs.Array.data[7].Clips.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 440f6ca4a8df46549902942b63b8c86d, type: 3}
     - target: {fileID: 7961212434189698592, guid: c58754bb4d6539e4493f52babeb18494, type: 3}
-      propertyPath: _sfxPairs.Array.data[6].Clips.Array.data[3]
+      propertyPath: _sfxPairs.Array.data[7].Clips.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: e57dde2748267b14e86418bd8aa92a5f, type: 3}
     m_RemovedComponents: []

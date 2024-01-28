@@ -22,7 +22,7 @@ public class SpawnedWeaponBase : MonoBehaviour
             
             foreach (Collider2D coll in Physics2D.OverlapCircleAll(transform.position, _overlapQueryRadius))
             {
-                if (!coll.CompareTag("Player")) { break; }
+                if (!coll.CompareTag("Player")) { continue; }
 
                 if (coll.gameObject == OwnerPlayer.gameObject)
                 {
