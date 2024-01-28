@@ -6,8 +6,8 @@ public class ExplosionManager : MonoSingleton<ExplosionManager>
 {
     [SerializeField] private GameObject _explosionPrefab;
 
-    public void SpawnExplosion(Vector3 position)
+    public Explosion SpawnExplosion(Vector3 position)
     {
-        Instantiate(_explosionPrefab, position, Quaternion.identity);
+        return Instantiate(_explosionPrefab, position, Quaternion.identity).GetComponent<Explosion>();
     }
 }
