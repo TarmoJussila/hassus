@@ -35,7 +35,7 @@ public class ChatMessageGenerator : MonoBehaviour
     {
         StartCoroutine(NormalMessageLoop());
         PlayerHealth.OnPlayerDead += GenerateHypeMessages;
-        GenerateHypeMessages(default, null);
+        //GenerateHypeMessages(default, null);
     }
 
     private void OnDestroy()
