@@ -36,6 +36,7 @@ namespace Hassus.Map
         private Dictionary<Vector2Int, MapBlock> mapBlocks = new();
         private Dictionary<Vector2Int, BoxCollider2D> mapColliders = new();
         private List<Vector3> spawnPoints = new List<Vector3>();
+        private List<Vector3> itemPoints = new List<Vector3>();
         private int randomMapIndex = 0;
         private int nextSpawnPointIndex = 0;
         
@@ -44,6 +45,7 @@ namespace Hassus.Map
         private readonly string mapEmptySymbol = ".";
         private readonly string mapBlockSymbol = "#";
         private readonly string mapSpawnSymbol = "S";
+        private readonly string mapItemSymbol = "R";
         private readonly bool enableDebugInput = true;
 
         private void Awake()
@@ -129,6 +131,10 @@ namespace Hassus.Map
                     else if (symbol == mapSpawnSymbol)
                     {
                         spawnPoints.Add(new Vector2(i, j));
+                    }
+                    else if (symbol == mapItemSymbol)
+                    {
+                        itemPoints.Add(new Vector2(i, j));
                     }
                 }
             }
@@ -230,6 +236,11 @@ namespace Hassus.Map
             }
             return spawnPoints[nextSpawnPointIndex];
         }
+
+        public Vector3 GetRandomItemPoint()
+        {
+            return itemPoints[Random.Range(0, itemPoints.Count)];
+        }
         
         public void Explode(Vector3 center, int circleRadius = 1, bool reverseOrder = false)
         {
@@ -289,6 +300,11 @@ namespace Hassus.Map
                         Gizmos.color = Color.red;
                         Gizmos.DrawSphere(new Vector2(i, j), 1f);
                     }
+                    else if (symbol == mapItemSymbol)
+                    {
+                        Gizmos.color = Color.yellow;
+                        Gizmos.DrawSphere(new Vector2(i, j), 0.8f);
+                    }
                 }
             }
         }
@@ -312,6 +328,11 @@ namespace Hassus.Map
                     {
                         Gizmos.color = new Color(255f, 0f, 255f, 0.5f);
                         Gizmos.DrawSphere(new Vector2(i, j), 1f);
+                    }
+                    else if (symbol == mapItemSymbol)
+                    {
+                        Gizmos.color = new Color(255f, 255f, 0f, 0.5f);
+                        Gizmos.DrawSphere(new Vector2(i, j), 0.8f);
                     }
                 }
             }
