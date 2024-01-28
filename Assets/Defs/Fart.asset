@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 331a9f704098ce444bfe1e253742dc9e, type: 3}
-  m_Name: ExampleBangGun
+  m_Name: Fart
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 146cd35fe238b484fa6bc9fa54a66e0a, type: 3}
-  MaxUses: 3
+  Sprite: {fileID: 2084497036, guid: 2e239b6792bd1b746914574a6d9798dc, type: 3}
+  MaxUses: 1
   WeaponAnimationTrigger: melee
   Prefab: {fileID: 1356383632892484393, guid: 58ca4968225e22a458514d2eb76ae136, type: 3}
   SpawnOffset: {x: 0, y: 0}
   SpawnForce: {x: 0, y: 0}
+  Cooldown: 0.1

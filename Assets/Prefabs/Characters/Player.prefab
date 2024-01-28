@@ -159,10 +159,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 3
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9311a2c6bee22324084e13ab1fe475db, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -269,8 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _jumpForce: 25
-  _groundCheckRadius: 0.5
-  _groundCheckOffset: {x: 0, y: -0.7}
+  _groundCheckRadius: 0.41
+  _groundCheckOffset: {x: 0, y: -0.31}
   _groundCheckLayer:
     serializedVersion: 2
     m_Bits: 256
