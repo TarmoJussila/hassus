@@ -205,9 +205,9 @@ public class GameStateSystem : MonoSingleton<GameStateSystem>
     {
         if (StateTime > 1f && EnterKeyPressed)
         {
-            ChangeGameState(GameState.OUTRO_0);
+            ChangeGameState(GameState.OUTRO_1);
             MusicManager.Instance.FadeOutMusic(MusicManager.MusicType.GAMEPLAY, 0f);
-            MusicManager.Instance.FadeInMusic(MusicManager.MusicType.OUTRO, 2f);
+            MusicManager.Instance.FadeInMusic(MusicManager.MusicType.OUTRO, 3f);
         }
     }
     
