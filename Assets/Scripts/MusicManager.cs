@@ -14,7 +14,7 @@ public class MusicManager : MonoSingleton<MusicManager>
     [SerializeField] private AudioSource gameplayMusicSource;
     [SerializeField] private AudioSource outroMusicSource;
 
-    private readonly float fadeInSpeed = 0.2f;
+    private readonly float fadeInSpeed = 0.5f;
     private readonly float fadeOutSpeed = 0.5f;
     private readonly float volumeMax = 0.5f;
 
