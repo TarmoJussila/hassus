@@ -707,18 +707,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SFXManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7961212434189698592, guid: c58754bb4d6539e4493f52babeb18494, type: 3}
-      propertyPath: _sfxPairs.Array.data[7].Clips.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 9470fe8444938d1479576f224de883bb, type: 3}
-    - target: {fileID: 7961212434189698592, guid: c58754bb4d6539e4493f52babeb18494, type: 3}
-      propertyPath: _sfxPairs.Array.data[7].Clips.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 440f6ca4a8df46549902942b63b8c86d, type: 3}
-    - target: {fileID: 7961212434189698592, guid: c58754bb4d6539e4493f52babeb18494, type: 3}
-      propertyPath: _sfxPairs.Array.data[7].Clips.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: e57dde2748267b14e86418bd8aa92a5f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
